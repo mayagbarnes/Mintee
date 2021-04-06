@@ -4,10 +4,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px;
+    background-color: white;
 
     img {
-        width: 100px;
+        width: 125px;
+        margin-bottom: 5px;
+        margin-left: 10px;
+        padding: 10px;
     }
 
     button {
@@ -18,11 +21,11 @@
         color: black;
         border-radius: 3px;
         margin-right: 20px;
-        padding-left: 5px;
-        padding-right: 5px;
-        padding-top: 2px;
-        padding-bottom: 2px;
-        font-size: small;
+        padding-left: 7px;
+        padding-right: 7px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        font-size: large;
     }
 
     button a {
@@ -49,7 +52,7 @@
     justify-content: space-between;
 
     img {
-        width: 100px;
+        width: 125px;
         margin-bottom: 5px;
         margin-left: 10px;
         padding: 10px;
@@ -66,7 +69,7 @@
         margin-right: 10px;
     }
 
-    div:hover {
+    .nav-right:hover {
         background-color: $dark-gray;
         text-decoration: none;
     }

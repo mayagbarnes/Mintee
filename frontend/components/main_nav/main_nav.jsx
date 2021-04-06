@@ -11,21 +11,23 @@ const MainNav = ({ currentUser, logoutUser }) => {
         </Link>
       </div>
       <div className='nav-right'>
-      <button><Link to="/demologin">Demo Sign In</Link></button>
-      <button><Link to="/login">Sign In</Link></button>
-      <button><Link to="/signup">Sign Up</Link></button>
+        <button><Link to="/demologin">Demo Sign In</Link></button>
+        <button><Link to="/login">Sign In</Link></button>
+        <button><Link to="/signup">Sign Up</Link></button>
       </div>
     </nav>
   );
   
   const mainMenu = () => (
     <nav className="logout">
+      <div className='nav-left'>
         <Link to="/" className="header-link">
           <img src="/assets/black_logo.png" alt="Mint Logo"/>
         </Link>
-        <div>
+      </div>
+      <div className='nav-right'>
         <button onClick={logoutUser}>LOG OUT</button>
-        </div>
+      </div>
     </nav>
   );
 

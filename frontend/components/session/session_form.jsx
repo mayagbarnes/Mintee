@@ -19,21 +19,22 @@ class SessionForm extends React.Component {
     }
 
     renderErrors() {
-    return(
-        <ul>
-            {this.props.errors.map((error, i) => (
-            <li key={`error-${i}`}>
-                {error}
-            </li>
-            ))}
-        </ul>
-        );
+        return(
+            <ul>
+                {this.props.errors.map((error, i) => (
+                <li key={`error-${i}`}>
+                    {error}
+                </li>
+                ))}
+            </ul>
+            );
     }
 
     render() {
         let route = '/signup';
         let link_name = 'Create an Account';
         let text = "New to Mint?"
+        
         if(this.props.formType === 'Create Account') {
             route = '/login';
             link_name = 'Sign In';
@@ -47,7 +48,16 @@ class SessionForm extends React.Component {
         }
 
         return (
-            <section className='session-form-section'>
+            <section>
+                <nav className="login-signup">
+                    <div className='nav-left'>
+                        <Link to="/" className="header-link">
+                        <img src="/assets/logo.png" alt="Mint Logo"/>
+                        </Link>
+                    </div>
+                </nav>
+
+                <section className='session-form-section'>
                 <div className='session-form'>
                 <h2>{this.props.formHeading}</h2>
                 <h4> Monitor all your accounts in one place</h4>
@@ -73,6 +83,7 @@ class SessionForm extends React.Component {
                     <p>{text} <Link to={route}>{link_name}</Link></p>
                 </form>
                 </div>
+                </section>
             </section>
         )
     }

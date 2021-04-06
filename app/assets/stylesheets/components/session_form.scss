@@ -4,7 +4,7 @@
 .session-form-section {
     display: flex;
     justify-content: center;
-    background: lightgray;
+    background: $lightest-gray;
 }
 
 .session-form {
@@ -13,6 +13,10 @@
     padding-top: 25px;
     padding-left: 25px;
     padding-right: 25px;
+    border-color: $light-gray;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
 
     h2 {
         font-size: x-large;
@@ -43,7 +47,7 @@
         color: white;
         width: 80%;
         border-radius: 3px;
-        padding: 2px;
+        padding: 5px;
         font-size: medium;
     }
 
