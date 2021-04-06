@@ -41,7 +41,9 @@ class SessionForm extends React.Component {
         }
         let demo = ''
         if(this.props.formHeading !== 'Demo Sign In') {
-            demo = <Link to="/demologin">Demo Sign In</Link>
+            demo = <div className='button-holder'>
+                        <button><Link to="/demologin">Demo Sign In</Link></button>
+                    </div>
         }
 
         return (
@@ -53,21 +55,23 @@ class SessionForm extends React.Component {
                     {this.renderErrors()}
                     <label> Username
                         <br/>
-                        <input type="text" value={this.state.username}
-                                onChange={this.handleChange('username')}/>
+                        <input id='login-username' type="text" value={this.state.username}
+                                onChange={this.handleChange('username')}
+                                />
                     </label>
                     <br/>
                     <label> Password
                         <br/>
                         <input type="password" value={this.state.password}
-                                onChange={this.handleChange('password')}/>
+                                onChange={this.handleChange('password')}
+                                />
                     </label>
                     <div className='button-holder'>
                         <button type='submit'>{this.props.formType}</button>
                     </div>
+                    {demo}
+                    <p>{text} <Link to={route}>{link_name}</Link></p>
                 </form>
-                <button>{demo}</button>
-                <h4>{text} <Link to={route}>{link_name}</Link></h4>
                 </div>
             </section>
         )

@@ -1,0 +1,84 @@
+
+/* Formatting for Login/SignUp Form */
+
+.session-form-section {
+    display: flex;
+    justify-content: center;
+    background: lightgray;
+}
+
+.session-form {
+    background-color: white;
+    margin: 15px;
+    padding-top: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+
+    h2 {
+        font-size: x-large;
+        text-align: center;
+    }
+
+    h4 {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-size: small;
+    }
+
+    input {
+        border-color: $light-gray;
+        border-style: solid;
+        border-width: 1px;
+        margin-bottom: 20px;
+        margin-top: 7px;
+        padding: 3px;
+        width: 95%;
+        border-radius: 5px;
+    }
+
+    button {
+        background: $blue;
+        color: white;
+        width: 80%;
+        border-radius: 3px;
+        padding: 2px;
+        font-size: medium;
+    }
+
+    p {
+        margin: 20px;
+        text-align: center;
+        a {
+            color: $blue;
+        }
+    }
+
+    ul {
+        color: red;
+        text-align: center;
+        margin: 10px
+    }
+
+    button:hover {
+        background: $darkest-blue;
+    }
+
+    
+}
+
+
+
+.button-holder {
+    text-align: center;
+    margin: 20px;
+
+    a:hover {
+        text-decoration: none;
+    }
+}
+
+
+
+
