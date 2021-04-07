@@ -1,5 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import MainNavContainer from '../main_nav/main_nav_container';
+import { ImEnter } from 'react-icons/im';
+import Unlock from '@zendeskgarden/svg-icons/src/16/lock-unlocked-fill.svg';
+import Lock from '@zendeskgarden/svg-icons/src/16/lock-locked-fill.svg';
+import Clipboard from '@zendeskgarden/svg-icons/src/16/clipboard-list-fill.svg';
 
 class SessionForm extends React.Component {
     constructor(props) {
@@ -16,8 +21,7 @@ class SessionForm extends React.Component {
         return (e) => (this.setState( {[type]: e.target.value} ) )
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
+    handleSubmit() {
         this.props.action(this.state)
             .then( () => this.props.history.push('/dashboard'));
     }
@@ -39,34 +43,33 @@ class SessionForm extends React.Component {
         let route = '/signup';
         let link_name = 'Create an Account';
         let text = "New to Mint?"
-        
+        let demo = ''
+        let icon = ''
         if(this.props.formType === 'Create Account') {
             route = '/login';
             link_name = 'Sign In';
             text = 'Already a user?';
+            icon = < Clipboard />
+        } else if(this.props.formType === 'Sign In') {
+            icon = < Lock />
         }
-        let demo = ''
         if(this.props.formHeading !== 'Demo Sign In') {
-            demo = <div className='button-holder'>
-                        <button><Link to="/demologin">Demo Sign In</Link></button>
+            demo = <div className='demo'>
+                        <h4> Take it for a test drive: </h4>
+                        <div>
+                            <button><Link to="/demologin"> Demo Sign In</Link></button>
+                        </div>
                     </div>
         }
 
         return (
             <section>
-                <nav className="login-signup">
-                    <div className='nav-left'>
-                        <Link to="/" className="header-link">
-                        <img src={window.photos.logo} alt="Mint Logo"/>
-                        </Link>
-                    </div>
-                </nav>
-
+                {<MainNavContainer />}
                 <section className='session-form-section'>
                 <div className='session-form'>
                 <h2>{this.props.formHeading}</h2>
                 <h4> Monitor all your accounts in one place</h4>
-                <form onSubmit={this.handleSubmit}>
+                <div>
                     {this.renderErrors()}
                     <label> Username
                         <br/>
@@ -82,11 +85,11 @@ class SessionForm extends React.Component {
                                 />
                     </label>
                     <div className='button-holder'>
-                        <button type='submit'>{this.props.formType}</button>
+                        <button onClick={this.handleSubmit}>{icon}<text> {this.props.formType}</text></button>
                     </div>
                     {demo}
                     <p>{text} <Link to={route}>{link_name}</Link></p>
-                </form>
+                </div>
                 </div>
                 </section>
             </section>

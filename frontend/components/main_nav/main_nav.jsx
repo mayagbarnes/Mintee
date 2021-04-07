@@ -1,5 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Clipboard from '@zendeskgarden/svg-icons/src/16/clipboard-list-fill.svg';
+import Lock from '@zendeskgarden/svg-icons/src/16/lock-locked-fill.svg';
+import Unlock from '@zendeskgarden/svg-icons/src/16/lock-unlocked-fill.svg';
+// import { GiHamburgerMenu } from 'react-icons/gi';
+import { ImEnter } from 'react-icons/im';
 
 
 const MainNav = ({ currentUser, logoutUser }) => {
@@ -11,9 +16,23 @@ const MainNav = ({ currentUser, logoutUser }) => {
         </Link>
       </div>
       <div className='nav-right'>
-        <button><Link to="/demologin">Demo Sign In</Link></button>
-        <button><Link to="/login">Sign In</Link></button>
-        <button><Link to="/signup">Sign Up</Link></button>
+        <button><Link to="/demologin">
+          <p className='icon'><ImEnter/></p> 
+          <text> Demo Sign In</text> 
+          </Link>
+        </button>
+
+        <button><Link to="/login">
+          <p className='icon'><Lock/></p>
+          <text> Sign In</text>
+          </Link>
+        </button>
+        
+        <button><Link to="/signup">
+          <p className='icon'><Clipboard/></p>
+          <text> Sign Up</text>
+          </Link>
+        </button>
       </div>
     </nav>
   );
@@ -21,6 +40,7 @@ const MainNav = ({ currentUser, logoutUser }) => {
   const mainMenu = () => (
     <nav className="logout">
       <div className='nav-left'>
+        {/* <GiHamburgerMenu/> */}
         <Link to="/" className="header-link">
           <img src={window.photos.black_logo} alt="Mint Logo"/>
         </Link>

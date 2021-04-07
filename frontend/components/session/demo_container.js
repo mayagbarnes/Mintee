@@ -9,7 +9,7 @@ const mapStateToProps = (state) => ({
         password: '123456',
     },
     formHeading: 'Demo Sign In',
-    formType: 'Sign In',
+    formType: 'Test It Out',
     errors: state.errors.session,
 });
 

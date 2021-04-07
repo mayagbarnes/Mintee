@@ -11,6 +11,7 @@ const mapStateToProps = (state) => ({
     formHeading: 'Create a Mintee Account',
     formType: 'Create Account',
     errors: state.errors.session,
+    icon: Clipboard
 });
 
 const mapDispatchToProps = (dispatch) => ({

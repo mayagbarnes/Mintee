@@ -25,16 +25,43 @@
         padding-right: 7px;
         padding-top: 3px;
         padding-bottom: 3px;
-        font-size: large;
+        font-size: medium;
     }
 
     button a {
         color: black;
+        display: flex;
+    }
+
+    p {
+        display: inline;
+    }
+
+    p.icon {
+        padding-right: 5px;
+        
+        svg {
+            height: 17px;
+            width: 17px;
+            align-self: center;
+            padding-top: 2px;
+        }
+    }
+
+    .nav-left {
+        display: flex;
+        align-items: center;
+
+        .menu-icon {
+            display: inline;
+            margin-left: 15px;
+            width: 40px;
+        }
     }
 }
 
 .login-signup button:hover {
-    background-color: $light-gray;
+    background-color: $lightest-gray;
     text-decoration: none;
 }
 
@@ -55,7 +82,6 @@
         width: 125px;
         margin-bottom: 5px;
         margin-left: 10px;
-        padding: 10px;
     }
 
     div {
@@ -69,9 +95,21 @@
         margin-right: 10px;
     }
 
+    .nav-right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .nav-right:hover {
         background-color: $dark-gray;
         text-decoration: none;
     }
+
+    svg {
+        height: 30px;
+        width: 30px;
+    }
     
 } 
+
