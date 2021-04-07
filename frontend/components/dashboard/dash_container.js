@@ -4,7 +4,7 @@ import Dash from './dash';
 import {removeAccountErrors} from '../../actions/account_actions';
 
 const mapStateToProps = (state) => ({
-    accounts: state.accounts,
+    accounts: Object.values(state.entities.accounts),
     errors: state.errors.accounts,
 });
 

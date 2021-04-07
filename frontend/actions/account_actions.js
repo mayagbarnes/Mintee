@@ -1,14 +1,14 @@
 import * as AccountAPIUtil from '../util/account_api_util';
 
 export const RECEIVE_ACCOUNT = 'RECEIVE_ACCOUNT';
-export const RECEIVE_ALL_ACCOUNTS = 'RECEIVE_ALL_ACCOUNTS';
-export const REMOVE_ACCOUNT = 'REMOVE_ACCOUNT';
-export const RECEIVE_ACCOUNT_ERRORS = 'RECEIVE_ACCOUNT_ERRORS';
-export const REMOVE_ACCOUNT_ERRORS = 'RECEIVE_ACCOUNT_ERRORS';
+export const RECEIVE_ACCOUNTS = 'RECEIVE_ACCOUNTS';
+// export const REMOVE_ACCOUNT = 'REMOVE_ACCOUNT';
+// export const RECEIVE_ACCOUNT_ERRORS = 'RECEIVE_ACCOUNT_ERRORS';
+// export const REMOVE_ACCOUNT_ERRORS = 'RECEIVE_ACCOUNT_ERRORS';
 
 
-const receiveAllAccounts = (accounts) => ({
-    type: RECEIVE_ALL_ACCOUNTS,
+const receiveAccounts = (accounts) => ({
+    type: RECEIVE_ACCOUNTS,
     accounts
 });
 
@@ -22,28 +22,25 @@ const removeAccount = (accountId) => ({
     accountId
 });
 
-const receiveErrors = (errors) => ({
-    type: RECEIVE_ACCOUNT_ERRORS,
-    errors
-});
+// const receiveErrors = (errors) => ({
+//     type: RECEIVE_ACCOUNT_ERRORS,
+//     errors
+// });
 
-export const removeAccountErrors = (errors) => ({
-    type: REMOVE_ACCOUNT_ERRORS,
-    errors
-});
+// export const removeAccountErrors = (errors) => ({
+//     type: REMOVE_ACCOUNT_ERRORS,
+//     errors
+// });
 
 export const fetchAccounts = () => dispatch => (
     AccountAPIUtil.indexAccounts()
-    .then(accounts => (
-        dispatch(receiveAllAccounts(accounts))
+    .then(accounts => (dispatch(receiveAccounts(accounts))
     ))
 );
 
 export const fetchAccount = (accountId) => dispatch => (
     AccountAPIUtil.showAccount(accountId)
-    .then(account => (
-        dispatch(receiveAccount(account))
-    ))
+    .then(account => dispatch(receiveAccount(account)))
 );
 
 export const createAccount = account => dispatch => (

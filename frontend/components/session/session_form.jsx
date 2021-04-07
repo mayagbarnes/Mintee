@@ -64,7 +64,13 @@ class SessionForm extends React.Component {
 
         return (
             <section>
-                {<MainNavContainer />}
+                <nav className="login-signup">
+                    <div className='nav-left'>
+                        <Link to="/" className="header-link">
+                        <img src={window.photos.logo} alt="Mint Logo"/>
+                        </Link>
+                    </div>
+                </nav>
                 <section className='session-form-section'>
                 <div className='session-form'>
                 <h2>{this.props.formHeading}</h2>

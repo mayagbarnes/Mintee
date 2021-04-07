@@ -1,12 +1,12 @@
-import {RECEIVE_ACCOUNT, RECEIVE_ALL_ACCOUNTS, REMOVE_ACCOUNT} from '../../actions/account_actions';
-
+import { RECEIVE_ACCOUNT, RECEIVE_ACCOUNTS, REMOVE_ACCOUNT} from '../../actions/account_actions';
+import { RECEIVE_CURRENT_USER } from '../../actions/session_actions';
 
 const accountsReducer = (state = {}, action) => {
     Object.freeze(state);
     let newState = Object.assign( {}, state)
     switch(action.type) {
-        case RECEIVE_ALL_ACCOUNTS:
-            return Object.assign( {}, state, action.accounts);
+        case RECEIVE_ACCOUNTS:
+            return action.accounts;
         case RECEIVE_ACCOUNT:
             newState[action.account.id] = action.account;
             return newState;

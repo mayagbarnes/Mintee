@@ -1,5 +1,6 @@
 import React from 'react';
-import MainNavContainer from '../main_nav/main_nav_container'
+import MainNavContainer from '../main_nav/main_nav_container';
+import AccountItem from '../account/account_item';
 
 class Dash extends React.Component {
     constructor(props) {
@@ -11,24 +12,27 @@ class Dash extends React.Component {
     }
 
     render() {
-        // let cashAccounts = this.props.accounts.map( account => {
-        //     if(account.category === 'Cash') {
-        //         return account.account_name
-        //     }
-        // })
+        let accounts = this.props.accounts.map( account => {
+            return < AccountItem key={account.id}
+            account={account} 
+            updateAccount={this.props.updateAccount}
+            deleteAccount={this.props.deleteAccount} />
+        });
+
         return (
             <div>
                 <section className='main-nav'>
-                    < MainNavContainer />
+                    {< MainNavContainer />}
                 </section>
                 <section className='dash-main'>
-                    <div>Cash</div>
+                    <div className='category'>Cash</div>
+                        <ul>
+                            {accounts}
+                        </ul>
+                    <div className='category'>Loans</div>
                         <ul>
                         </ul>
-                    <div>Loans</div>
-                        <ul>
-                        </ul>
-                    <div>Investments</div>
+                    <div className='category'>Investments</div>
                         <ul>
                         </ul>
                 </section>
