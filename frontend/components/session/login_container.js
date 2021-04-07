@@ -15,7 +15,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     action: (user) => dispatch(loginUser(user)),
-    clearErrors: () => dispatch(removeErrors())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SessionForm)
