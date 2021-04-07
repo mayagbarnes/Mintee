@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Clipboard from '@zendeskgarden/svg-icons/src/16/clipboard-list-fill.svg';
 import Lock from '@zendeskgarden/svg-icons/src/16/lock-locked-fill.svg';
-import Unlock from '@zendeskgarden/svg-icons/src/16/lock-unlocked-fill.svg';
+// import Unlock from '@zendeskgarden/svg-icons/src/16/lock-unlocked-fill.svg';
 // import { GiHamburgerMenu } from 'react-icons/gi';
 import { ImEnter } from 'react-icons/im';
 
@@ -18,19 +18,19 @@ const MainNav = ({ currentUser, logoutUser }) => {
       <div className='nav-right'>
         <button><Link to="/demologin">
           <p className='icon'><ImEnter/></p> 
-          <text> Demo Sign In</text> 
+          <div className='button-text'> Demo Sign In</div> 
           </Link>
         </button>
 
         <button><Link to="/login">
           <p className='icon'><Lock/></p>
-          <text> Sign In</text>
+          <div className='button-text'> Sign In</div>
           </Link>
         </button>
         
         <button><Link to="/signup">
           <p className='icon'><Clipboard/></p>
-          <text> Sign Up</text>
+          <div className='button-text'> Sign Up</div>
           </Link>
         </button>
       </div>

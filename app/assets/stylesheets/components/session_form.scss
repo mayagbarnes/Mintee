@@ -72,6 +72,7 @@
     }
 
     button {
+        display: inline;
         background: $blue;
         color: white;
         width: 80%;
@@ -110,6 +111,10 @@
     a:hover {
         text-decoration: none;
     }
+}
+
+.button-text div {
+      display: inline;  
 }
 
 

@@ -1,17 +1,15 @@
 
-export const showAccount = (account) => (
+export const showAccount = (accountId) => (
     $.ajax({
         method: 'GET',
-        url: `/api/accounts/${account.id}`,
-        data: {account}
+        url: `/api/accounts/${accountId}`
     })
 );
 
-export const indexAccounts = (accounts) => (
+export const indexAccounts = () => (
     $.ajax({
         method: 'GET',
-        url: '/api/accounts',
-        data: {accounts}
+        url: '/api/accounts'
     })
 );
 

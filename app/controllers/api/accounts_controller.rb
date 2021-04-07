@@ -1,4 +1,4 @@
-class AccountsController < ApplicationController
+class Api::AccountsController < ApplicationController
     before_action :require_logged_in, only: [:create, :edit, :destroy, :show, :index]
 
     def show
@@ -29,8 +29,8 @@ class AccountsController < ApplicationController
 
     def destroy
         @account = current_user.accounts.find_by(id: params[:id])
-        if @account && @goal.delete
-            render "api/accounts/index"
+        if @account && @account.destroy
+            render json: @account
         end
     end
 

@@ -85,7 +85,7 @@ class SessionForm extends React.Component {
                                 />
                     </label>
                     <div className='button-holder'>
-                        <button onClick={this.handleSubmit}>{icon}<text> {this.props.formType}</text></button>
+                        <button onClick={this.handleSubmit}>{icon} {this.props.formType}</button>
                     </div>
                     {demo}
                     <p>{text} <Link to={route}>{link_name}</Link></p>
