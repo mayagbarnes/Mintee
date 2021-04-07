@@ -8,6 +8,10 @@ class SessionForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentWillUnmount() {
+        this.props.clearErrors();
+    }
+
     handleChange(type) {
         return (e) => (this.setState( {[type]: e.target.value} ) )
     }
@@ -53,7 +57,7 @@ class SessionForm extends React.Component {
                 <nav className="login-signup">
                     <div className='nav-left'>
                         <Link to="/" className="header-link">
-                        <img src="/assets/logo.png" alt="Mint Logo"/>
+                        <img src={window.photos.logo} alt="Mint Logo"/>
                         </Link>
                     </div>
                 </nav>
