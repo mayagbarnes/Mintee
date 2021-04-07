@@ -7,7 +7,7 @@ const MainNav = ({ currentUser, logoutUser }) => {
     <nav className="login-signup">
       <div className='nav-left'>
         <Link to="/" className="header-link">
-          <img src="/assets/logo.png" alt="Mint Logo"/>
+          <img src={window.photos.logo} alt="Mint Logo"/>
         </Link>
       </div>
       <div className='nav-right'>
@@ -22,7 +22,7 @@ const MainNav = ({ currentUser, logoutUser }) => {
     <nav className="logout">
       <div className='nav-left'>
         <Link to="/" className="header-link">
-          <img src="/assets/black_logo.png" alt="Mint Logo"/>
+          <img src={window.photos.black_logo} alt="Mint Logo"/>
         </Link>
       </div>
       <div className='nav-right'>
