@@ -5,7 +5,7 @@ import {
   Redirect,
   Link
 } from 'react-router-dom';
-import { AuthRoute, ProtectedRoute } from '../util/route_utils'; 
+import { AuthRoute, ProtectedRoute, AdjustedRoute } from '../util/route_utils'; 
 import SignUpContainer from './session/signup_container';
 import LoginContainer from './session/login_container';
 import DemoContainer from './session/demo_container';
@@ -22,7 +22,7 @@ const App = () => (
             <AuthRoute exact path="/demologin" component={DemoContainer} />
             <ProtectedRoute exact path="/dashboard" component={DashContainer} />
             <Route exact path="/" component={MainNavContainer} />
-            <Redirect to="/" />
+            <AdjustedRoute path="/"/>
         </Switch>
     </div>
 )

@@ -43,6 +43,18 @@
         }
       }
     }
+
+    .account-form-body>ul {
+      color: red;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 400;
+      margin: 10px
+    }
+
+    .account-form-body li {
+      margin: 5px;
+    }
   
     .account-form {
       background-color: white;

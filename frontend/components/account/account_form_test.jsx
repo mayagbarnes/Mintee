@@ -1,11 +1,21 @@
 import React from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
-class AccountForm extends React.Component {
+class AccountFormTest extends React.Component {
     constructor(props) {
         super(props);
-        this.state = this.props.account
+        this.state = this.props.account;
+        this.state[menu] = 'closed';
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleToggle = this.handleToggle.bind(this);
+    }
+
+    handleToggle() {
+        this.setState( this.state[menu] = 'open')
+    }
+
+    handleClick(type) {
+        return (e) => (this.setState( { [type]: e.currentTarget.value} ) )
     }
 
     handleChange(type) {
@@ -56,13 +66,17 @@ class AccountForm extends React.Component {
                       <br/>
                     <label>Account Category
                          <br/>
-                        <div onClick={ () => { menu = !menu }} className='custom-select-wrapper'>
-                        <select defaultValue={defaultVal} name="category" className="account-category" onChange={this.handleChange('category')} >
-                            <option value='' disabled>---Please Select----</option>
-                            <option value="Cash">Cash</option>
-                            <option value="Loan">Loan</option>
-                            <option value="Investment">Investment</option>
-                        </select>
+                        <div onClick={this.handleToggle} className='custom-select-wrapper'>
+                            <div className={`custom-select ${this.state.menu}`}>
+                                <div className="custom-select__trigger"><span>---Please Select----</span>
+                                    <div className="arrow"></div>
+                                </div>
+                                <div className="custom-options">
+                                    <span onClick={this.handleClick('category')} className="custom-option selected" data-value="Cash">Cash</span>
+                                    <span onClick={this.handleClick('category')} className="custom-option" data-value="Loan">Loan</span>
+                                    <span onClick={this.handleClick('category')} className="custom-option" data-value="Investment">Investment</span>
+                                </div>
+                            </div>
                         </div>
                     </label>
                     <br/>
@@ -83,4 +97,4 @@ class AccountForm extends React.Component {
 
 }
 
-export default AccountForm;
+export default AccountFormTest;

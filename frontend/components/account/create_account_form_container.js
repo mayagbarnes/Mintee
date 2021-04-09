@@ -2,6 +2,7 @@ import {connect} from 'react-redux';
 import {createAccount} from '../../actions/account_actions';
 import AccountForm from './account_form';
 import {closeModal} from '../../actions/account_modal_actions'
+// import AccountFormTest from './account_form_test';
 
 const mapStateToProps = (state) => ({
     account: {
