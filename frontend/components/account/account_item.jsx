@@ -23,7 +23,6 @@ class AccountItem extends React.Component {
                 <div className='account-change-buttons'>
                     <button className='account-update' onClick={ () => {this.props.openModal('Update', this.props.account)}}>Update</button>
                     <button className='account-delete' onClick={ () => {this.props.openModal('Delete', this.props.account)}}>Delete</button>
-                    {/* <button className='account-delete' onClick={ () => {this.props.deleteAccount(this.props.account.id)}}>Delete</button> */}
                 </div>
             </div>
         )

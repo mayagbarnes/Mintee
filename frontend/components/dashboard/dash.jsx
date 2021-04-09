@@ -1,7 +1,6 @@
 import React from 'react';
 import MainNavContainer from '../main_nav/main_nav_container';
 import AccountItem from '../account/account_item';
-// import Add from '@zendeskgarden/svg-icons/src/16/plus-fill.svg';
 import { BsPlusCircle } from 'react-icons/bs';
 import NavBar from '../nav_bar/nav_bar';
 import { IoCashOutline } from 'react-icons/io5';
