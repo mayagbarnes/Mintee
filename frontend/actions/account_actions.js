@@ -2,9 +2,9 @@ import * as AccountAPIUtil from '../util/account_api_util';
 
 export const RECEIVE_ACCOUNT = 'RECEIVE_ACCOUNT';
 export const RECEIVE_ACCOUNTS = 'RECEIVE_ACCOUNTS';
-// export const REMOVE_ACCOUNT = 'REMOVE_ACCOUNT';
-// export const RECEIVE_ACCOUNT_ERRORS = 'RECEIVE_ACCOUNT_ERRORS';
-// export const REMOVE_ACCOUNT_ERRORS = 'RECEIVE_ACCOUNT_ERRORS';
+export const REMOVE_ACCOUNT = 'REMOVE_ACCOUNT';
+export const RECEIVE_ACCOUNT_ERRORS = 'RECEIVE_ACCOUNT_ERRORS';
+export const REMOVE_ACCOUNT_ERRORS = 'RECEIVE_ACCOUNT_ERRORS';
 
 
 const receiveAccounts = (accounts) => ({
@@ -22,15 +22,10 @@ const removeAccount = (accountId) => ({
     accountId
 });
 
-// const receiveErrors = (errors) => ({
-//     type: RECEIVE_ACCOUNT_ERRORS,
-//     errors
-// });
-
-// export const removeAccountErrors = (errors) => ({
-//     type: REMOVE_ACCOUNT_ERRORS,
-//     errors
-// });
+const receiveErrors = (errors) => ({
+    type: RECEIVE_ACCOUNT_ERRORS,
+    errors
+});
 
 export const fetchAccounts = () => dispatch => (
     AccountAPIUtil.indexAccounts()

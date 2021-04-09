@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {fetchAccounts, createAccount, updateAccount, deleteAccount} from '../../actions/account_actions';
 import Dash from './dash';
-import {removeAccountErrors} from '../../actions/account_actions';
+import {openModal} from '../../actions/account_modal_actions';
 
 const mapStateToProps = (state) => ({
     accounts: Object.values(state.entities.accounts),
@@ -11,9 +11,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     fetchAccounts: () => dispatch(fetchAccounts()),
     createAccount: (account) => dispatch(createAccount(account)),
-    updateAccount: (account) => dispatch(updateAccount(account)),
-    deleteAccount: (account) => dispatch(deleteAccount(account)),
-    clearErrors: () => dispatch(removeAccountErrors())
+    deleteAccount: (accountId) => dispatch(deleteAccount(accountId)),
+    openModal: (type, account) => dispatch(openModal(type, account))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dash)

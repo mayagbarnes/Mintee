@@ -7,7 +7,7 @@
     background-color: white;
 
     img {
-        width: 125px;
+        width: 150px;
         margin-bottom: 5px;
         margin-left: 10px;
         padding: 10px;
@@ -74,37 +74,41 @@
     display: flex;
     justify-content: space-between;
 
-    img {
-        width: 125px;
-        margin-bottom: 5px;
-        margin-left: 10px;
-    }
+    .nav-left {
+        margin-left: 3%;
 
-    div {
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        font-size: large;
-        display: flex;
-        align-items: center;
-        margin-right: 10px;
+        img {
+            width: 180px;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
     }
 
     .nav-right {
+        font-size: 24px;
         display: flex;
+        margin-right: 25px;
         justify-content: center;
         align-items: center;
-    }
 
-    .nav-right:hover {
-        background-color: $dark-gray;
-        text-decoration: none;
-    }
+        button {
+            padding: 30px;
+        }
 
-    svg {
-        height: 30px;
-        width: 30px;
+        button:hover {
+            background-color: $dark-gray;
+            text-decoration: none;
+        }
+
+        svg {
+            height: 22px;
+            width: 22px;
+            path {
+                stroke: $light-gray;
+                stroke-width: 1;
+            }
+        }
     }
     
 } 

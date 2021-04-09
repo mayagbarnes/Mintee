@@ -1,0 +1,139 @@
+.modal-background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+
+.modal-child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-color: $light-gray;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  width: 35%;
+}
+
+.account-form-holder {
+    margin-left: 20px;
+    margin-right: 20px;
+
+
+    .account-form-close {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 15px;
+
+      button {
+        color: black;
+        background-color: white;
+        width: 30px;
+        height: 30px;
+        svg {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  
+    .account-form {
+      background-color: white;
+      padding-top: 5px;
+      padding-left: 25px;
+      padding-right: 25px;
+
+      h2 {
+        margin-bottom: 30px;
+        font-size: 26px;
+      }
+
+      button {
+        display: inline;
+        background: $blue;
+        color: white;
+        width: 70%;
+        border-radius: 3px;
+        padding: 8px;
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      label {
+        font-weight: 400;
+        font-size: medium;
+        margin-left: 3px;
+      }
+    
+      select {
+        margin-bottom: 20px;
+        margin-top: 7px;
+        margin-left: 6px;
+        padding: 4px;
+        border-color: $light-gray;
+        border-style: solid;
+        border-width: 1px;
+        font-family: $serif;
+        font-weight: 300;
+        font-size: 16px;
+      }
+
+      input {
+        display: block;
+        margin : 0 auto;
+        border-color: $light-gray;
+        border-style: solid;
+        border-width: 1px;
+        margin-bottom: 20px;
+        margin-top: 7px;
+        padding: 4px;
+        width: 95%;
+        border-radius: 5px;
+      }
+      
+      input:focus-within {
+        border-color: $blue;
+        box-shadow: 0 0 4px 4px $lightest-blue;
+      }
+
+
+.account-change-buttons {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+        font-weight: 400;
+        
+        .account-delete {
+            background-color: $darkest-green;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 0 1px 1px $lightest-gray;
+            margin: 10px;
+        }
+
+        .account-update {
+            background-color: darkred;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 0 1px 1px $lightest-gray;
+            margin: 10px;
+        }
+    }
+
+
+
+
+    }
+}

@@ -2,10 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Clipboard from '@zendeskgarden/svg-icons/src/16/clipboard-list-fill.svg';
 import Lock from '@zendeskgarden/svg-icons/src/16/lock-locked-fill.svg';
-// import Unlock from '@zendeskgarden/svg-icons/src/16/lock-unlocked-fill.svg';
 // import { GiHamburgerMenu } from 'react-icons/gi';
 import { ImEnter } from 'react-icons/im';
-
+import { GrLogout } from 'react-icons/gr'
 
 const MainNav = ({ currentUser, logoutUser }) => {
   const sessionLinks = () => (
@@ -41,12 +40,12 @@ const MainNav = ({ currentUser, logoutUser }) => {
     <nav className="logout">
       <div className='nav-left'>
         {/* <GiHamburgerMenu/> */}
-        <Link to="/" className="header-link">
+        <Link to="/dashboard" className="header-link">
           <img src={window.photos.black_logo} alt="Mint Logo"/>
         </Link>
       </div>
       <div className='nav-right'>
-        <button onClick={logoutUser}>LOG OUT</button>
+        <button onClick={logoutUser}> <GrLogout/> LOG OUT</button>
       </div>
     </nav>
   );

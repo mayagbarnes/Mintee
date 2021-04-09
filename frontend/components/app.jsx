@@ -11,16 +11,17 @@ import LoginContainer from './session/login_container';
 import DemoContainer from './session/demo_container';
 import MainNavContainer from './main_nav/main_nav_container';
 import DashContainer from './dashboard/dash_container';
-
+import Modal from './modal/modal';
 
 const App = () => (
     <div>
+        <Modal />
         <Switch>
             <AuthRoute exact path="/signup" component={SignUpContainer} />
             <AuthRoute exact path="/login" component={LoginContainer} />
             <AuthRoute exact path="/demologin" component={DemoContainer} />
             <ProtectedRoute exact path="/dashboard" component={DashContainer} />
-            <Route exect path="/" component={MainNavContainer} />
+            <Route exact path="/" component={MainNavContainer} />
             <Redirect to="/" />
         </Switch>
     </div>

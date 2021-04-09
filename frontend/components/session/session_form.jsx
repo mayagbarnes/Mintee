@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MainNavContainer from '../main_nav/main_nav_container';
 import { ImEnter } from 'react-icons/im';
 import Unlock from '@zendeskgarden/svg-icons/src/16/lock-unlocked-fill.svg';
 import Lock from '@zendeskgarden/svg-icons/src/16/lock-locked-fill.svg';

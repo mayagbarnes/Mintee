@@ -1,5 +1,6 @@
 import {RECEIVE_ACCOUNT_ERRORS, REMOVE_ACCOUNT_ERRORS } from '../../actions/account_actions';
 import {RECEIVE_CURRENT_USER} from '../../actions/session_actions';
+import {CLOSE_MODAL} from '../../actions/account_modal_actions';
 
 const accountErrorsReducer = (state = [], action) => {
     Object.freeze(state);
@@ -8,7 +9,7 @@ const accountErrorsReducer = (state = [], action) => {
             return [];
         case RECEIVE_ACCOUNT_ERRORS:
             return action.errors;
-        case REMOVE_ACCOUNT_ERRORS:
+        case CLOSE_MODAL:
             return [];
         default: 
             return state;
