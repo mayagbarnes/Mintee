@@ -1,0 +1,200 @@
+.main-body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+
+    .transaction-table {
+        width: 99%;
+        margin: 0 auto;
+        border-color: $light-gray;
+        border-style: solid;
+        border-width: 2px;
+        border-radius: 5px;
+        margin-top: 2%;
+        margin-bottom: 5%;
+
+        th {
+            font-family: $serif;
+            font-size: 20px;
+            font-weight: 500;
+            background-color: $lightest-gray;
+            padding: 10px;
+            border-bottom: 1px solid $light-gray;
+        }
+
+        td {
+            border-bottom: 1px solid $lightest-gray;
+            padding-top: 5px;
+            padding-bottom: 5px;
+
+        }
+
+        tr.transaction-info {
+            font-size: 18px;
+            font-weight: 300;
+
+            .transaction-date {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .transaction-category {
+                text-align: center;
+            }
+
+            .transaction-amount {
+                text-align: right;
+                padding-right: 10px;
+            }
+
+            .transaction-change-buttons {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                // font-weight: 300;
+        
+                .transaction-delete {
+                    margin-left: 15px;
+                    background-color: rgb(231, 32, 32);
+                    border: 2px solid black;
+                    border-radius: 5px;
+
+                    svg {
+                        fill: white;
+                        height: 26px;
+                        width: 26px;
+                    }
+                }
+
+                .transaction-update {
+                    background-color: $lightest-green;
+                    border: 2px solid black;
+                    border-radius: 5px;
+
+                    svg {
+                        fill: black;
+                        stroke: black;
+                        height: 26px;
+                        width: 26px;
+
+                    }
+                }
+
+                .transaction-update:hover {
+                    background-color: $green;
+                }
+
+                .transaction-delete:hover {
+                    background-color: rgb(107, 1, 1);
+                }
+
+
+            }
+        }
+    }
+
+    .transactions-rightside {
+        border-color: $light-gray;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 5px;
+        background-color: white;
+        padding-top: 25px;
+        padding-left: 25px;
+        padding-right: 25px;
+        margin-top: 4%;
+        margin-right: 2%;
+        width: 55%;
+
+        h2 {
+            text-align: left;
+            padding: 10px;
+            margin: 10px;
+            font-size: 28px;
+        }
+
+    }
+
+    .trans-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 5px;
+        border-bottom: $light-gray;
+        border-bottom-style: solid;
+        border-bottom-width: 3px;
+
+        h2 {
+            font-size: 26px;
+            margin-bottom: 0px;
+            margin-top: 0px;
+            margin-left: 0px;
+        }
+
+        svg {
+            height: 28px;
+            width: 28px;
+            padding-left: 10px;
+        }
+
+        .trans-right {
+            display: flex;
+            align-items: center;
+
+            p {
+                display: inline;
+                font-size: 24px;
+                font-weight: 300;
+            }
+
+        }
+
+    }
+
+    li:last-child {
+       border-bottom: none;
+    }
+
+}
+
+
+.transaction-delete-form {
+
+    h2 {
+        font-size: 26px;
+        margin-bottom: 40px;
+    }
+
+    .transaction-action-buttons {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+        font-weight: 400;
+        
+        .transaction-action-confirm {
+            background-color: $darkest-green;
+            color: white;
+            font-size: 18px;
+            width: 20%;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 0 1px 1px $lightest-gray;
+            margin: 30px;
+        }
+
+        .transaction-action-back {
+            background-color: darkred;
+            color: white;
+            font-size: 18px;
+            width: 20%;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 0 1px 1px $lightest-gray;
+            margin: 30px;
+        }
+    }
+
+}
+
+

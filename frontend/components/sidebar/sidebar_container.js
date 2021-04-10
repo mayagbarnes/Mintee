@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
-import {fetchAccounts} from '../../actions/account_actions';
-import Dash from './dash';
+import {fetchAccounts, createAccount} from '../../actions/account_actions';
+import Sidebar from './sidebar';
 import {openModal} from '../../actions/account_modal_actions';
 
 const mapStateToProps = (state) => ({
@@ -10,7 +10,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     fetchAccounts: () => dispatch(fetchAccounts()),
+    createAccount: (account) => dispatch(createAccount(account)),
     openModal: (type, account) => dispatch(openModal(type, account))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dash)
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar)

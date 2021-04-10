@@ -1,0 +1,34 @@
+.sidebar-account-item {
+    margin: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+    border-bottom: $light-gray;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    padding-bottom: 7px;
+
+    .sidebar-account-primary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h4 {
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-account-balance {
+            font-size: 18px;
+        }
+    }
+
+    .sidebar-account-institution {
+        margin-bottom: 5px;
+        color: $darkest-gray;
+        margin-left: 10px;
+        font-size: 18px;
+        font-weight: 300;
+    }
+
+}

@@ -1,14 +1,13 @@
 import React from 'react';
-import MainNavContainer from '../main_nav/main_nav_container';
-import AccountItem from '../account/account_item';
+// import NavBar from '../nav_bar/nav_bar';
+// import MainNavContainer from '../main_nav/main_nav_container';
 import { BsPlusCircle } from 'react-icons/bs';
-import NavBar from '../nav_bar/nav_bar';
 import { IoCashOutline } from 'react-icons/io5';
-import {GoCreditCard} from 'react-icons/go'
-import {BiLineChart} from 'react-icons/bi'
+import {GoCreditCard} from 'react-icons/go';
+import {BiLineChart} from 'react-icons/bi';
+import SidebarAccountItem from './sidebar_account_item.jsx';
 
-
-class Dash extends React.Component {
+class Sidebar extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -30,8 +29,8 @@ class Dash extends React.Component {
             });
 
         this.props.accounts.forEach( account => {
-            let acc = <li className='account-item'
-                        key={account.id}>< AccountItem
+            let acc = <li className='sidebar-account-item'
+                        key={account.id}>< SidebarAccountItem
                                 account={account} 
                                 openModal={this.props.openModal}/>
                         </li>
@@ -50,20 +49,15 @@ class Dash extends React.Component {
         })
 
         return (
-            <div>
-                <section className='main-nav'>
-                    {< MainNavContainer />}
-                    {< NavBar page='Overview'/>}
-                </section>
-                <div className='dashboard'>
-                <header className='dashboard-heading'>
+            <div className='sidebar'>
+                <header className='sidebar-heading'>
                     <h2>ACCOUNTS</h2>
-                    <button className='dash-right' onClick={ () => {this.props.openModal('Create')}}>
+                    <button className='sidebar-right' onClick={ () => {this.props.openModal('Create')}}>
                         <p>Add</p>
                         <BsPlusCircle />
                     </button>
                 </header>
-                <section className='dash-main'>
+                <section className='sidebar-main'>
                         <div className='category'>
                             <h3> < IoCashOutline /> Cash </h3>
                             <p>{formatter.format(cashTotal)}</p>
@@ -86,11 +80,9 @@ class Dash extends React.Component {
                              {investmentAccounts}
                         </ul>
                 </section>
-                </div>
             </div>
-            
         )
     }
 }
 
-export default Dash;
+export default Sidebar;

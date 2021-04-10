@@ -1,13 +1,13 @@
-import {RECEIVE_ACCOUNT_ERRORS } from '../../actions/account_actions';
+import {RECEIVE_TRANSACTION_ERRORS } from '../../actions/transaction_actions';
 import {RECEIVE_CURRENT_USER} from '../../actions/session_actions';
 import {CLOSE_MODAL} from '../../actions/account_modal_actions';
 
-const accountErrorsReducer = (state = [], action) => {
+const transactionErrorsReducer = (state = [], action) => {
     Object.freeze(state);
     switch(action.type) {
         case RECEIVE_CURRENT_USER:
             return [];
-        case RECEIVE_ACCOUNT_ERRORS:
+        case RECEIVE_TRANSACTION_ERRORS:
             return action.errors;
         case CLOSE_MODAL:
             return [];
@@ -16,4 +16,4 @@ const accountErrorsReducer = (state = [], action) => {
     }
 };
 
-export default accountErrorsReducer;
+export default transactionErrorsReducer;

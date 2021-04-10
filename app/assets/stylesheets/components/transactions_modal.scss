@@ -1,32 +1,8 @@
-.modal-background {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 10;
-}
-
-.modal-child {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border-color: $light-gray;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 5px;
-  width: 35%;
-}
-
-.account-form-holder {
+.transaction-form-holder {
     margin-left: 20px;
     margin-right: 20px;
 
-
-    .account-form-close {
+    .transaction-form-close {
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -44,7 +20,7 @@
       }
     }
 
-    .account-form-body>ul {
+    .transaction-form-body>ul {
       color: red;
       text-align: center;
       font-size: 16px;
@@ -52,11 +28,11 @@
       margin: 10px
     }
 
-    .account-form-body li {
+    .transaction-form-body li {
       margin: 5px;
     }
   
-    .account-form {
+    .transaction-form {
       background-color: white;
       padding-top: 5px;
       padding-left: 25px;
@@ -114,38 +90,6 @@
         border-color: $blue;
         box-shadow: 0 0 4px 4px $lightest-blue;
       }
-
-
-.account-change-buttons {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        text-align: center;
-        font-weight: 400;
-        
-        .account-delete {
-            background-color: $darkest-green;
-            color: white;
-            font-size: 16px;
-            padding: 10px;
-            border-radius: 4px;
-            box-shadow: 0 0 1px 1px $lightest-gray;
-            margin: 10px;
-        }
-
-        .account-confirm {
-            background-color: darkred;
-            color: white;
-            font-size: 16px;
-            padding: 10px;
-            border-radius: 4px;
-            box-shadow: 0 0 1px 1px $lightest-gray;
-            margin: 10px;
-        }
-    }
-
-
-
 
     }
 }
