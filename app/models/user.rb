@@ -8,11 +8,18 @@ class User < ApplicationRecord
 
     has_many :accounts, 
         foreign_key: :user_id,
-        class_name: :Account
+        class_name: :Account,
+        dependent: :destroy
 
     has_many :transactions, 
         through: :accounts,
-        source: :transactions
+        source: :transactions,
+        dependent: :destroy
+
+    has_many :investments, 
+        through: :accounts,
+        source: :investments,
+        dependent: :destroy
 
     def self.find_by_credentials(username, password)
         user = User.find_by(username: username)

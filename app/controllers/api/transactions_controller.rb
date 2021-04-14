@@ -3,10 +3,13 @@ class Api::TransactionsController < ApplicationController
 
     def show
         @transaction = current_user.transactions.find_by(id: params[:id])
+        # render json: @transaction
     end
 
     def index
         @transactions = current_user.transactions
+        # render json: @transactions
+        # dont need jbuilder when returning 
     end
 
     def create
@@ -32,6 +35,11 @@ class Api::TransactionsController < ApplicationController
         if @transaction && @transaction.destroy
             render json: @transaction
         end
+    end
+
+    def search 
+        # query = params[:query] "%#{params[:search]}%"
+        @transactions = current_user.transactions.where("transactions.description ILIKE ?", "%#{params[:query]}%")
     end
 
     private

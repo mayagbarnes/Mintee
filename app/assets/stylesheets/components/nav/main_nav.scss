@@ -7,7 +7,7 @@
     background-color: white;
 
     img {
-        width: 150px;
+        width: 160px;
         margin-bottom: 5px;
         margin-left: 10px;
         padding: 10px;
@@ -23,9 +23,11 @@
         margin-right: 20px;
         padding-left: 7px;
         padding-right: 7px;
-        padding-top: 3px;
+        padding-top: 5px;
         padding-bottom: 3px;
-        font-size: medium;
+        font-size: 18px;
+        font-weight: 300;
+        box-shadow: 0 0 3px 3px white;
     }
 
     button a {
@@ -47,17 +49,41 @@
     .nav-left {
         display: flex;
         align-items: center;
+        justify-content: space-between;
 
-        .menu-icon {
-            display: inline;
-            margin-left: 15px;
-            width: 40px;
+        .header-icons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15%;
+            
+            .button-text {
+                font-size: 22px;
+                margin-left: 5px;
+                font-weight: 300;
+            }
+
+            svg {
+                display: inline;
+                height: 28px;
+                width: 28px;
+            }
+
         }
+
+
+        .linkedin {
+            fill: $blue;
+            height: 28px;
+            width: 28px;
+        }
+   
     }
 }
 
 .login-signup button:hover {
-    background-color: $lightest-gray;
+    box-shadow: 0 0 3px 3px $light-gray;
+    font-weight: 400;
     text-decoration: none;
 }
 
@@ -76,6 +102,38 @@
 
     .nav-left {
         margin-left: 3%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15%;
+            padding: 10px;
+            
+            .button-text {
+                font-size: 22px;
+                margin-left: 5px;
+                font-weight: 300;
+            }
+
+            svg {
+                display: inline;
+                height: 28px;
+                width: 28px;
+            }
+        }
+
+        .left-icon {
+            fill: white;
+        }
+
+        .header-icons:hover {
+            box-shadow: 0 0 3px 3px white;
+            text-decoration: none;
+        }
 
         img {
             width: 180px;
@@ -98,6 +156,7 @@
 
         button:hover {
             background-color: $dark-gray;
+            font-weight: 400;
             text-decoration: none;
         }
 

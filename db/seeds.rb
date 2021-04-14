@@ -9,6 +9,8 @@
 User.delete_all
 Account.delete_all
 Transaction.delete_all
+Investment.delete_all
+
 
 
 demo_login = User.create( {username: 'DemoLogin', password: '123456'})
@@ -28,6 +30,16 @@ transaction_4 = Transaction.create( { description: 'Credit Card Payment', catego
 transaction_5 = Transaction.create( { description: 'Paycheck', category: 'Income', date: "2021-04-06", amount: 2500.50, account_id: account_1.id } )
 transaction_6 = Transaction.create( { description: 'Gym Membership', category: 'Health and Fitness', date: "2021-04-05", amount: -75.00, account_id: account_1.id } )
 
+# account1 - investments
+
+investment_1 = Investment.create( { inv_name: 'Apple', ticker: 'AAPL', shares: 100.00, price_paid: 100.00, account_id: account_1.id} )
+investment_2 = Investment.create( { inv_name: 'Microsoft', ticker: 'MSFT', shares: 50.00, price_paid: 200.00, account_id: account_1.id} )
+investment_3 = Investment.create( { inv_name: 'Google', ticker: 'GOOGL', shares: 1.00, price_paid: 2000.00, account_id: account_1.id} )
+
 
 # transaction = { description: 'yikes', category: 'Health and Fitness', date: "2021-10-31", amount: -75.00, account_id: 26 }
-
+# $.ajax({
+#         method: 'GET',
+#         url: '/api/transactions/search',
+#         data: {query: 'pay'}
+# })

@@ -1,8 +1,8 @@
-.transaction-form-holder {
+.investment-form-holder {
     margin-left: 20px;
     margin-right: 20px;
 
-    .transaction-form-close {
+    .investment-form-close {
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -20,50 +20,63 @@
       }
     }
 
-    .transaction-form-body>ul {
+    .investment-form-body>ul {
       color: red;
       text-align: center;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 400;
-      margin: 10px
+      margin: 7px;
     }
 
-    .transaction-form-body li {
-      margin: 5px;
+    .investment-form-body li {
+      margin: 2px;
     }
   
-    .transaction-form {
+    .investment-form {
       background-color: white;
       padding-top: 5px;
       padding-left: 25px;
       padding-right: 25px;
 
       h2 {
-        margin-bottom: 30px;
-        font-size: 26px;
+        margin-bottom: 20px;
+        font-size: 28px;
       }
 
       button {
         display: inline;
         background: $blue;
         color: white;
-        width: 70%;
+        width: 50%;
         border-radius: 3px;
         padding: 8px;
-        font-size: 18px;
+        font-size: 20px;
+        font-weight: 300;
+        margin: 0px;
         margin-bottom: 20px;
+      }
+
+      button:hover {
+        box-shadow: 0 0 3px 3px $light-gray;
+        font-weight: 400;
+        text-decoration: none;
+      }
+
+      div.button-holder {
+        margin-top: 5px;
+        margin-bottom: 10px;
       }
 
       label {
         font-weight: 400;
-        font-size: medium;
-        margin-left: 3px;
+        font-size: 18px;
+        margin-left: 4%;
       }
     
       select {
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         margin-top: 7px;
-        margin-left: 6px;
+        margin-left: 4%;
         padding: 4px;
         border-color: $light-gray;
         border-style: solid;
@@ -79,10 +92,10 @@
         border-color: $light-gray;
         border-style: solid;
         border-width: 1px;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         margin-top: 7px;
         padding: 4px;
-        width: 95%;
+        width: 90%;
         border-radius: 5px;
       }
       

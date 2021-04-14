@@ -8,7 +8,7 @@ class CreateAccounts < ActiveRecord::Migration[5.2]
       t.integer :user_id, null: false
       t.timestamps
     end
-    add_index :accounts, :account_name, unique: true
+    add_index :accounts, :account_name
     add_index :accounts, :institution
     add_index :accounts, :category
     add_index :accounts, :user_id

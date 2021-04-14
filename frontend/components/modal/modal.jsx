@@ -4,9 +4,14 @@ import { connect } from 'react-redux';
 import CreateAccountContainer from '../../components/account/create_account_form_container';
 import UpdateAccountContainer from '../../components/account/update_account_form_container';
 import DeleteAccountContainer from '../account/delete_account_container';
+
 import AddTransactionContainer from '../transactions/add_transaction_container';
 import EditTransactionContainer from '../transactions/edit_transaction_container';
 import RemoveTransactionContainer from '../transactions/remove_transaction_container';
+
+import AddInvestmentContainer from '../investments/add_investment_container';
+import EditInvestmentContainer from '../investments/edit_investment_container';
+import RemoveInvestmentContainer from '../investments/remove_investment_container';
 
 function Modal({modal, itemId, closeModal}) {
   if (!modal) {
@@ -24,13 +29,22 @@ function Modal({modal, itemId, closeModal}) {
       component = <DeleteAccountContainer accountId={itemId}/> 
       break;
     case 'Add':
-      component = <AddTransactionContainer transactionId={itemId}/> 
+      component = <AddTransactionContainer/> 
       break;
     case 'Edit':
       component = <EditTransactionContainer transactionId={itemId}/> 
       break;
     case 'Remove':
       component = <RemoveTransactionContainer transactionId={itemId}/> 
+      break;
+    case 'AddInv':
+      component = <AddInvestmentContainer/> 
+      break;
+    case 'EditInv':
+      component = <EditInvestmentContainer investmentId={itemId}/> 
+      break;
+    case 'RemoveInv':
+      component = <RemoveInvestmentContainer investmentId={itemId}/> 
       break;
     default:
       return null;

@@ -17,3 +17,4 @@ const transactionErrorsReducer = (state = [], action) => {
 };
 
 export default transactionErrorsReducer;
+

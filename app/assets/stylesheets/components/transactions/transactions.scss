@@ -1,8 +1,9 @@
+
 .main-body {
     display: flex;
     align-items: flex-start;
     justify-content: space-around;
-
+    
     .transaction-table {
         width: 99%;
         margin: 0 auto;
@@ -22,13 +23,36 @@
             border-bottom: 1px solid $light-gray;
         }
 
+        th.asc {
+            background-color: $green;
+        }
+
+        th.desc {
+            background-color: $green;
+        }
+
+        .transaction-svg-holder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            svg {
+                margin-left: 5px;
+            }
+        }
+
         td {
             border-bottom: 1px solid $lightest-gray;
             padding-top: 5px;
             padding-bottom: 5px;
-
         }
 
+        tr.no-results {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 400;
+        }
+        
         tr.transaction-info {
             font-size: 18px;
             font-weight: 300;
@@ -51,18 +75,18 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                // font-weight: 300;
         
                 .transaction-delete {
                     margin-left: 15px;
-                    background-color: rgb(231, 32, 32);
+                    background-color: rgb(219, 2, 2);
                     border: 2px solid black;
                     border-radius: 5px;
 
                     svg {
+                       
                         fill: white;
-                        height: 26px;
-                        width: 26px;
+                        height: 28px;
+                        width: 28px;
                     }
                 }
 
@@ -72,6 +96,9 @@
                     border-radius: 5px;
 
                     svg {
+                        padding-top: 2px;
+                        padding-left: 1px;
+                        padding-right: 1px;
                         fill: black;
                         stroke: black;
                         height: 26px;
@@ -90,6 +117,7 @@
 
 
             }
+
         }
     }
 
@@ -104,7 +132,7 @@
         padding-right: 25px;
         margin-top: 4%;
         margin-right: 2%;
-        width: 55%;
+        width: 60%;
 
         h2 {
             text-align: left;
@@ -157,44 +185,57 @@
 
 }
 
+.transaction-form-holder {
+    margin-left: 20px;
+    margin-right: 20px;
 
-.transaction-delete-form {
-
-    h2 {
-        font-size: 26px;
-        margin-bottom: 40px;
-    }
-
-    .transaction-action-buttons {
+    .transaction-form-close {
         display: flex;
         align-items: center;
-        justify-content: space-around;
-        text-align: center;
-        font-weight: 400;
-        
-        .transaction-action-confirm {
-            background-color: $darkest-green;
-            color: white;
-            font-size: 18px;
-            width: 20%;
-            padding: 10px;
-            border-radius: 4px;
-            box-shadow: 0 0 1px 1px $lightest-gray;
-            margin: 30px;
+        justify-content: flex-end;
+        margin-top: 15px;
+    }
+
+    .transaction-delete-form {
+        background-color: white;
+        padding-top: 5px;
+        padding-left: 25px;
+        padding-right: 25px;
+
+        h2 {
+            font-size: 26px;
+            margin-bottom: 20px;
         }
 
-        .transaction-action-back {
-            background-color: darkred;
-            color: white;
-            font-size: 18px;
-            width: 20%;
-            padding: 10px;
-            border-radius: 4px;
-            box-shadow: 0 0 1px 1px $lightest-gray;
-            margin: 30px;
+        .transaction-action-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            text-align: center;
+            font-weight: 400;
+            
+            .transaction-action-confirm {
+                background-color: $darkest-green;
+                color: white;
+                font-size: 16px;
+                width: 35%;
+                padding: 10px;
+                border-radius: 4px;
+                box-shadow: 0 0 1px 1px $lightest-gray;
+                margin: 10px;
+            }
+
+            .transaction-action-back {
+                background-color: darkred;
+                color: white;
+                font-size: 16px;
+                width: 35%;
+                padding: 10px;
+                border-radius: 4px;
+                box-shadow: 0 0 1px 1px $lightest-gray;
+                margin: 10px;
+            }
         }
     }
 
 }
-
-

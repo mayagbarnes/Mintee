@@ -12,8 +12,9 @@ import DemoContainer from './session/demo_container';
 import MainNavContainer from './main_nav/main_nav_container';
 import DashContainer from './dashboard/dash_container';
 import TransactionsContainer from './transactions/transactions_container';
-
+import InvestmentsContainer from './investments/investments_container';
 import Modal from './modal/modal';
+import HomepageContainer from './main_nav/homepage_container';
 
 const App = () => (
     <div>
@@ -24,7 +25,8 @@ const App = () => (
             <AuthRoute exact path="/demologin" component={DemoContainer} />
             <ProtectedRoute exact path="/dashboard" component={DashContainer} />
             <ProtectedRoute exact path="/transactions" component={TransactionsContainer} />
-            <Route exact path="/" component={MainNavContainer} />
+            <ProtectedRoute exact path="/investments" component={InvestmentsContainer} />
+            <Route exact path="/" component={HomepageContainer} />
             <AdjustedRoute path="/"/>
         </Switch>
     </div>

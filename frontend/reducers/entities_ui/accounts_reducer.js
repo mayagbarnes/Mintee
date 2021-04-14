@@ -1,5 +1,5 @@
 import { RECEIVE_ACCOUNT, RECEIVE_ACCOUNTS, REMOVE_ACCOUNT} from '../../actions/account_actions';
-import { RECEIVE_CURRENT_USER } from '../../actions/session_actions';
+import { LOGOUT_CURRENT_USER } from '../../actions/session_actions';
 
 const accountsReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -13,6 +13,8 @@ const accountsReducer = (state = {}, action) => {
         case REMOVE_ACCOUNT:
             delete newState[action.accountId];
             return newState;
+        case LOGOUT_CURRENT_USER:
+            return {};
         default: 
             return state;
     }

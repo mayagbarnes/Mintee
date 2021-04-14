@@ -34,6 +34,7 @@ class TransactionForm extends React.Component {
         let defaultAccount = this.state.account_id;
         let accountsDropdown = this.props.accounts.map( (account) => {
             return  <option 
+                        key={account.id}
                         value={account.id}>
                         {account.account_name}
                     </option>
@@ -61,13 +62,11 @@ class TransactionForm extends React.Component {
                                 onChange={this.handleChange('date')}
                                 />
                     </label>
-                    <br/>
                     <label> Description
                         <input id='transaction-description' type="text" value={this.state.description}
                                 onChange={this.handleChange('description')}
                                 />
                     </label>
-                    <br/>
                     <label>Category
                          <br/>
                         <div className='custom-select-wrapper'>
@@ -86,13 +85,11 @@ class TransactionForm extends React.Component {
                         </select>
                         </div>
                     </label>
-                    <br/>
                     <label> Amount
                         <input type="number" value={this.state.amount}
                                 onChange={this.handleChange('amount')}
                                 />
                     </label>
-                    <br/>
                     <div className='button-holder'>
                         <button onClick={this.handleSubmit}>{this.props.formType}</button>
                     </div>

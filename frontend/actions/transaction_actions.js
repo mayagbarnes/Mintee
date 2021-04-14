@@ -5,6 +5,7 @@ export const RECEIVE_TRANSACTIONS = 'RECEIVE_TRANSACTIONS';
 export const REMOVE_TRANSACTION = 'REMOVE_TRANSACTION';
 export const RECEIVE_TRANSACTION_ERRORS = 'RECEIVE_TRANSACTION_ERRORS';
 export const REMOVE_TRANSACTION_ERRORS = 'RECEIVE_TRANSACTION_ERRORS';
+export const RECEIVE_FILTERED_TRANSACTIONS = 'RECEIVE_FILTERED_TRANSACTIONS';
 
 
 const receiveTransactions = (transactions) => ({
@@ -60,6 +61,19 @@ export const deleteTransaction = transactionId => dispatch => (
     TransactionAPIUtil.deleteTransaction(transactionId)
     .then( () => (
         dispatch(removeTransaction(transactionId))
+    ))
+);
+
+
+
+const receiveFilteredTransactions = (transactions) => ({
+    type: RECEIVE_FILTERED_TRANSACTIONS,
+    transactions
+});
+
+export const fetchFilteredTransactions = (string) => dispatch => (
+    TransactionAPIUtil.searchTransactions(string)
+    .then(transactions => (dispatch(receiveFilteredTransactions(transactions))
     ))
 );
 

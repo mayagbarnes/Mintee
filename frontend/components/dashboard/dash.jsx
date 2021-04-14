@@ -18,6 +18,12 @@ class Dash extends React.Component {
     }
 
     render() {
+        // let none = <div>
+        //                 <div className='account-info-primary'>
+        //                     <h4 className='account-name' >No Accounts of This Category</h4>
+        //                 </div>
+        //             </div>
+
         let cashAccounts = [];
         var cashTotal = 0;
         let loanAccounts = [];

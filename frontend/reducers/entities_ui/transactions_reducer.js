@@ -1,5 +1,5 @@
 import { RECEIVE_TRANSACTION, RECEIVE_TRANSACTIONS, REMOVE_TRANSACTION} from '../../actions/transaction_actions';
-import { RECEIVE_CURRENT_USER } from '../../actions/session_actions';
+import { LOGOUT_CURRENT_USER } from '../../actions/session_actions';
 
 const transactionsReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -13,6 +13,8 @@ const transactionsReducer = (state = {}, action) => {
         case REMOVE_TRANSACTION:
             delete newState[action.transactionId];
             return newState;
+        case LOGOUT_CURRENT_USER:
+            return {};
         default: 
             return state;
     }

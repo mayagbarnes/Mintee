@@ -25,7 +25,7 @@ class DeleteAccountForm extends React.Component {
                     <div className='account-form-body'>
                         <div className='account-change-buttons'>
                             <button className='account-delete' onClick={this.handleDelete}>Yes</button>
-                            <button className='account-update' onClick={this.props.closeModal}>Cancel</button>
+                            <button className='account-confirm' onClick={this.props.closeModal}>Cancel</button>
                         </div>
                     </div>
                 </div>

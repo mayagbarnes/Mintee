@@ -10,7 +10,7 @@ class NavBar extends React.Component {
     render() {
         let overviewClass = (this.props.page === 'Overview' ? 'selected' : 'unselected');
         let transactionsClass = (this.props.page === 'Transactions' ? 'selected' : 'unselected');
-        // let investmentsClass = (this.props.page === 'Investments' ? 'selected' : 'unselected');
+        let investmentsClass = (this.props.page === 'Investments' ? 'selected' : 'unselected');
 
 
         return(
@@ -25,11 +25,11 @@ class NavBar extends React.Component {
                         <div className='nav-link-text'> TRANSACTIONS </div> 
                     </Link>
                 </button>  
-                {/* <button className={`nav-button ${investmentsClass}`}>
+                <button className={`nav-button ${investmentsClass}`}>
                     <Link to="/investments" className="nav-links">
                         <div className='nav-link-text'> INVESTMENTS </div> 
                     </Link>
-                </button>   */}
+                </button>  
             </section>
         )
     }

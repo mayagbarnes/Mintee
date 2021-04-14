@@ -1,12 +1,16 @@
 .nav-bar {
     background-color: white;
-    margin-top: 4px;
+    margin-top: 0px;
     font-size: 24px;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     .nav-button {
         padding: 20px;
-        margin-left: 10%;
+        margin-left: 5%;
+        margin-right: 5%;
         border-bottom: white;
         border-bottom-style: solid;
         border-bottom-width: 4px;

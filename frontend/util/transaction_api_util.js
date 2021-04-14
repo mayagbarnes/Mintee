@@ -36,3 +36,10 @@ export const deleteTransaction = (transactionId) => (
     })
 );
 
+export const searchTransactions = (string) => (
+    $.ajax({
+        method: 'GET',
+        url: '/api/transactions/search',
+        data: {query: string}
+    })
+);
