@@ -187,7 +187,12 @@ class Investments extends React.Component {
                                 receiveInvestment = {this.props.receiveInvestment}
                                 openModal={this.props.openModal}/>
                             })
-
+            // investmentItems = this.props.filtered.map( investment => {
+            //                 return < InvestmentItem key={investment.id}
+            //                     investment={investment} 
+            //                     receiveInvestment = {this.props.receiveInvestment}
+            //                     openModal={this.props.openModal}/>
+            //                 })
             if(investmentItems.length === 0) {
                 investmentItems = <tr className='no-results'><td colSpan='7'>No Results</td></tr>
             }
@@ -214,7 +219,7 @@ class Investments extends React.Component {
                         </header>
                         <div className='transactions-search-bar'>
                             <label> <FaSearchDollar /> Search:
-                            <input type="text" onChange={this.editSearchTerm} placeholder='Enter name'/>
+                            <input type="text" onChange={this.editSearchTerm} placeholder='Enter Investment Name'/>
                             </label>
                         </div>
                         <table className='investment-table'>

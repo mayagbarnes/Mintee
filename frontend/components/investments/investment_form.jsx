@@ -1,12 +1,18 @@
 import React from 'react';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { AiOutlineCloseCircle, AiOutlineLoading } from 'react-icons/ai';
 
 class InvestmentForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = this.props.investment
+        this.state = {
+            investment: this.props.investment,
+            loading: false,
+        }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    // this.setState( { loading: true }, () => {
+        // {this.setState({loading: false})
 
     handleChange(type) {
         return (e) =>  {
@@ -16,24 +22,27 @@ class InvestmentForm extends React.Component {
                 } else {
                     value = e.currentTarget.value
                 };
-                return this.setState( {[type]: value} )
+                return this.setState({ investment: { ...this.state.investment, [type]: value} });
             } 
     }
 
     handleSubmit() {
         let apikey = window.finnhubAPIKey;
-        let ticker = this.state.ticker;
+        let ticker = this.state.investment.ticker;
 
-        fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
-            .then(response => response.json())
-            .then(quote => {this.validateTicker(quote["c"])})
+        this.setState( {loading: true }, () => { 
+            fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
+                .then(response => response.json())
+                .then(quote => this.validateTicker(quote["c"]))
+            });
     }
 
     validateTicker(price) {
+        this.setState({loading: false })
         if(price === 0) {
             alert("Invalid Ticker"); 
         } else {
-            this.props.action(this.state)
+            this.props.action(this.state.investment)
             .then( () => this.props.closeModal());
         }
     }
@@ -59,6 +68,9 @@ class InvestmentForm extends React.Component {
                         {account.account_name}
                     </option>
         })
+
+        let loading = this.state.loading ? <AiOutlineLoading />: '';
+        let loadingClass = this.state.loading ? 'loader': '';
         
         return (
             <section className='investment-form-holder'>
@@ -78,28 +90,28 @@ class InvestmentForm extends React.Component {
                     </label>
                     <br/>
                     <label> Name/Description
-                        <input id='investment-name' type="text" value={this.state.inv_name}
+                        <input id='investment-name' type="text" value={this.state.investment.inv_name}
                                 onChange={this.handleChange('inv_name')}/>
                     </label>
                     <br/>
                     <label> Ticker Symbol
-                        <input id='investment-ticker' type="text" value={this.state.ticker}
+                        <input id='investment-ticker' type="text" value={this.state.investment.ticker}
                                 onChange={this.handleChange('ticker')}
                                 />
                     </label>
                     <br/>
                     <label> Shares
-                        <input type="number" value={this.state.shares}
+                        <input type="number" value={this.state.investment.shares}
                                 onChange={this.handleChange('shares')}
                                 />
                     </label>
                     <br/>
                     <label> Price Paid
-                        <input type="number" value={this.state.price_paid}
+                        <input type="number" value={this.state.investment.price_paid}
                                 onChange={this.handleChange('price_paid')}
                                 />
                     </label>
-                    <br/>
+                    <div className={`${loadingClass}`}></div>
                     <div className='button-holder'>
                         <button onClick={this.handleSubmit}>{this.props.formType}</button>
                     </div>

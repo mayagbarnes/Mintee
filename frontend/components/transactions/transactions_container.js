@@ -8,7 +8,7 @@ import {openModal} from '../../actions/account_modal_actions';
 
 const mapStateToProps = (state) => ({
     transactions: Object.values(state.entities.transactions).sort(starter),
-    filtered: Object.values(state.entities.filtered).sort(starter),
+    filtered: Object.values(state.entities.filteredTran).sort(starter),
     errors: state.errors.transactions,
 });
 

@@ -12,7 +12,7 @@ const entitiesReducer = combineReducers({
   users: usersReducer,
   accounts: accountsReducer,
   transactions: transactionsReducer,
-  filtered: filteredReducer,
+  filteredTran: filteredReducer,
   investments: investmentsReducer,
   filteredInv: filteredInvReducer
 });

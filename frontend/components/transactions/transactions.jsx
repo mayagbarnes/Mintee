@@ -155,7 +155,7 @@ class Transactions extends React.Component {
                         </header>
                         <div className='transactions-search-bar'>
                             <label> <FaSearchDollar /> Search:
-                            <input type="text" onChange={this.editSearchTerm} placeholder='Enter description'/>
+                            <input type="text" onChange={this.editSearchTerm} placeholder='Enter Transaction Description'/>
                             </label>
                         </div>
                         <table className='transaction-table'>

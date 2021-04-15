@@ -55,7 +55,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 15%;
+            margin-left: 10%;
+            padding: 10px;
             
             .button-text {
                 font-size: 22px;
@@ -71,6 +72,10 @@
 
         }
 
+        .header-icons:hover {
+            box-shadow: 0 0 3px 3px $gray;
+            text-decoration: none;
+        }
 
         .linkedin {
             fill: $blue;
@@ -110,7 +115,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 15%;
+            margin-left: 10%;
             padding: 10px;
             
             .button-text {
@@ -131,7 +136,7 @@
         }
 
         .header-icons:hover {
-            box-shadow: 0 0 3px 3px white;
+            box-shadow: 0 0 3px 3px $gray;
             text-decoration: none;
         }
 

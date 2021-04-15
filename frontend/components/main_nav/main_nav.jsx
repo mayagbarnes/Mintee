@@ -14,10 +14,10 @@ const MainNav = ({ currentUser, logoutUser }) => {
         <Link to="/" className="header-link">
           <img src={window.photos.logo} alt="Mint Logo"/>
         </Link>
-        <a target="_blank" href="https://github.com/mayagbarnes" className='header-icons'>
-          <p className='left-icon'><FaGithub className='icon-class'/></p> 
-          <div className='button-text'> Github</div> 
-        </a>
+          <a target="_blank" href="https://github.com/mayagbarnes" className='header-icons'>
+            <p className='left-icon'><FaGithub className='icon-class'/></p> 
+            <div className='button-text'> Github</div> 
+          </a>
         <a target="_blank" href="https://www.linkedin.com/in/mayabarnes/" className='header-icons'>
           <p className='left-icon'><GrLinkedin className='linkedin'/></p> 
           <div className='button-text'> LinkedIn</div> 
