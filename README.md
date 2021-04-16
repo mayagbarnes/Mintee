@@ -22,11 +22,10 @@
 
 ## Technologies & Hosting
 
-Technologies included in building Mintee:
+Mintee is hosted on Heroku and incorporates the following technologies:
 * Ruby on Rails
 * React
 * Redux
 * PostgreSQL
 * Webpack
 * Babel
-* Heroku
