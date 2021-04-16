@@ -12,10 +12,16 @@ class SessionForm extends React.Component {
         super(props);
         this.state = this.props.user
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleDemo = this.handleDemo.bind(this);
     }
 
     componentWillUnmount() {
         this.props.clearErrors();
+    }
+
+    handleDemo() {
+        this.props.demo({ username: 'DemoLogin', password: '123456'})
+            .then( () => this.props.history.push('/transactions'));
     }
 
     handleChange(type) {
@@ -97,7 +103,7 @@ class SessionForm extends React.Component {
             demo = <div className='demo'>
                         <h4> Take it for a test drive: </h4>
                         <div>
-                            <button><Link to="/demologin"> Demo Sign In</Link></button>
+                            <button onClick={this.handleDemo}> Demo Sign In </button>
                         </div>
                     </div>
         }

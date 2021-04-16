@@ -1,26 +1,33 @@
-# README
+<img src="https://github.com/mayagbarnes/Mintee/blob/main/app/assets/images/logo.png" width="260" height="85">
 
-<!-- ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1") -->
+# Mintee
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Mintee](https://mintee.herokuapp.com/#/) is a clone of [Mint](https://mint.intuit.com/), one of Intuit's financial software offerings geared toward personal use. This version implements many of the same features, allowing users to manage their accounts, track spending, and monitor investments. 
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+* **Sign Up / Login**
+* **Accounts View**
+  * Create, Update, and Delete accounts
+* **Transactions View, Sort, & Search**
+  * View sidebar of accounts and all transactions
+  * Create, Update, and Delete transactions
+  * Change the order of transactions by any of the table categories - Ascending or Descending 
+  * Search transactions by their description
+* **Investments View, Sort, & Search**
+  * View sidebar of accounts and all investments
+  * Create, Update, and Delete investments
+  * Change the order of investments by any of the table categories - Ascending or Descending 
+  * Search investments by their name
 
-* System dependencies
+## Technologies & Hosting
 
-* Configuration
+Mintee was built using:
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Ruby on Rails
+* React
+* Redux
+* PostgreSQL
+* Webpack
+* Babel
+* Heroku
