@@ -1,5 +1,7 @@
 # README
 
+<!-- ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1") -->
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {updateInvestment, fetchInvestment} from '../../actions/investment_actions';
+import {updateInvestment, fetchInvestment, receiveInvestmentErrors} from '../../actions/investment_actions';
 import InvestmentForm from './investment_form';
 import {closeModal} from '../../actions/account_modal_actions'
 
@@ -11,7 +11,7 @@ class UpdateInvestmentForm extends React.Component {
   }
 
   render () {
-    const { investment, accounts, formHeading, formType, errors, action, closeModal} = this.props;
+    const { investment, accounts, formHeading, formType, errors, action, closeModal, receiveInvestmentErrors} = this.props;
     return (
       <InvestmentForm
         investment={investment}
@@ -21,6 +21,7 @@ class UpdateInvestmentForm extends React.Component {
         errors={errors}
         action={action}
         closeModal={closeModal}
+        receiveInvestmentErrors={receiveInvestmentErrors}
          />
     );
   }
@@ -38,6 +39,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
     action: (investment) => dispatch(updateInvestment(investment)),
     closeModal: () => dispatch(closeModal()),
+    receiveInvestmentErrors: (error) => dispatch(receiveInvestmentErrors(error)),
     fetchInvestment: (investmentId) => dispatch(fetchInvestment(investmentId))
 });
 

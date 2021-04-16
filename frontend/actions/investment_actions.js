@@ -23,7 +23,7 @@ const removeInvestment = (investmentId) => ({
     investmentId
 });
 
-const receiveInvestmentErrors = (errors) => ({
+export const receiveInvestmentErrors = (errors) => ({
     type: RECEIVE_INVESTMENT_ERRORS,
     errors
 });
@@ -39,14 +39,15 @@ export const fetchInvestment = (investmentId) => dispatch => (
     .then(investment => dispatch(receiveInvestment(investment)))
 );
 
-export const createInvestment = investment => dispatch => (
-    InvestmentAPIUtil.newInvestment(investment)
+export const createInvestment = investment => dispatch => {
+    // if(investment.price === 0) return;
+    return InvestmentAPIUtil.newInvestment(investment)
     .then(investment => (
         dispatch(receiveInvestment(investment))
     ), err => (
         dispatch(receiveInvestmentErrors(err.responseJSON))
     ))
-);
+};
 
 export const updateInvestment = investment => dispatch => (
     InvestmentAPIUtil.updateInvestment(investment)

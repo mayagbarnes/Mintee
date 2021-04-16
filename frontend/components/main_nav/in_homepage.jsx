@@ -14,8 +14,8 @@ class LoggedInHomePage extends React.Component {
                 {<NavBar/>}
                 <div className="homepage-body">
                     <div className='homepage-left'>
-                        <h2>Congratulations!</h2>
-                        <h3>Keep up the good work</h3>
+                        <h2 className='in-homepage-h2'>Congratulations!</h2>
+                        <h3 className='in-homepage-h3'>Keep up the good work</h3>
                         <p className='homepage-secondary'> Thanks for joining our community, consider going mobile!</p>
                         <br/>
                         <div className='link-holder'>

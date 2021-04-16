@@ -2,16 +2,13 @@ import React from 'react';
 import {MdDeleteForever} from 'react-icons/md';
 import {GrEdit} from 'react-icons/gr';
 
-
 class InvestmentItem extends React.Component {
     constructor(props) {
         super(props);
-        // this.getPrice();
     }
 
     componentDidUpdate() {
         if(!this.props.investment.price) {
-            // console.log('UPDATE TRIGGERED')
             let apikey = window.finnhubAPIKey;
             let ticker = this.props.investment.ticker
         
@@ -21,20 +18,7 @@ class InvestmentItem extends React.Component {
         }
     }
 
-    // getPrice() {
-    //     console.log('MOUNT TRIGGERED')
-
-    //     let apikey = window.finnhubAPIKey;
-    //     let ticker = this.props.investment.ticker
-    
-    //     fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
-    //         .then(response => (response.json()))
-    //         .then(quote => {this.addCurrentPrice(quote["c"])})
-    // }
-
     componentDidMount() {
-        // console.log('MOUNT TRIGGERED')
-
         let apikey = window.finnhubAPIKey;
         let ticker = this.props.investment.ticker
     
@@ -44,8 +28,6 @@ class InvestmentItem extends React.Component {
     }
 
     addCurrentPrice(price) {
-        // console.log('ADD TRIGGERED')
-
         let current_price = `${price}`
         let total = parseInt(this.props.investment.shares) * price
         let investment = {...this.props.investment, price: current_price, market_value: total}
@@ -53,7 +35,6 @@ class InvestmentItem extends React.Component {
     }
 
     render() {
-        
         var formatter = new Intl.NumberFormat('en-US', {
                 style: 'currency',
                 currency: 'USD',

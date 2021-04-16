@@ -11,9 +11,6 @@ class InvestmentForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    // this.setState( { loading: true }, () => {
-        // {this.setState({loading: false})
-
     handleChange(type) {
         return (e) =>  {
              let value = ''
@@ -40,11 +37,11 @@ class InvestmentForm extends React.Component {
     validateTicker(price) {
         this.setState({loading: false })
         if(price === 0) {
-            alert("Invalid Ticker"); 
+            this.props.receiveInvestmentErrors(["Invalid Ticker"]); 
         } else {
             this.props.action(this.state.investment)
-            .then( () => this.props.closeModal());
-        }
+            .then(this.props.closeModal);
+        } 
     }
 
     renderErrors() {
@@ -60,7 +57,7 @@ class InvestmentForm extends React.Component {
 
 
     render() {
-        let defaultAccount = this.state.account_id;
+        let defaultAccount = this.state.investment.account_id;
         let accountsDropdown = this.props.accounts.map( (account) => {
             return  <option 
                         key={account.id}

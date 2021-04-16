@@ -8,7 +8,7 @@ const investmentErrorsReducer = (state = [], action) => {
         case RECEIVE_CURRENT_USER:
             return [];
         case RECEIVE_INVESTMENT_ERRORS:
-            return action.errors;
+            return [...state, ...action.errors];
         case CLOSE_MODAL:
             return [];
         default: 

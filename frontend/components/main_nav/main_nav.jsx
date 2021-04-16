@@ -24,21 +24,21 @@ const MainNav = ({ currentUser, logoutUser }) => {
         </a>
       </div>
       <div className='nav-right'>
-        <button><Link to="/demologin">
-          <p className='icon'><ImEnter/></p> 
-          <div className='button-text'> Demo Sign In</div> 
-          </Link>
-        </button>
-
         <button><Link to="/signup">
           <p className='icon'><Clipboard/></p>
           <div className='button-text'> Sign Up</div>
           </Link>
         </button>
-        
+
         <button><Link to="/login">
           <p className='icon'><Lock/></p>
           <div className='button-text'> Sign In</div>
+          </Link>
+        </button>
+        
+        <button><Link to="/demologin">
+          <p className='icon'><ImEnter/></p> 
+          <div className='button-text'> Demo Sign In</div> 
           </Link>
         </button>
       </div>
@@ -49,7 +49,7 @@ const MainNav = ({ currentUser, logoutUser }) => {
    <nav className="logout">
       <div className='nav-left'>
         {/* <GiHamburgerMenu/> */}
-        <Link to="/dashboard" className="header-link">
+        <Link to="/" className="header-link">
           <img src={window.photos.black_logo} alt="Mint Logo"/>
         </Link>
 

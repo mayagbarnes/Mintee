@@ -80,6 +80,7 @@
         border-radius: 3px;
         padding: 10px;
         font-size: 18px;
+        font-weight: 300;
     }
 
     p {
@@ -94,12 +95,16 @@
 
     ul {
         color: red;
+        font-size: 18px;
+        font-weight: 300;
         text-align: center;
-        margin: 10px
+        margin-bottom: 20px;
     }
 
     button:hover {
-        background: $darkest-blue;
+        box-shadow: 0 0 3px 3px $gray;
+        text-decoration: none;
+        font-weight: 400;
     }
 }
 

@@ -18,11 +18,13 @@ class Dash extends React.Component {
     }
 
     render() {
-        // let none = <div>
-        //                 <div className='account-info-primary'>
-        //                     <h4 className='account-name' >No Accounts of This Category</h4>
-        //                 </div>
-        //             </div>
+        let none = <li className='account-item'  key='account-none'>
+                    <div>
+                        <div className='account-info-none'>
+                            <h4 className='account-name' >No Accounts to Display</h4>
+                        </div>
+                    </div>
+                    </li>
 
         let cashAccounts = [];
         var cashTotal = 0;
@@ -54,6 +56,10 @@ class Dash extends React.Component {
                 investmentAccounts.push(acc);
             }
         })
+
+        if(cashAccounts.length === 0) { cashAccounts = none}
+        if(loanAccounts.length === 0) {loanAccounts = none}
+        if(investmentAccounts.length === 0) {investmentAccounts = none}
 
         return (
             <div>

@@ -1,6 +1,4 @@
 import React from 'react';
-// import NavBar from '../nav_bar/nav_bar';
-// import MainNavContainer from '../main_nav/main_nav_container';
 import { BsPlusCircle } from 'react-icons/bs';
 import { IoCashOutline } from 'react-icons/io5';
 import {GoCreditCard} from 'react-icons/go';
@@ -17,6 +15,14 @@ class Sidebar extends React.Component {
     }
 
     render() {
+        let none = <li className='sidebar-account-item' key='account-none'>
+                    <div>
+                        <div className='sidebar-account-none'>
+                            <h4 className='account-name' >No Accounts to Display</h4>
+                        </div>
+                    </div>
+                    </li>
+
         let cashAccounts = [];
         var cashTotal = 0;
         let loanAccounts = [];
@@ -47,6 +53,10 @@ class Sidebar extends React.Component {
                 investmentAccounts.push(acc);
             }
         })
+
+        if(cashAccounts.length === 0) { cashAccounts = none}
+        if(loanAccounts.length === 0) {loanAccounts = none}
+        if(investmentAccounts.length === 0) {investmentAccounts = none}
 
         return (
             <div className='sidebar'>
