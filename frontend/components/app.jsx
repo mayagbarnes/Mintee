@@ -5,6 +5,7 @@ import {
   Redirect,
   Link
 } from 'react-router-dom';
+
 import { AuthRoute, ProtectedRoute, AdjustedRoute } from '../util/route_utils'; 
 import SignUpContainer from './session/signup_container';
 import LoginContainer from './session/login_container';
@@ -22,7 +23,7 @@ const App = () => (
         <Switch>
             <AuthRoute exact path="/signup" component={SignUpContainer} />
             <AuthRoute exact path="/login" component={LoginContainer} />
-            <AuthRoute exact path="/demologin" component={DemoContainer} />
+            {/* <AuthRoute exact path="/demologin" component={DemoContainer} /> */}
             <ProtectedRoute exact path="/dashboard" component={DashContainer} />
             <ProtectedRoute exact path="/transactions" component={TransactionsContainer} />
             <ProtectedRoute exact path="/investments" component={InvestmentsContainer} />

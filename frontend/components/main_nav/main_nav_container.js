@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { logoutUser } from '../../actions/session_actions';
+import { withRouter } from 'react-router'
+import { logoutUser, loginUser } from '../../actions/session_actions';
 import MainNav from './main_nav';
 
 const mapStateToProps = ({ session, entities: { users } }) => {
@@ -9,10 +10,8 @@ const mapStateToProps = ({ session, entities: { users } }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  logoutUser: () => dispatch(logoutUser())
+  logoutUser: () => dispatch(logoutUser()),
+  loginDemo: (user) => dispatch(loginUser(user)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MainNav);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainNav));

@@ -20,8 +20,8 @@ class SessionForm extends React.Component {
     }
 
     handleDemo() {
-        this.props.demo({ username: 'DemoLogin', password: '123456'})
-            .then( () => this.props.history.push('/transactions'));
+        this.props.demo({username: 'DemoLogin', password: '123456'})
+        .then( () => this.props.history.push('/transactions'));
     }
 
     handleChange(type) {
@@ -76,10 +76,11 @@ class SessionForm extends React.Component {
                     <div className='button-text'> Sign In</div>
                     </Link>
                     </button>
-                    <button><Link to="/demologin">
-                    <p className='icon'><ImEnter/></p> 
-                    <div className='button-text'> Demo Sign In</div> 
-                    </Link>
+                    <button onClick={this.handleDemo}>
+                        <div>
+                        <p className='icon'><ImEnter/></p> 
+                        <div className='button-text'> Demo Sign In</div> 
+                        </div>
                     </button>
                     </div>
 
@@ -92,10 +93,11 @@ class SessionForm extends React.Component {
                     <div className='button-text'> Sign Up</div>
                     </Link>
                     </button>
-                    <button><Link to="/demologin">
-                    <p className='icon'><ImEnter/></p> 
-                    <div className='button-text'> Demo Sign In</div> 
-                    </Link>
+                    <button onClick={this.handleDemo}>
+                        <div>
+                        <p className='icon'><ImEnter/></p> 
+                        <div className='button-text'> Demo Sign In</div> 
+                        </div>
                     </button>
                     </div>
         }
@@ -132,7 +134,7 @@ class SessionForm extends React.Component {
                 <div className='session-form'>
                 <h2>{this.props.formHeading}</h2>
                 <h4> Monitor all your accounts in one place</h4>
-                <div>
+                <form>
                     {this.renderErrors()}
                     <label> Username
                         <br/>
@@ -152,7 +154,7 @@ class SessionForm extends React.Component {
                     </div>
                     {demo}
                     <p>{text} <Link to={route}>{link_name}</Link></p>
-                </div>
+                </form>
                 </div>
                 </section>
             </section>
