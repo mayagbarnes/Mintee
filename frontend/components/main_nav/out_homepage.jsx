@@ -52,11 +52,26 @@ class LoggedOutHomePage extends React.Component {
                             </div>
                         </div>
                         <div className='main-video'>
+                            {/* autoPlay muted loop  */}
                             <video autoPlay muted loop id="myVideo">
                                 <source src="https://digitalasset.intuit.com/VIDEO/A5v9SBOck/mint-hero-xl.mp4" type="video/mp4"/>
                             </video>
                         </div>
                     </div>
+                    <div className='section-2'>
+                        <div className='sec2-div'>
+                        <img src="https://digitalasset.intuit.com/IMAGE/A6pjTLj7g/Group-1311-2.svg" alt=""/>
+                        <p className='section-2-secondary'>#1 most downloaded personal finance app*</p>
+                        </div>
+                        <div className='sec2-div'>
+                        <img src="https://digitalasset.intuit.com/IMAGE/A6pjTLj7g/Group-1311-2.svg" alt=""/>
+                        <p className='section-2-secondary'>Budget-friendly, totally free</p>
+                        </div>
+                    </div>
+                    {/* <div className='section-3'>
+                        <div className='rotation-controls'>
+                        </div>
+                    </div> */}
                 </div>
             </section>
         )
@@ -65,7 +80,7 @@ class LoggedOutHomePage extends React.Component {
 
 export default LoggedOutHomePage;
 
- /* <img className='homepage-right' src={window.photos.homepage} alt="HomepageImg"/> */
+
 
 
  

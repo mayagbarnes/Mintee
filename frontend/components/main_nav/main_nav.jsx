@@ -62,16 +62,15 @@ class MainNav extends React.Component {
         <nav className="logout">
             <div className='nav-left'>
               {/* <GiHamburgerMenu/> */}
-              <Link to="/" className="header-link">
+              <Link to="/dashboard" className="header-link">
                 <img src={window.photos.black_logo} alt="Mint Logo"/>
               </Link>
-
               <a target="_blank" href="https://github.com/mayagbarnes" className='header-icons'>
                 <p className='left-icon'><FaGithub className='left-icon github'/></p> 
                 <div className='button-text'> Github</div> 
               </a>
-              <a target="_blank" href="https://www.linkedin.com/in/mayabarnes/" className='header-icons'>
-                <p className='left-icon'><GrLinkedin className='left-icon linkedin'/></p> 
+              <a target="_blank" href="https://www.linkedin.com/in/mayabarnes/" className='header-icons linkedin'>
+                <p className='left-icon'><GrLinkedin className='linkedin-icon'/></p> 
                 <div className='button-text'> LinkedIn</div> 
               </a>
             </div>

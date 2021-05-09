@@ -24,7 +24,7 @@
         padding-right: 7px;
         padding-top: 5px;
         padding-bottom: 3px;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 300;
         box-shadow: 0 0 3px 3px white;
     }
@@ -60,7 +60,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
             border-radius: 3px;
             border-bottom: white;
             border-bottom-style: solid;
@@ -103,7 +103,6 @@
 
 .login-signup button:hover {
     box-shadow: 0 0 3px 3px $light-gray;
-    font-weight: 400;
     text-decoration: none;
 }
 
@@ -131,9 +130,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 10%;
-            padding: 10px;
+            padding: 20px;
             border-radius: 3px;
+            margin-left: 15%;
             
             .button-text {
                 font-size: 22px;
@@ -153,20 +152,20 @@
         }
 
         .header-icons:hover {
-            box-shadow: 0 0 3px 3px $gray;
+            font-weight: 300;
+            background-color: $darker-gray;
             text-decoration: none;
         }
 
         img {
             width: 160px;
-            margin-bottom: 5px;
             margin-left: 10px;
             padding: 10px;
         }
     }
 
     .nav-right {
-        font-size: 24px;
+        font-size: 22px;
         display: flex;
         margin-right: 25px;
         justify-content: center;
@@ -177,8 +176,8 @@
         }
 
         button:hover {
-            box-shadow: 0 0 3px 3px $gray;
             font-weight: 300;
+            background-color: $darker-gray;
             text-decoration: none;
         }
 
