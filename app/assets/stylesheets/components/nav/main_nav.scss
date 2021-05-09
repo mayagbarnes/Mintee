@@ -51,21 +51,21 @@
     }
 
     .nav-left {
+        margin-left: 2%;
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
-        margin-left: 2%;
-
+        
         .header-icons {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-bottom: 15px;
+            padding: 15px;
             border-radius: 3px;
             border-bottom: white;
             border-bottom-style: solid;
             border-bottom-width: 4px;
-            margin-left: 15%;
+            margin-left: 10%;
             
             .button-text {
                 font-size: 22px;
@@ -82,7 +82,7 @@
         }
 
         .linkedin {
-            margin-left: 10%;
+            margin-left: 5%;
         }
 
         .header-icons:hover {
@@ -130,9 +130,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 15px;
+            padding-top: 16px;
             border-radius: 3px;
-            margin-left: 15%;
+            margin-left: 10%;
             
             .button-text {
                 font-size: 22px;
@@ -145,6 +146,10 @@
                 height: 28px;
                 width: 28px;
             }
+        }
+
+        .linkedin {
+            margin-left: 5%;
         }
 
         .left-icon {

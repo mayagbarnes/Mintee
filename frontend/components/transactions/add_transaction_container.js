@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
 import {createTransaction} from '../../actions/transaction_actions';
+import {fetchAccount} from '../../actions/account_actions';
 import TransactionForm from './transaction_form';
 import {closeModal} from '../../actions/account_modal_actions'
 
@@ -19,6 +20,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     action: (transaction) => dispatch(createTransaction(transaction)),
+    fetchAccount: (accountId) => dispatch(fetchAccount(accountId)),
     closeModal: () => dispatch(closeModal())
 });
 

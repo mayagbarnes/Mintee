@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {updateTransaction, fetchTransaction} from '../../actions/transaction_actions';
+import {fetchAccount} from '../../actions/account_actions';
 import TransactionForm from './transaction_form';
 import {closeModal} from '../../actions/account_modal_actions'
 
@@ -11,7 +12,7 @@ class UpdateTransactionForm extends React.Component {
   }
 
   render () {
-    const { transaction, accounts, formHeading, formType, errors, action, closeModal} = this.props;
+    const { transaction, accounts, formHeading, formType, errors, action, closeModal, fetchAccount} = this.props;
     return (
       <TransactionForm
         transaction={transaction}
@@ -21,6 +22,7 @@ class UpdateTransactionForm extends React.Component {
         errors={errors}
         action={action}
         closeModal={closeModal}
+        fetchAccount={fetchAccount}
          />
     );
   }
@@ -38,7 +40,8 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
     action: (transaction) => dispatch(updateTransaction(transaction)),
     closeModal: () => dispatch(closeModal()),
-    fetchTransaction: (transactionId) => dispatch(fetchTransaction(transactionId))
+    fetchAccount: (accountId) => dispatch(fetchAccount(accountId)),
+    fetchTransaction: (transactionId) => dispatch(fetchTransaction(transactionId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateTransactionForm)

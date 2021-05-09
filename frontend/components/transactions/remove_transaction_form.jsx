@@ -9,7 +9,9 @@ class RemoveTransactionForm extends React.Component {
     }
 
     handleDelete() {
+        let accountId = this.props.transaction.account_id
         this.props.deleteTransaction(this.props.transaction.id)
+            .then( () => this.props.fetchAccount(accountId))
             .then( () => this.props.closeModal());
     }
 

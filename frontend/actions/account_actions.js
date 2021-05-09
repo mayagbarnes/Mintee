@@ -12,7 +12,7 @@ const receiveAccounts = (accounts) => ({
     accounts
 });
 
-const receiveAccount = (account) => ({
+export const receiveAccount = (account) => ({
     type: RECEIVE_ACCOUNT,
     account
 });

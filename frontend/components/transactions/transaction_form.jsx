@@ -13,7 +13,9 @@ class TransactionForm extends React.Component {
     }
 
     handleSubmit() {
+        let accountId = this.state.account_id
         this.props.action(this.state)
+            .then(() => this.props.fetchAccount(accountId))
             .then( () => this.props.closeModal());
     }
 
