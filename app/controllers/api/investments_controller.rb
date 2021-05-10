@@ -24,8 +24,8 @@ class Api::InvestmentsController < ApplicationController
 
     def update
         @investment = current_user.investments.find_by(id: params[:id])
-        old_amount = @investment.shares * @investment.prev_close
-        new_amount =  @investment.shares * params[:investment][:prev_close].to_f
+        old_amount = (@investment.shares * @investment.prev_close)
+        new_amount =  (params[:investment][:shares].to_f * params[:investment][:prev_close].to_f)
         if @investment.update(investment_params)
             if old_amount != new_amount
                  # Adjusting Account Balance:

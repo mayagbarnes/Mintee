@@ -32,9 +32,9 @@ transaction_6 = Transaction.create( { description: 'Gym Membership', category: '
 
 # account1 - investments
 
-investment_1 = Investment.create( { inv_name: 'Apple', ticker: 'AAPL', shares: 100.00, prev_close: 0, price_paid: 100.00, account_id: account_1.id, last_fetch: "2021-05-01" } )
-investment_2 = Investment.create( { inv_name: 'Microsoft', ticker: 'MSFT', shares: 50.00, prev_close: 0, price_paid: 200.00, account_id: account_1.id, last_fetch: "2021-05-01"} )
-investment_3 = Investment.create( { inv_name: 'Google', ticker: 'GOOGL', shares: 1.00, prev_close: 0, price_paid: 2000.00, account_id: account_1.id, last_fetch: "2021-05-01"} )
+investment_1 = Investment.create( { inv_name: 'Apple', ticker: 'AAPL', shares: 100.00, prev_close: 0, price_paid: 100.00, account_id: account_5.id, last_fetch: "2021-05-01" } )
+investment_2 = Investment.create( { inv_name: 'Microsoft', ticker: 'MSFT', shares: 50.00, prev_close: 0, price_paid: 200.00, account_id: account_5.id, last_fetch: "2021-05-01"} )
+investment_3 = Investment.create( { inv_name: 'Google', ticker: 'GOOGL', shares: 1.00, prev_close: 0, price_paid: 2000.00, account_id: account_5.id, last_fetch: "2021-05-01"} )
 
 
 # transaction = { description: 'yikes', category: 'Health and Fitness', date: "2021-10-31", amount: -75.00, account_id: 26 }

@@ -28,26 +28,19 @@ class InvestmentForm extends React.Component {
         let ticker = this.state.investment.ticker;
         let weekday = new Date().getDay();
 
-        if (this.props.formType === 'Create') {
-            if(weekday === 0 || weekday === 6) {
-                this.setState( {loading: true }, () => { 
-                    fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
-                        .then(response => response.json())
-                        .then(quote => this.validateTicker(quote["c"]))
-                    });
-            } else {
-                this.setState( {loading: true }, () => { 
-                    fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
-                        .then(response => response.json())
-                        .then(quote => this.validateTicker(quote["pc"]))
-                    });
-            }
+        if(weekday === 0 || weekday === 6) {
+            this.setState( {loading: true }, () => { 
+                fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
+                    .then(response => response.json())
+                    .then(quote => this.validateTicker(quote["c"]))
+                });
         } else {
-            this.setState({ investment: { ...this.state.investment} },
-                () => this.props.action(this.state.investment)
-                .then(() => this.props.fetchAccount(accountId))
-                .then(this.props.closeModal))
-        } 
+            this.setState( {loading: true }, () => { 
+                fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
+                    .then(response => response.json())
+                    .then(quote => this.validateTicker(quote["pc"]))
+                });
+        }
     }
 
     buildDateString() {
@@ -68,7 +61,6 @@ class InvestmentForm extends React.Component {
     validateTicker(price) {
         let dateString = this.buildDateString();
         let accountId = this.state.investment.account_id
-        console.log(accountId)
         if(price === 0) {
             this.setState({loading: false })
             this.props.receiveInvestmentErrors(["Invalid Ticker"]); 

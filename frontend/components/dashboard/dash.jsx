@@ -14,7 +14,55 @@ class Dash extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchAccounts();
+        this.props.fetchInvestments()
+            .then( () => this.updateInvestments())
+            .then( () => this.props.fetchAccounts());
+    }
+
+    buildDateString() {
+        let current_date = new Date();
+        let month = String(current_date.getMonth() + 1);
+        let day = String(current_date.getDate());
+        let year = String(current_date.getFullYear());
+
+        if (Number(month) < 10) {
+            month = '0' + month
+        } 
+        if (Number(day) < 10) {
+            day = '0' + day
+        }
+
+        return `${year}-${month}-${day}`;
+    }
+
+    updateInvestments() {
+        let today = this.buildDateString();
+        let weekday = new Date().getDay();
+
+        this.props.investments.forEach( inv => {
+            let apikey = window.finnhubAPIKey;
+            let ticker = inv.ticker
+
+            if(inv.last_fetch !== today) {
+                if(weekday === 0 || weekday === 6) {
+                    fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
+                        .then(response => (response.json()))
+                        .then(quote => {this.addCurrentPrice(quote["c"], inv)})
+                } else {
+                    fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
+                        .then(response => (response.json()))
+                        .then(quote => {this.addCurrentPrice(quote["pc"], inv)})
+                }
+            } 
+        })
+    }
+
+    addCurrentPrice(price, inv) {
+        let today = this.buildDateString();
+        let accountId = inv.account_id
+        let investment = {...inv, prev_close: price, last_fetch: today};
+        this.props.updateInvestment(investment)
+        .then(() => this.props.fetchAccount(accountId));
     }
 
     render() {
