@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {fetchInvestments, fetchFilteredInvestments, receiveInvestment } from '../../actions/investment_actions';
+import {fetchInvestments, fetchFilteredInvestments, receiveInvestment, updateInvestment} from '../../actions/investment_actions';
 import Investments from './investment_main';
 import {openModal} from '../../actions/account_modal_actions';
 
@@ -15,6 +15,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     fetchInvestments: () => dispatch(fetchInvestments()),
     receiveInvestment: (investment) => dispatch(receiveInvestment(investment)),
+    updateInvestment: (investment) => dispatch(updateInvestment(investment)),
     fetchFilteredInvestments: (string) => dispatch(fetchFilteredInvestments(string)),
     openModal: (type, investment) => dispatch(openModal(type, investment))
 });

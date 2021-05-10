@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
 import {deleteInvestment} from '../../actions/investment_actions';
+import {fetchAccount} from '../../actions/account_actions';
 import RemoveInvestmentForm from './remove_investment_form';
 import {closeModal} from '../../actions/account_modal_actions'
 
@@ -9,6 +10,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     deleteInvestment: (investmentId) => dispatch(deleteInvestment(investmentId)),
+    fetchAccount: (accountId) => dispatch(fetchAccount(accountId)),
     closeModal: () => dispatch(closeModal())
 });
 

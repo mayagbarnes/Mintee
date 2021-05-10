@@ -12,6 +12,10 @@ class Api::InvestmentsController < ApplicationController
     def create
         @investment = Investment.new(investment_params)
         if @investment.save
+             # Update to Account Balance:
+            @account = current_user.accounts.find_by(id: @investment.account)
+            @account.balance = @account.balance + (@investment.shares * @investment.prev_close)
+            @account.save
             render "api/investments/show"
         else
             render json: @investment.errors.full_messages, status: 422
@@ -20,7 +24,15 @@ class Api::InvestmentsController < ApplicationController
 
     def update
         @investment = current_user.investments.find_by(id: params[:id])
+        old_amount = @investment.shares * @investment.prev_close
+        new_amount =  @investment.shares * params[:investment][:prev_close].to_f
         if @investment.update(investment_params)
+            if old_amount != new_amount
+                 # Adjusting Account Balance:
+                @account = current_user.accounts.find_by(id: @investment.account)
+                @account.balance = @account.balance - old_amount + new_amount
+                @account.save
+            end
             render "api/investments/show"
         else
             render json: @investment.errors.full_messages, status: 422
@@ -29,7 +41,13 @@ class Api::InvestmentsController < ApplicationController
 
     def destroy
         @investment = current_user.investments.find_by(id: params[:id])
+        investment_value = @investment.shares * @investment.prev_close
+        investment_account = @investment.account
         if @investment && @investment.destroy
+            # Remove investment from Account Balance:
+            @account = current_user.accounts.find_by(id: investment_account)
+            @account.balance = @account.balance - investment_value
+            @account.save
             render json: @investment
         end
     end
@@ -40,6 +58,6 @@ class Api::InvestmentsController < ApplicationController
 
     private
     def investment_params
-        params.require(:investment).permit(:inv_name, :ticker, :shares, :price_paid, :account_id)
+        params.require(:investment).permit(:inv_name, :ticker, :shares, :prev_close, :price_paid, :account_id, :last_fetch)
     end
 end

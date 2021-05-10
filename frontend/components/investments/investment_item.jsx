@@ -7,31 +7,62 @@ class InvestmentItem extends React.Component {
         super(props);
     }
 
-    componentDidUpdate() {
-        if(!this.props.investment.price) {
-            let apikey = window.finnhubAPIKey;
-            let ticker = this.props.investment.ticker
+    // componentDidUpdate() {
+    //     if(!this.props.investment.price) {
+    //         let apikey = window.finnhubAPIKey;
+    //         let ticker = this.props.investment.ticker
         
-                fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
-                    .then(response => (response.json()))
-                    .then(quote => this.addCurrentPrice(quote["c"]))
+    //             fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
+    //                 .then(response => (response.json()))
+    //                 .then(quote => this.addCurrentPrice(quote["pc"]))
+    //     }
+    // }
+
+    buildDateString() {
+        let current_date = new Date();
+        let month = String(current_date.getMonth() + 1);
+        let day = String(current_date.getDate());
+        let year = String(current_date.getFullYear());
+
+        if (Number(month) < 10) {
+            month = '0' + month
+        } 
+        if (Number(day) < 10) {
+            day = '0' + day
         }
+
+        return `${year}-${month}-${day}`;
     }
 
     componentDidMount() {
-        let apikey = window.finnhubAPIKey;
-        let ticker = this.props.investment.ticker
-    
-        fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
-            .then(response => (response.json()))
-            .then(quote => {this.addCurrentPrice(quote["c"])})
+        let today = this.buildDateString();
+        let weekday = new Date().getDay();
+
+        if(this.props.investment.last_fetch !== today) {
+            if(weekday === 0 || weekday === 6) {
+                let apikey = window.finnhubAPIKey;
+                let ticker = this.props.investment.ticker
+            
+                fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
+                    .then(response => (response.json()))
+                    .then(quote => {this.addCurrentPrice(quote["c"])})
+
+            } else {
+                let apikey = window.finnhubAPIKey;
+                let ticker = this.props.investment.ticker
+            
+                fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
+                    .then(response => (response.json()))
+                    .then(quote => {this.addCurrentPrice(quote["pc"])})
+            }
+        } 
     }
 
     addCurrentPrice(price) {
-        let current_price = `${price}`
-        let total = parseInt(this.props.investment.shares) * price
-        let investment = {...this.props.investment, price: current_price, market_value: total}
-        this.props.receiveInvestment(investment)
+        let today = this.buildDateString();
+        let total = parseInt(this.props.investment.shares) * price;
+        let investment = {...this.props.investment, prev_close: price, last_fetch: today, market_value: total};
+        this.props.updateInvestment(investment);
     }
 
     render() {
@@ -42,10 +73,10 @@ class InvestmentItem extends React.Component {
         let cost = parseFloat(this.props.investment.price_paid);
             cost.toFixed(2);
             cost = formatter.format(cost)
-        let price = parseFloat(this.props.investment.price);
+        let price = parseFloat(this.props.investment.prev_close);
             price.toFixed(2);
             price = formatter.format(price)
-        let market_value = parseInt(this.props.investment.shares) * parseInt(this.props.investment.price)
+        let market_value = parseInt(this.props.investment.shares) * parseInt(this.props.investment.prev_close)
             market_value.toFixed(2);
             market_value = formatter.format(market_value)
 

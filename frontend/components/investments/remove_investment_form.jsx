@@ -9,7 +9,9 @@ class RemoveInvestmentForm extends React.Component {
     }
 
     handleDelete() {
+        let accountId = this.props.investment.account_id
         this.props.deleteInvestment(this.props.investment.id)
+            .then( () => this.props.fetchAccount(accountId))
             .then( () => this.props.closeModal());
     }
 

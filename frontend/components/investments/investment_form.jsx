@@ -26,22 +26,59 @@ class InvestmentForm extends React.Component {
     handleSubmit() {
         let apikey = window.finnhubAPIKey;
         let ticker = this.state.investment.ticker;
+        let weekday = new Date().getDay();
 
-        this.setState( {loading: true }, () => { 
-            fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
-                .then(response => response.json())
-                .then(quote => this.validateTicker(quote["c"]))
-            });
+        if (this.props.formType === 'Create') {
+            if(weekday === 0 || weekday === 6) {
+                this.setState( {loading: true }, () => { 
+                    fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
+                        .then(response => response.json())
+                        .then(quote => this.validateTicker(quote["c"]))
+                    });
+            } else {
+                this.setState( {loading: true }, () => { 
+                    fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
+                        .then(response => response.json())
+                        .then(quote => this.validateTicker(quote["pc"]))
+                    });
+            }
+        } else {
+            this.setState({ investment: { ...this.state.investment} },
+                () => this.props.action(this.state.investment)
+                .then(() => this.props.fetchAccount(accountId))
+                .then(this.props.closeModal))
+        } 
+    }
+
+    buildDateString() {
+        let current_date = new Date();
+        let month = String(current_date.getMonth() + 1);
+        let day = String(current_date.getDate());
+        let year = String(current_date.getFullYear());
+
+        if (Number(month) < 10) {
+            month = '0' + month
+        } 
+        if (Number(day) < 10) {
+            day = '0' + day
+        }
+        return `${year}-${month}-${day}`;
     }
 
     validateTicker(price) {
-        this.setState({loading: false })
+        let dateString = this.buildDateString();
+        let accountId = this.state.investment.account_id
+        console.log(accountId)
         if(price === 0) {
+            this.setState({loading: false })
             this.props.receiveInvestmentErrors(["Invalid Ticker"]); 
         } else {
-            this.props.action(this.state.investment)
-            .then(this.props.closeModal);
-        } 
+            this.setState({ investment: { ...this.state.investment, prev_close: price, last_fetch: dateString} },
+                () => this.props.action(this.state.investment)
+                .then(() => this.props.fetchAccount(accountId))
+                .then( () => this.setState({loading: false }))
+                .then(this.props.closeModal))
+        }
     }
 
     renderErrors() {

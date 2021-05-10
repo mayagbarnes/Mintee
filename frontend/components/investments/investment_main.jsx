@@ -170,6 +170,7 @@ class Investments extends React.Component {
             investmentItems = this.props.investments.map( investment => {
                             return < InvestmentItem key={investment.id}
                                 investment={investment} 
+                                updateInvestment={this.props.updateInvestment}
                                 receiveInvestment = {this.props.receiveInvestment}
                                 openModal={this.props.openModal}/>
                             })

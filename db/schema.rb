@@ -33,8 +33,10 @@ ActiveRecord::Schema.define(version: 2021_04_13_162052) do
     t.string "inv_name", null: false
     t.string "ticker", null: false
     t.decimal "shares", null: false
+    t.decimal "prev_close", null: false
     t.decimal "price_paid", null: false
     t.integer "account_id", null: false
+    t.date "last_fetch", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_investments_on_account_id"
