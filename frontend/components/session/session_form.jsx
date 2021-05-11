@@ -21,7 +21,7 @@ class SessionForm extends React.Component {
 
     handleDemo() {
         this.props.demo({username: 'DemoLogin', password: '123456'})
-        .then( () => this.props.history.push('/transactions'));
+        .then( () => this.props.history.push('/dashboard'));
     }
 
     handleChange(type) {
@@ -30,7 +30,7 @@ class SessionForm extends React.Component {
 
     handleSubmit() {
         this.props.action(this.state)
-            .then( () => this.props.history.push('/transactions'));
+            .then( () => this.props.history.push('/dashboard'));
     }
 
     renderErrors() {

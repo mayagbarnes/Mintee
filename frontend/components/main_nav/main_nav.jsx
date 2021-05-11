@@ -12,11 +12,18 @@ class MainNav extends React.Component {
     constructor(props) {
           super(props);
           this.handleDemo = this.handleDemo.bind(this);
+          this.handleLogout = this.handleLogout.bind(this);
+
     }
 
     handleDemo() {
         this.props.loginDemo({username: 'DemoLogin', password: '123456'})
-        .then( () => this.props.history.push('/transactions'));
+        .then( () => this.props.history.push('/dashboard'));
+    }
+
+    handleLogout() {
+        this.props.logoutUser()
+        .then( () => this.props.history.push('/'));
     }
 
     render() {
@@ -75,7 +82,7 @@ class MainNav extends React.Component {
               </a>
             </div>
             <div className='nav-right'>
-              <button onClick={this.props.logoutUser}> <GrLogout/> LOG OUT</button>
+              <button onClick={this.handleLogout}> <GrLogout/> LOG OUT</button>
             </div>
           </nav>
         );
