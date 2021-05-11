@@ -20,7 +20,7 @@ account_4 = Account.create( { account_name: 'Credit Card', institution: 'Chase',
 account_5 = Account.create( { account_name: 'Individual', institution: 'Charles Schwab', category: 'Investment', balance: 1500.50, user_id: demo_login.id } )
 account_6 = Account.create( { account_name: 'Roth IRA', institution: 'Charles Schwab', category: 'Investment', balance: 7000.30, user_id: demo_login.id } )
 
-# checking account transactions
+# checking account transactions - April
 
 transaction_1 = Transaction.create( { description: 'Paycheck', category: 'Income', date: "2021-04-15", amount: 2000.50, account_id: account_1.id } )
 transaction_2 = Transaction.create( { description: 'Paycheck', category: 'Income', date: "2021-04-30", amount: 2000.50, account_id: account_1.id } )

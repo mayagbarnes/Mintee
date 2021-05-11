@@ -1,91 +1,221 @@
-/* Formatting for Dashboard of Accounts */
+// /* Formatting for Dashboard of Accounts */
 
-.dashboard {
-    margin-top: 4%;
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-bottom: 10%;
-    padding-top: 25px;
-    padding-left: 25px;
-    padding-right: 25px;
+.main-body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+.dashboard-leftside {
     border-color: $light-gray;
     border-style: solid;
     border-width: 1px;
     border-radius: 5px;
-    background: white;
+    background-color: white;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 4%;
+    margin-left: 2%;
+    width: 30%;
+
+    .dashboard-account-none h4 {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 400;
+        margin-bottom: 7px;
+    }
 
     .dashboard-heading {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        margin: 15px;
         border-bottom: $light-gray;
         border-bottom-style: solid;
         border-bottom-width: 3px;
+        margin: 20px;
+        margin-bottom: 15px;
         padding: 10px;
 
         h2 {
-            margin: 10px;
-            font-size: 32px;
+            font-size: 24px;
+            margin-bottom: 0px;
+            margin-top: 0px;
+            margin-left: 0px;
         }
 
         svg {
-            height: 30px;
-            width: 30px;
+            height: 26px;
+            width: 26px;
             padding-left: 10px;
         }
 
-        .dash-right {
+        .dashboard-right {
             display: flex;
             align-items: center;
 
             p {
                 display: inline;
-                font-size: 26px;
-                font-weight: 400;
+                font-size: 22px;
+                font-weight: 300;
             }
 
         }
     }
-}
 
-.dash-main {
-    padding: 25px;
+    .dashboard-main {
+        margin-bottom: 5%;
+    }
 
     div.category {
         background-color: $lightest-gray;
         border-radius: 3px;
         display: flex;
         justify-content: space-between;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        margin: 4%;
+        margin-bottom: 2%;
 
         h3 {
             text-align: left;
-            margin-left: 40px;
-            font-size: 28px;
+            margin-left: 30px;
+            font-size: 24px;
             margin-top: 10px;
-            font-weight: 500;
+            font-weight: 400;
             display: flex;
 
             svg {
-                height: 30px;
-                width: 30px;
+                height: 25px;
+                width: 25px;
                 margin-right: 10px;
             }
         }
 
         p {
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 500;
-            margin-right: 40px;
+            margin-right: 30px;
             margin-top: 10px;
             margin-bottom: 10px;
         }
     }
+}
 
-    li:last-child {
-       border-bottom: none;
+.dash-rightside {
+    border-color: $light-gray;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    background-color: white;
+    padding: 25px;
+    margin-top: 4%;
+    margin-right: 2%;
+    width: 57%;
+
+    h2 {
+        text-align: center;
+        padding: 10px;
+        margin: 10px;
+        font-size: 26px;
     }
-    
+
+    .dash-trans-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 5px;
+        border-bottom: $light-gray;
+        border-bottom-style: solid;
+        border-bottom-width: 3px;
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 0px;
+            margin-top: 0px;
+            margin-left: 0px;
+        }
+    }
+
+        .view-button-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .view-button {
+            padding: 10px;
+            background-color: $dark-green;
+            border: 1px solid $darkest-green;
+            border-radius: 5px;
+
+            .button-text {
+                font-size: 16px;
+                font-weight: 500;
+                color: white;
+            }
+        }
+
+        .chart-select-button-unselected {
+            position: relative;
+            top: 1px;
+            padding: 10px;
+            padding-top: 6px;
+            padding-bottom: 2px;
+            margin-top: 15px;
+            background-color: $lightest-gray;
+            border-top: 1px solid $darkest-green;
+            border-right: 1px solid $darkest-green;
+            border-left: 1px solid $darkest-green;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            color: $darkest-green;
+        }
+
+        .chart-select-button-selected {
+            position: relative;
+            top: 2px;
+            padding: 10px;
+            padding-top: 8px;
+            padding-bottom: 3px;
+            margin-top: 15px;
+            background-color: white;
+            border-top: 1px solid $darkest-green;
+            border-right: 1px solid $darkest-green;
+            border-left: 1px solid $darkest-green;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            color: $darkest-green;
+        }
+
+        .chart-select-button-unselected:hover {
+            box-shadow: 0 0 2px 2px $light-gray;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .current-chart-div-unselected {
+            display: none;
+        }
+
+        .current-chart-div-selected {
+           background-color: white;
+           border-top: 1px solid $darkest-green;
+           border-bottom: 1px solid $darkest-green;
+           border-right: 1px solid $darkest-green;
+           border-left: 1px solid $darkest-green;
+           border-radius: 4px;
+           border-top-left-radius: 0px;
+           padding: 15px;
+           padding-left: 40px;
+           padding-right: 40px;
+           padding-bottom: 30px;
+        }
+
+
+
 }

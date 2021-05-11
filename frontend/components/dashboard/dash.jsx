@@ -6,18 +6,80 @@ import NavBar from '../nav_bar/nav_bar';
 import { IoCashOutline } from 'react-icons/io5';
 import {GoCreditCard} from 'react-icons/go'
 import {BiLineChart} from 'react-icons/bi'
+import CurrenMonthChart from "../charts/month_chart";
+import SpendingTrendChart from "../charts/spending_chart";
 
+import { Link } from 'react-router-dom';
 
 class Dash extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {chart: 'month'}
+        this.handleButtonClick = this.handleButtonClick.bind(this)
     }
 
     componentDidMount() {
         this.props.fetchInvestments()
             .then( () => this.updateInvestments())
-            .then( () => this.props.fetchAccounts());
+            .then( () => this.props.fetchAccounts())
     }
+
+    // Method to handle which chart to render
+    handleButtonClick(e) {
+        e.preventDefault();
+        this.setState({chart: e.target.value})
+    }
+    
+
+    // calculate the total spent that month 
+    totalSpend(month){
+        let total = 0;
+        this.props.transactions.forEach((trans)=>{
+            if (trans.category !== 'Income'){
+                let monthString = trans.date.slice(5,7);
+        
+                if(monthString === month){
+                    total += Number(trans.amount)
+                }
+            }
+        })
+        return -total;
+    }
+
+    // calculate the total spent that month 
+    totalIncome(month){
+        let total = 0;
+        this.props.transactions.forEach((trans)=>{
+            if (trans.category === 'Income'){
+                let monthString = trans.date.slice(5,7);
+                if(monthString === month){
+                    total += Number(trans.amount)
+                }
+            }
+        })
+        return total;
+    }
+
+    // get correct month string for testing 
+    getMonth(month){
+        if (month < 10){
+            month = '0' + month;
+        } else {
+            month = month.toString();
+        }
+        return month;
+    }
+
+     // get correct month label for graph 
+    label(month){
+        let monthArr = ['January', 'February', 'March', 
+        'April', 'May', 'June', 'July', 
+        'August', 'September', 'October', 'November', 'December'];
+
+        return monthArr[month]
+    }
+    
+    // Methods to update all investment values when user logs in 
 
     buildDateString() {
         let current_date = new Date();
@@ -67,11 +129,11 @@ class Dash extends React.Component {
 
     render() {
         let none = <li className='account-item'  key='account-none'>
-                    <div>
-                        <div className='account-info-none'>
-                            <h4 className='account-name' >No Accounts to Display</h4>
+                        <div>
+                            <div className='dashboard-account-none'>
+                                <h4 className='account-name' >No Accounts to Display</h4>
+                            </div>
                         </div>
-                    </div>
                     </li>
 
         let cashAccounts = [];
@@ -87,7 +149,7 @@ class Dash extends React.Component {
 
         this.props.accounts.forEach( account => {
             let acc = <li className='account-item'
-                        key={account.id}>< AccountItem
+                        key={account.id}><AccountItem
                                 account={account} 
                                 openModal={this.props.openModal}/>
                         </li>
@@ -109,44 +171,87 @@ class Dash extends React.Component {
         if(loanAccounts.length === 0) {loanAccounts = none}
         if(investmentAccounts.length === 0) {investmentAccounts = none}
 
+        let monthClass = '';
+        let quarterClass = '';
+        if(this.state.chart === 'month') {
+            monthClass = 'selected';
+            quarterClass = 'unselected';
+        } else if(this.state.chart === 'quarter') {
+            monthClass = 'unselected';
+            quarterClass = 'selected';
+        }
+
         return (
             <div>
                 <section className='main-nav'>
                     {< MainNavContainer />}
                     {< NavBar page='Overview'/>}
                 </section>
-                <div className='dashboard'>
-                <header className='dashboard-heading'>
-                    <h2>ACCOUNTS</h2>
-                    <button className='dash-right' onClick={ () => {this.props.openModal('Create')}}>
-                        <p>Add</p>
-                        <BsPlusCircle />
-                    </button>
-                </header>
-                <section className='dash-main'>
-                        <div className='category'>
-                            <h3> < IoCashOutline /> Cash </h3>
-                            <p>{formatter.format(cashTotal)}</p>
-                        </div>
-                            <ul>
-                                {cashAccounts}
-                            </ul>
-                        <div className='category'>
-                            <h3> <GoCreditCard /> Loans</h3>
-                            <p>{formatter.format(loanTotal)}</p>
-                        </div>
-                            <ul>
-                                {loanAccounts}
-                            </ul>
-                    <div className='category'>
-                         <h3> <BiLineChart /> Investments</h3>
-                        <p>{formatter.format(investmentTotal)}</p>
+                <section className='main-body'>
+                <section className='dashboard-leftside'>
+                    <div>
+                        <header className='dashboard-heading'>
+                            <h2>ACCOUNTS</h2>
+                            <button className='dashboard-right' onClick={ () => {this.props.openModal('Create')}}>
+                                <p>Add</p>
+                                <BsPlusCircle />
+                            </button>
+                        </header>
+                        <section className='dashboard-main'>
+                            <div className='category'>
+                                <h3> < IoCashOutline /> Cash </h3>
+                                <p>{formatter.format(cashTotal)}</p>
+                            </div>
+                                <ul>
+                                    {cashAccounts}
+                                </ul>
+                            <div className='category'>
+                                <h3> <GoCreditCard /> Loans</h3>
+                                <p>{formatter.format(loanTotal)}</p>
+                            </div>
+                                <ul>
+                                    {loanAccounts}
+                                </ul>
+                            <div className='category'>
+                                <h3> <BiLineChart /> Investments</h3>
+                                <p>{formatter.format(investmentTotal)}</p>
+                            </div>
+                                <ul>
+                                    {investmentAccounts}
+                                </ul>
+                        </section>
                     </div>
-                        <ul>
-                             {investmentAccounts}
-                        </ul>
                 </section>
-                </div>
+                <section className='dash-rightside'>
+                    <div className='dashboard'>
+                        <header className='dash-trans-heading'>
+                            <h2>TRANSACTION TRENDS</h2>
+                            <div className='view-button-container'>
+                                <button className='view-button'>
+                                <Link to="/transactions">
+                                    <p className='icon'></p>
+                                    <div className='button-text'>View Transactions</div>
+                                </Link>
+                                </button>
+                            </div>
+                        </header>
+                        <div className='chart-select-container'>
+                            <button className={`chart-select-button-${monthClass}`} value="month" onClick={this.handleButtonClick}>
+                                Current Month
+                            </button>
+                            <button className={`chart-select-button-${quarterClass} spending-tab`} value="quarter" onClick={this.handleButtonClick}>
+                                Spending Trend
+                            </button>
+                        </div>
+                        <div className={`current-chart-div-${monthClass}`}>
+                            <CurrenMonthChart fetchTransactions={this.props.fetchTransactions} transactions={this.props.transactions}/>
+                        </div>
+                        <div className={`current-chart-div-${quarterClass}`}>
+                            <SpendingTrendChart fetchTransactions={this.props.fetchTransactions} transactions={this.props.transactions}/>
+                        </div>
+                    </div>
+                 </section>
+                </section>
             </div>
             
         )

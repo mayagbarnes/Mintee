@@ -1,11 +1,11 @@
 .account-item {
-    margin: 15px;
-    padding-left: 30px;
-    padding-right: 30px;
+    margin: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
     border-bottom: $light-gray;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    padding-bottom: 10px;
+    padding-bottom: 7px;
 
     .account-info-none h4 {
         text-align: center;
@@ -20,21 +20,21 @@
         justify-content: space-between;
 
         h4 {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 400;
-            margin-bottom: 7px;
+            margin-bottom: 5px;
         }
 
         .account-balance {
-            font-size: 26px;
+            font-size: 22px;
         }
     }
 
     .account-institution {
-        margin-top: 10px;
+        margin-bottom: 10px;
         color: $darkest-gray;
         margin-left: 10px;
-        font-size: 26px;
+        font-size: 22px;
         font-weight: 300;
     }
 
@@ -52,7 +52,7 @@
             border-radius: 4px;
             box-shadow: 0 0 1px 1px $lightest-gray;
             margin-left: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
         }
 
         .account-update {
@@ -63,7 +63,7 @@
             border-radius: 4px;
             box-shadow: 0 0 1px 1px $lightest-gray;
             margin-right: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
         }
     }
 }

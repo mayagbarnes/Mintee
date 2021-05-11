@@ -95,7 +95,7 @@ class InvestmentForm extends React.Component {
                     </option>
         })
 
-        let loading = this.state.loading ? <AiOutlineLoading />: '';
+        // let loading = this.state.loading ? <AiOutlineLoading />: '';
         let loadingClass = this.state.loading ? 'loader': '';
         
         return (
