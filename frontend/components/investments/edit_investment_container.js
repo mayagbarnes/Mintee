@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {updateInvestment, fetchInvestment, receiveInvestmentErrors} from '../../actions/investment_actions';
 import {fetchAccount} from '../../actions/account_actions';
 import InvestmentForm from './investment_form';
+import {fetchStocks} from '../../actions/stock_actions';
 import {closeModal} from '../../actions/account_modal_actions'
 
 
@@ -12,10 +13,11 @@ class UpdateInvestmentForm extends React.Component {
   }
 
   render () {
-    const { investment, accounts, formHeading, formType, errors, action, closeModal, receiveInvestmentErrors, fetchAccount} = this.props;
+    const { investment, stocks, accounts, formHeading, formType, errors, action, closeModal, receiveInvestmentErrors, fetchAccount, fetchStocks} = this.props;
     return (
       <InvestmentForm
         investment={investment}
+        stocks={stocks}
         accounts={accounts}
         formHeading={formHeading}
         formType={formType}
@@ -24,6 +26,7 @@ class UpdateInvestmentForm extends React.Component {
         closeModal={closeModal}
         receiveInvestmentErrors={receiveInvestmentErrors}
         fetchAccount={fetchAccount}
+        fetchStocks={fetchStocks}
          />
     );
   }
@@ -32,6 +35,7 @@ class UpdateInvestmentForm extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
     investment: state.entities.investments[ownProps.investmentId],
+    stocks: state.entities.stocks,
     accounts: Object.values(state.entities.accounts),
     formHeading: 'Update Investment',
     formType: 'Update',
@@ -43,6 +47,7 @@ const mapDispatchToProps = (dispatch) => ({
     closeModal: () => dispatch(closeModal()),
     receiveInvestmentErrors: (error) => dispatch(receiveInvestmentErrors(error)),
     fetchAccount: (accountId) => dispatch(fetchAccount(accountId)),
+    fetchStocks: () => dispatch(fetchStocks()),
     fetchInvestment: (investmentId) => dispatch(fetchInvestment(investmentId))
 });
 

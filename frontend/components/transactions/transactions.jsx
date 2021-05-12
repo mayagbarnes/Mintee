@@ -11,6 +11,7 @@ class Transactions extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             searchTerm: '',
             date: 'desc',
             description: 'default',
@@ -33,7 +34,8 @@ class Transactions extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchTransactions();
+        this.props.fetchTransactions()
+        .then( () =>  setTimeout(() => {this.setState({loading:false})}, 1000));
     }
 
     sortAmount() {
@@ -120,19 +122,24 @@ class Transactions extends React.Component {
                                 transaction={transaction} 
                                 openModal={this.props.openModal}/>
                             })
-            if(transactionItems.length === 0) {
-                transactionItems = <tr className='no-results'><td colSpan='5'>No Transactions To Display</td></tr>
-            }
         } else {
             transactionItems = this.props.filtered.map( transaction => {
                             return < TransactionItem key={transaction.id}
                                 transaction={transaction} 
                                 openModal={this.props.openModal}/>
                             })
-            if(transactionItems.length === 0) {
-                transactionItems = <tr className='no-results'><td colSpan='5'>No Results</td></tr>
-            }
         }
+
+        let loadingClass = this.state.loading ? 'loader': '';
+
+        let display = <div className={`${loadingClass}`}></div>
+
+        if(transactionItems.length === 0 && this.state.loading) {
+            transactionItems = <tr className='no-results'><td colSpan='5'>{display}</td></tr>
+        } else if (transactionItems.length === 0) {
+            transactionItems = <tr className='no-results'><td colSpan='5'>No Transactions To Display</td></tr>
+        }
+
         
         return (
             <div>

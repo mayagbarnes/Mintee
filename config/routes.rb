@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :investments, except: [:new, :edit] do
       get 'search', on: :collection
     end 
-    
+    resources :stocks, only: [:index]
   end
 
   root "static_pages#root"

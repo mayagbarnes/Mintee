@@ -6,6 +6,7 @@ import transactionsReducer from './transactions_reducer';
 import investmentsReducer from './investments_reducer';
 import filteredReducer from './filtered_reducer';
 import filteredInvReducer from './filtered_inv_reducer';
+import stocksReducer from './stocks_reducer';
 
 
 const entitiesReducer = combineReducers({
@@ -14,7 +15,8 @@ const entitiesReducer = combineReducers({
   transactions: transactionsReducer,
   filteredTran: filteredReducer,
   investments: investmentsReducer,
-  filteredInv: filteredInvReducer
+  filteredInv: filteredInvReducer,
+  stocks: stocksReducer
 });
 
 export default entitiesReducer;

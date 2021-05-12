@@ -20,13 +20,13 @@
         justify-content: space-between;
 
         h4 {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 400;
             margin-bottom: 5px;
         }
 
         .account-balance {
-            font-size: 22px;
+            font-size: 20px;
         }
     }
 
@@ -34,7 +34,7 @@
         margin-bottom: 10px;
         color: $darkest-gray;
         margin-left: 10px;
-        font-size: 22px;
+        font-size: 19px;
         font-weight: 300;
     }
 
@@ -47,7 +47,7 @@
         .account-delete {
             background-color: darkred;
             color: white;
-            font-size: 16px;
+            font-size: 14px;
             padding: 10px;
             border-radius: 4px;
             box-shadow: 0 0 1px 1px $lightest-gray;
@@ -58,7 +58,7 @@
         .account-update {
             background-color: $darkest-green;
             color: white;
-            font-size: 16px;
+            font-size: 14px;
             padding: 10px;
             border-radius: 4px;
             box-shadow: 0 0 1px 1px $lightest-gray;

@@ -5,6 +5,7 @@ import {fetchInvestments, updateInvestment} from '../../actions/investment_actio
 import Dash from './dash';
 import {openModal} from '../../actions/account_modal_actions';
 
+
 const mapStateToProps = (state) => ({
     accounts: Object.values(state.entities.accounts),
     investments: Object.values(state.entities.investments),

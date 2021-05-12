@@ -1,15 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'uri'
+require 'net/http'
 
 User.delete_all
 Account.delete_all
 Transaction.delete_all
 Investment.delete_all
+Stock.delete_all
 
 
 demo_login = User.create( {username: 'DemoLogin', password: '123456'})
@@ -56,3 +52,62 @@ investment_4 = Investment.create( { inv_name: 'Zendesk', ticker: 'ZEN', shares: 
 investment_5 = Investment.create( { inv_name: 'Russell 3000 ETF', ticker: 'SPY', shares: 47.00, prev_close: 0, price_paid: 225.00, account_id: account_6.id, last_fetch: "2021-05-01" } )
 investment_6 = Investment.create( { inv_name: 'MSCI ACWI ETF', ticker: 'ACWI', shares: 40.00, prev_close: 0, price_paid: 88.00, account_id: account_6.id, last_fetch: "2021-05-01"} )
 investment_7 = Investment.create( { inv_name: 'Vanguard Bond ETF', ticker: 'BND', shares: 75.00, prev_close: 0, price_paid: 80.00, account_id: account_6.id, last_fetch: "2021-05-01"} )
+
+
+# Fetch U.S. traded stocks, ETPS, and REITS
+
+fetch_stocks = URI("https://finnhub.io/api/v1/stock/symbol?exchange=US&securityType=Common%20Stock&token=#{Rails.application.credentials.finnhub[:api_key]}")
+all_stocks = Net::HTTP.get_response(fetch_stocks).body
+all_stocks = JSON.parse(all_stocks)
+
+all_stocks.each do |stock|
+  Stock.create(
+    { name: stock["description"],
+      ticker: stock["symbol"]
+    }
+  )
+end
+
+fetch_etps = URI("https://finnhub.io/api/v1/stock/symbol?exchange=US&securityType=ETP&token=#{Rails.application.credentials.finnhub[:api_key]}")
+all_etps = Net::HTTP.get_response(fetch_etps).body
+all_etps = JSON.parse(all_etps) 
+
+all_etps.each do |stock|
+  Stock.create(
+    name: stock["description"],
+    ticker: stock["symbol"],
+  )
+end
+
+fetch_reits = URI("https://finnhub.io/api/v1/stock/symbol?exchange=US&securityType=REIT&token=#{Rails.application.credentials.finnhub[:api_key]}")
+all_reits = Net::HTTP.get_response(fetch_reits).body
+all_reits = JSON.parse(all_reits) 
+
+all_reits.each do |stock|
+  Stock.create(
+    name: stock["description"],
+    ticker: stock["symbol"],
+)
+
+# Fetch U.S. traded ADRs & MLPS
+
+# fetch_adrs = URI("https://finnhub.io/api/v1/stock/symbol?exchange=US&securityType=ADR&token=#{Rails.application.credentials.finnhub[:api_key]}")
+# fetch_mlps = URI("https://finnhub.io/api/v1/stock/symbol?exchange=US&securityType=MLP&token=#{Rails.application.credentials.finnhub[:api_key]}")
+
+# all_mlps = JSON.parse(fetch_mlps) 
+
+# all_mlps.each do |stocks|
+#   Stock.create(
+#     name: stocks["description"],
+#     ticker: stocks["symbol"],
+#   )
+# end
+
+# all_adrs = JSON.parse(fetch_adrs) 
+
+# all_adrs.each do |stocks|
+#   Stock.create(
+#     name: stocks["description"],
+#     ticker: stocks["symbol"],
+#   )
+# end

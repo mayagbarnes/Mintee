@@ -2,7 +2,7 @@ import React from 'react';
 import { AiOutlineCloseCircle, AiOutlineLoading } from 'react-icons/ai';
 import SearchMatches from './ticker_search';
 
-class InvestmentForm extends React.Component {
+class NewInvestmentForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,18 +12,19 @@ class InvestmentForm extends React.Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
     }
 
+    // componentDidMount() {
+    //     this.props.fetchStocks();
+    // }
+
     handleSearch(e) {
-        e.preventDefault();
         this.setState({investment: { ticker: e.currentTarget.value}})
     }
 
-    handleClick(value) {
-        return (e) =>  {
-                return this.setState({ investment: { ...this.state.investment, ticker: value} });
-            } 
+    handleSelect(value) {
+        this.setState({investment: { ticker: value}})
     }
 
     handleChange(type) {
@@ -106,8 +107,6 @@ class InvestmentForm extends React.Component {
 
         let loadingClass = this.state.loading ? 'wheel-loader': '';
         
-        console.log(this.state.investment.ticker)
-
             let matchingStocks = [];
                 if(this.state.investment.ticker !== '') {
                     matchingStocks = this.props.stocks.filter( (stock) => {
@@ -126,40 +125,44 @@ class InvestmentForm extends React.Component {
                         let company = matchingStocks[i].name.split(' ').map( (word) => {
                             return word[0].toUpperCase() + word.slice(1).toLowerCase()
                         }).join(' ')
-                        let stock = matchingStocks[i];
-                        let tableRow = <tr onClick={ () => this.handleClick(stock.ticker)} value={stock.ticker} key={stock.id} className="search-result-item">
+                        let ticker = matchingStocks[i].ticker
+                        let tableRow = <tr onClick={() => this.handleSelect(ticker)} 
+                                                key={matchingStocks[i].id} 
+                                                className="search-result-item">
+                                            <td className="search-list-symbol">
+                                                {ticker}
+                                            </td>
                                             <td className="search-list-description">
                                                 {company}
                                             </td>
-                                            <td className="search-list-symbol">
-                                                {stock.ticker}
-                                            </td>
                                         </tr>
                         matches.push(tableRow)
-                    }
-                } else if(matchingStocks.length === 0 && this.state.investment.ticker !== '') {
+                        };
+                    } else if(matchingStocks.length === 0 && this.state.investment.ticker !== '') {
                     matches = <tr className="search-list-item">
                                     <td colSpan='2' className="search-list-description">
                                         No matching tickers
                                     </td>
                                 </tr>   
-                } else if(matchingStocks.length === 0 && this.state.investment.ticker === '') {
-                    matches = <tr className="hidden">
-                                    <td colSpan='2' className="search-list-description">
-                                    </td>
-                                </tr>   
-                    hidden = 'hidden'
-                } else {
-                    matches = matchingStocks.map((stock) => {
-                        let company = stock.name.split(' ').map( (word) => {
-                            return word[0].toUpperCase() + word.slice(1).toLowerCase()
-                        }).join(' ')
-                        return (<tr onClick={ () => this.handleClick(stock.ticker)} value={stock.ticker} key={stock.id} className="search-result-item">
+                    } else if(matchingStocks.length === 0 && this.state.investment.ticker === '') {
+                        matches = <tr className="hidden">
+                                        <td colSpan='2' className="search-list-description">
+                                        </td>
+                                    </tr>
+                        hidden = 'hidden'
+                    }else {
+                        matches = matchingStocks.map((stock) => {
+                            let company = stock.name.split(' ').map( (word) => {
+                                return word[0].toUpperCase() + word.slice(1).toLowerCase()
+                            }).join(' ')
+                        let ticker = matchingStocks[i].ticker
+                        return (<tr onClick={() => this.handleSelect(ticker)}
+                                    key={stock.id} className="search-result-item">
+                            <td className="search-list-symbol">
+                                {ticker}
+                            </td>
                             <td className="search-list-description">
                                 {company}
-                            </td>
-                            <td className="search-list-symbol">
-                                {stock.ticker}
                             </td>
                         </tr>)
                     })
@@ -183,7 +186,8 @@ class InvestmentForm extends React.Component {
                     </label>
                     <br/>
                     <label> Name/Description
-                        <input id='investment-name' type="text" value={this.state.investment.inv_name}
+                        <input id='investment-name' placeholder='Ex: Apple'
+                            type="text" value={this.state.investment.inv_name}
                                 onChange={this.handleChange('inv_name')}/>
                     </label>
                     <br/>
@@ -191,9 +195,9 @@ class InvestmentForm extends React.Component {
                         <div className="search-input-holder">
                             <input id='investment-ticker' 
                                 type="text" 
-                                placeholder='Search Company or Ticker'
+                                placeholder='Search Company Name or Ticker'
                                 value={this.state.investment.ticker}
-                                onChange={this.handleChange('ticker')}
+                                onChange={this.handleSearch}
                             />
                         </div>
                         <table className={`search-result-table ${hidden}`}>
@@ -204,13 +208,14 @@ class InvestmentForm extends React.Component {
                     </label>
                     <br/>
                     <label id='investment-shares'> Shares
-                        <input id='investment-shares' type="number" value={this.state.investment.shares}
+                        <input id='investment-shares' placeholder='Ex: 25' type="number" value={this.state.investment.shares}
                                 onChange={this.handleChange('shares')}
                                 />
                     </label>
                     <br/>
                     <label id='price-paid'> Price Paid
-                        <input id='price-paid' type="number" value={this.state.investment.price_paid}
+                        <input id='price-paid' type="number" placeholder='Ex: 77.77'
+                            value={this.state.investment.price_paid}
                                 onChange={this.handleChange('price_paid')}
                                 />
                     </label>
@@ -226,4 +231,4 @@ class InvestmentForm extends React.Component {
 
 }
 
-export default InvestmentForm;
+export default NewInvestmentForm;

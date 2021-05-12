@@ -11,6 +11,7 @@ class Investments extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             searchTerm: '',
             inv_name: 'default',
             ticker: 'default',
@@ -30,7 +31,9 @@ class Investments extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchInvestments();
+        this.props.fetchInvestments()
+        .then( () => this.props.fetchStocks())
+        .then( () =>  setTimeout(() => {this.setState({loading:false})}, 1000))
     }
 
     editSearchTerm(e) {
@@ -174,9 +177,6 @@ class Investments extends React.Component {
                                 receiveInvestment = {this.props.receiveInvestment}
                                 openModal={this.props.openModal}/>
                             })
-            if(investmentItems.length === 0) {
-                investmentItems = <tr className='no-results'><td colSpan='7'>No Investments To Display</td></tr>
-            }
         } else {
             let matches = this.props.filtered.map( investment => investment.id)
 
@@ -194,10 +194,18 @@ class Investments extends React.Component {
             //                     receiveInvestment = {this.props.receiveInvestment}
             //                     openModal={this.props.openModal}/>
             //                 })
-            if(investmentItems.length === 0) {
-                investmentItems = <tr className='no-results'><td colSpan='7'>No Results</td></tr>
-            }
         }
+
+        let loadingClass = this.state.loading ? 'loader': '';
+
+        let display = <div className={`${loadingClass}`}></div>
+
+        if(investmentItems.length === 0 && this.state.loading) {
+            investmentItems = <tr className='no-results'><td colSpan='7'>{display}</td></tr>
+        } else if (investmentItems.length === 0) {
+            investmentItems = <tr className='no-results'><td colSpan='7'>No Investments To Display</td></tr>
+        }
+
         
         return (
             <div>
@@ -232,10 +240,10 @@ class Investments extends React.Component {
                                         </button>
                                     </th>
                                     <th className={`${this.state.ticker}`} > <button onClick={this.sortTicker}>Ticker {tickerSymbol}</button></th>
-                                    <th className={`${this.state.price}`} > <button onClick={this.sortPrice}>Current Price {priceSymbol}</button></th>
-                                    <th className={`${this.state.price_paid}`} > <button onClick={this.sortPricePaid}>Price Paid {costSymbol}</button></th>
+                                    <th className={`${this.state.price}`} > <button onClick={this.sortPrice}>Current Price{priceSymbol}</button></th>
+                                    <th className={`${this.state.price_paid}`} > <button onClick={this.sortPricePaid}>Cost Basis {costSymbol}</button></th>
                                     <th className={`${this.state.shares}`} > <button onClick={this.sortShares}>Shares {sharesSymbol}</button></th>
-                                    <th className={`${this.state.market_value}`} > <button onClick={this.sortMarketValue}>Market Value {valueSymbol}</button></th>
+                                    <th className={`${this.state.market_value}`} > <button onClick={this.sortMarketValue}>Market Value{valueSymbol}</button></th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
