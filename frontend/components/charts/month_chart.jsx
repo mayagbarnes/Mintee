@@ -9,12 +9,16 @@ import Chart from 'chart.js/auto';
 export default class CurrenMonthChart extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            loading: true
+        }
         this.chartRef = React.createRef();
     }
 
    componentDidMount() {
         this.props.fetchTransactions()
         .then( () =>  this.buildChart())
+        .then( () => this.setState({loading:false}))
    }
 
     buildChart() {
@@ -33,14 +37,14 @@ export default class CurrenMonthChart extends Component {
                     label: 'Total ($)',
                     data: [income, spending],
                     backgroundColor: [ 
-                        'rgba(75, 192, 192, 0.2)', 
-                        'rgba(255, 99, 132, 0.2)'
+                        'rgba(7, 163, 98, 0.6)', 
+                        'rgba(232, 9, 20, 0.6)'
                     ],
                     borderColor: [
-                        'rgb(75, 192, 192)', 
-                        'rgb(255, 99, 132)'
+                        'rgb(6, 122, 74)', 
+                        'rgb(179, 5, 14)'
                     ],
-                    borderWidth: 1
+                    borderWidth: 3
                 }]
             }
         });
@@ -98,11 +102,20 @@ export default class CurrenMonthChart extends Component {
     render() {
         let currDate = new Date().getMonth();
         let monthLabel = this.label(currDate);
+    
+        let display;
+        if(this.state.loading) {
+            display =  <div className='loader-container'><div className='loader'></div></div>
+        } else {
+            display = <div className='hidden'></div>
+        }
 
         return (
             <div className='spending-trend-container'>
                 <h2>{monthLabel}'s Month to Date Spending</h2>
-                <canvas id="myChart" ref={this.chartRef}/>
+                <canvas id="myChart" ref={this.chartRef}> 
+                </canvas>
+                {display}
             </div>
         )
     }

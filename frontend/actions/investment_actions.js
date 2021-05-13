@@ -28,8 +28,8 @@ export const receiveInvestmentErrors = (errors) => ({
     errors
 });
 
-export const fetchInvestments = () => dispatch => (
-    InvestmentAPIUtil.indexInvestments()
+export const fetchInvestments = (signal) => dispatch => (
+    InvestmentAPIUtil.indexInvestments(signal)
     .then(investments => (dispatch(receiveInvestments(investments))
     ))
 );

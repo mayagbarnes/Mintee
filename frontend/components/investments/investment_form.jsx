@@ -9,10 +9,14 @@ class InvestmentForm extends React.Component {
             investment: this.props.investment,
             stocks: this.props.stocks,
             loading: false,
+            clicked: true,
+            show: true,
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleTicker = this.handleTicker.bind(this);
+        this.handleCloseOptions = this.handleCloseOptions.bind(this);
     }
 
     handleSearch(e) {
@@ -20,36 +24,73 @@ class InvestmentForm extends React.Component {
         this.setState({investment: { ticker: e.currentTarget.value}})
     }
 
-    handleClick(value) {
+    handleChange(type) {
         return (e) =>  {
-                return this.setState({ investment: { ...this.state.investment, ticker: value} });
+                // if(type === 'ticker') {this.setState({ clicked: false}, () => console.log(this.state.clicked))} 
+                this.setState({ investment: { ...this.state.investment, [type]: e.currentTarget.value} })
             } 
     }
 
-    handleChange(type) {
-        return (e) =>  {
-                return this.setState({ investment: { ...this.state.investment, [type]: e.currentTarget.value} });
-            } 
+    handleTicker() {
+        console.log('HIT')
+        this.setState({ show: true })
+    }
+
+    handleCloseOptions() {
+        console.log('CLOSE')
+        this.setState({ show: false })
+    }
+
+    handleClick(e) {
+        console.log('clicked')
+        console.log(e.currentTarget.value)
+        this.setState({ clicked: true}, () => console.log(this.state.clicked))
+        this.setState({investment: { ticker: e.currentTarget.value}})
     }
 
     handleSubmit() {
         let apikey = window.finnhubAPIKey;
         let ticker = this.state.investment.ticker;
-        let weekday = new Date().getDay();
+        let marketOpen = this.testTime();
 
-        if(weekday === 0 || weekday === 6) {
-            this.setState( {loading: true }, () => { 
-                fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
-                    .then(response => response.json())
-                    .then(quote => this.validateTicker(quote["c"]))
-                });
+        if(ticker === '') {
+            this.props.receiveInvestmentErrors(["Ticker Symbol cannot be blank"]); 
         } else {
-            this.setState( {loading: true }, () => { 
-                fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
-                    .then(response => response.json())
-                    .then(quote => this.validateTicker(quote["pc"]))
-                });
+            if(!marketOpen) {
+                this.setState( {loading: true }, () => { 
+                    fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
+                        .then(response => response.json())
+                        .then(quote => this.validateTicker(quote["c"]))
+                    });
+            } else {
+                this.setState( {loading: true }, () => { 
+                    fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
+                        .then(response => response.json())
+                        .then(quote => this.validateTicker(quote["pc"]))
+                    });
+            }
         }
+    }
+
+    testTime() {
+        // market open @ 9:30 am EST
+        var startTime = '06:30:00'; 
+        // market close @ 4:00 PM EST
+        var endTime = '13:00:00';
+
+        let currentDate = new Date()   
+
+        let startDate = new Date(currentDate.getTime());
+        startDate.setHours(startTime.split(":")[0]);
+        startDate.setMinutes(startTime.split(":")[1]);
+        startDate.setSeconds(startTime.split(":")[2]);
+
+        let endDate = new Date(currentDate.getTime());
+        endDate.setHours(endTime.split(":")[0]);
+        endDate.setMinutes(endTime.split(":")[1]);
+        endDate.setSeconds(endTime.split(":")[2]);
+
+        return (startDate < currentDate && endDate > currentDate) ? true : false
     }
 
     buildDateString() {
@@ -93,6 +134,18 @@ class InvestmentForm extends React.Component {
         return errors;
     }
 
+    makeMatches(allMatches) {
+        let matching = allMatches.slice(0,5)
+        let matches = matching.map((stock) => {
+            let company = stock.name.split(' ').map( (word) => {
+                return word[0].toUpperCase() + word.slice(1).toLowerCase()
+            }).join(' ');
+            return (
+                    <option onClick={this.handleClick} key={`${stock.ticker}`} value={`${stock.ticker}`}>{company}</option>
+            )
+        })
+        return matches;
+    }
 
     render() {
         let defaultAccount = this.state.investment.account_id;
@@ -103,67 +156,36 @@ class InvestmentForm extends React.Component {
                         {account.account_name}
                     </option>
         })
+    
+        let betterMatches = [];
+        let anyMatches = [];
+            if(this.props.stocks && this.state.investment.ticker !== '') {
+                anyMatches = this.props.stocks.filter( (stock) => {
+                        if(this.state.investment.ticker.toLowerCase() === stock.ticker.toLowerCase()) {
+                            betterMatches.push(stock)
+                            return false;
+                        } else if(this.state.investment.ticker.toLowerCase() === stock.name.toLowerCase()) {
+                            betterMatches.push(stock)
+                            return false;
+                        } else {
+                            return (stock.name.toLowerCase().includes(this.state.investment.ticker.toLowerCase()) ||
+                            stock.ticker.toLowerCase().includes(this.state.investment.ticker.toLowerCase()))
+                        }
+                })
+            } 
 
+    
+        let allMatches = betterMatches.concat(anyMatches)
+        let matches;
+        let noResult = 'hidden';
+        if(allMatches.length === 0 && this.state.investment.ticker !== '') {
+            noResult = ''
+        } else {
+            matches = this.makeMatches(allMatches)
+        }
+       
         let loadingClass = this.state.loading ? 'wheel-loader': '';
-        
-        console.log(this.state.investment.ticker)
-
-            let matchingStocks = [];
-                if(this.state.investment.ticker !== '') {
-                    matchingStocks = this.props.stocks.filter( (stock) => {
-                        return (
-                            stock.name.toLowerCase().indexOf(this.state.investment.ticker.toLowerCase()) !== -1 ||
-                            stock.ticker.toLowerCase().indexOf(this.state.investment.ticker.toLowerCase()) !== -1
-                        )
-                    })
-                } 
-
-            let matches;
-            let hidden = '';
-                if(matchingStocks.length > 5) {
-                    matches = [];
-                    for(let i = 0; i < 5; i++) {
-                        let company = matchingStocks[i].name.split(' ').map( (word) => {
-                            return word[0].toUpperCase() + word.slice(1).toLowerCase()
-                        }).join(' ')
-                        let stock = matchingStocks[i];
-                        let tableRow = <tr onClick={ () => this.handleClick(stock.ticker)} value={stock.ticker} key={stock.id} className="search-result-item">
-                                            <td className="search-list-description">
-                                                {company}
-                                            </td>
-                                            <td className="search-list-symbol">
-                                                {stock.ticker}
-                                            </td>
-                                        </tr>
-                        matches.push(tableRow)
-                    }
-                } else if(matchingStocks.length === 0 && this.state.investment.ticker !== '') {
-                    matches = <tr className="search-list-item">
-                                    <td colSpan='2' className="search-list-description">
-                                        No matching tickers
-                                    </td>
-                                </tr>   
-                } else if(matchingStocks.length === 0 && this.state.investment.ticker === '') {
-                    matches = <tr className="hidden">
-                                    <td colSpan='2' className="search-list-description">
-                                    </td>
-                                </tr>   
-                    hidden = 'hidden'
-                } else {
-                    matches = matchingStocks.map((stock) => {
-                        let company = stock.name.split(' ').map( (word) => {
-                            return word[0].toUpperCase() + word.slice(1).toLowerCase()
-                        }).join(' ')
-                        return (<tr onClick={ () => this.handleClick(stock.ticker)} value={stock.ticker} key={stock.id} className="search-result-item">
-                            <td className="search-list-description">
-                                {company}
-                            </td>
-                            <td className="search-list-symbol">
-                                {stock.ticker}
-                            </td>
-                        </tr>)
-                    })
-                }
+        // let listClass = this.state.clicked ? 'hidden': '';
 
         return (
             <section className='investment-form-holder'>
@@ -188,29 +210,29 @@ class InvestmentForm extends React.Component {
                     </label>
                     <br/>
                     <label> Ticker Symbol
-                        <div className="search-input-holder">
-                            <input id='investment-ticker' 
+                         <input className='investment-ticker'
                                 type="text" 
+                                list='companies'
                                 placeholder='Search Company or Ticker'
                                 value={this.state.investment.ticker}
                                 onChange={this.handleChange('ticker')}
-                            />
-                        </div>
-                        <table className={`search-result-table ${hidden}`}>
-                            <tbody className="result-list">
-                                {matches}
-                            </tbody>
-                        </table>
+                                onKeyPress={this.handleTicker}/> 
+                            <div onClick={this.handleCloseOptions}>
+                                {this.state.show && <datalist id="companies">
+                                    {matches}
+                                </datalist> }
+                            </div>
+                            <div className={`no-results ${noResult}`}>No Matches Found</div>
                     </label>
                     <br/>
                     <label id='investment-shares'> Shares
-                        <input id='investment-shares' type="number" value={this.state.investment.shares}
+                        <input placeholder='ex: 20.0' id='investment-shares' type="number" value={this.state.investment.shares}
                                 onChange={this.handleChange('shares')}
                                 />
                     </label>
                     <br/>
                     <label id='price-paid'> Price Paid
-                        <input id='price-paid' type="number" value={this.state.investment.price_paid}
+                        <input placeholder='ex: 150.25' id='price-paid' type="number" value={this.state.investment.price_paid}
                                 onChange={this.handleChange('price_paid')}
                                 />
                     </label>

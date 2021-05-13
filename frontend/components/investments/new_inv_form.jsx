@@ -15,10 +15,6 @@ class NewInvestmentForm extends React.Component {
         this.handleSelect = this.handleSelect.bind(this);
     }
 
-    // componentDidMount() {
-    //     this.props.fetchStocks();
-    // }
-
     handleSearch(e) {
         this.setState({investment: { ticker: e.currentTarget.value}})
     }

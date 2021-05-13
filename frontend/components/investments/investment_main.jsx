@@ -10,6 +10,8 @@ import {FaSearchDollar} from 'react-icons/fa';
 class Investments extends React.Component {
     constructor(props) {
         super(props);
+        this.controller = new AbortController();
+        this.signal = this.controller.signal;
         this.state = {
             loading: true,
             searchTerm: '',
@@ -31,9 +33,13 @@ class Investments extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchInvestments()
-        .then( () => this.props.fetchStocks())
-        .then( () =>  setTimeout(() => {this.setState({loading:false})}, 1000))
+        this.props.fetchInvestments(this.signal)
+        this.props.fetchStocks(this.signal)
+        .then( () =>  this.setState({loading:false}))
+    }
+
+    componentWillUnmount() {
+        this.controller.abort();
     }
 
     editSearchTerm(e) {
@@ -169,44 +175,45 @@ class Investments extends React.Component {
 
 
         let investmentItems = []
-        if(this.state.searchTerm === '') {
-            investmentItems = this.props.investments.map( investment => {
-                            return < InvestmentItem key={investment.id}
-                                investment={investment} 
-                                updateInvestment={this.props.updateInvestment}
-                                receiveInvestment = {this.props.receiveInvestment}
-                                openModal={this.props.openModal}/>
-                            })
+        let loadingClass = this.state.loading ? 'loading': '';
+        if(this.state.loading) {
+             investmentItems = 
+                <tr className='results-loading'>
+                    <td colSpan='7'>
+                        <div className='loader'></div>
+                    </td>
+                </tr>
         } else {
-            let matches = this.props.filtered.map( investment => investment.id)
+            if(this.state.searchTerm === '') {
+                investmentItems = this.props.investments.map( investment => {
+                                return < InvestmentItem key={investment.id}
+                                    investment={investment} 
+                                    updateInvestment={this.props.updateInvestment}
+                                    receiveInvestment = {this.props.receiveInvestment}
+                                    openModal={this.props.openModal}/>
+                                })
+            } else {
+                let matches = this.props.filtered.map( investment => investment.id)
 
-            investmentItems = this.props.investments
-                .filter(investment => matches.includes(investment.id))
-                .map( investment => {
-                            return < InvestmentItem key={investment.id}
-                                investment={investment} 
-                                receiveInvestment = {this.props.receiveInvestment}
-                                openModal={this.props.openModal}/>
-                            })
-            // investmentItems = this.props.filtered.map( investment => {
-            //                 return < InvestmentItem key={investment.id}
-            //                     investment={investment} 
-            //                     receiveInvestment = {this.props.receiveInvestment}
-            //                     openModal={this.props.openModal}/>
-            //                 })
+                investmentItems = this.props.investments
+                    .filter(investment => matches.includes(investment.id))
+                    .map( investment => {
+                                return < InvestmentItem key={investment.id}
+                                    investment={investment} 
+                                    receiveInvestment = {this.props.receiveInvestment}
+                                    openModal={this.props.openModal}/>
+                                })
+            }
         }
 
-        let loadingClass = this.state.loading ? 'loader': '';
-
-        let display = <div className={`${loadingClass}`}></div>
-
-        if(investmentItems.length === 0 && this.state.loading) {
-            investmentItems = <tr className='no-results'><td colSpan='7'>{display}</td></tr>
-        } else if (investmentItems.length === 0) {
-            investmentItems = <tr className='no-results'><td colSpan='7'>No Investments To Display</td></tr>
+        if (investmentItems.length === 0) {
+            investmentItems = 
+                <tr className='no-results'>
+                    <td colSpan='7'>No Investments To Display</td>
+                </tr>
         }
 
-        
+       
         return (
             <div>
                 <section className='main-nav'>
@@ -231,7 +238,7 @@ class Investments extends React.Component {
                             <input type="text" onChange={this.editSearchTerm} placeholder='Enter Investment Name'/>
                             </label>
                         </div>
-                        <table className='investment-table'>
+                        <table className={`investment-table ${loadingClass}`}>
                             <thead>
                                 <tr>
                                     <th className={`${this.state.inv_name}`} >

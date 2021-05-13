@@ -7,7 +7,7 @@ const receiveStocks = (stocks) => ({
   stocks,
 });
 
-export const fetchStocks = () => (dispatch) =>
-  StockAPIUtil.indexStocks().then((stocks) =>
+export const fetchStocks = (signal) => (dispatch) =>
+  StockAPIUtil.indexStocks(signal).then((stocks) =>
     dispatch(receiveStocks(stocks))
   );

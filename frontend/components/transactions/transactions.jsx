@@ -116,27 +116,31 @@ class Transactions extends React.Component {
         let descriptionSymbol = this.state.description === 'desc' ? <BiDownArrow/> : this.state.description === 'asc' ? <BiUpArrow/> : '';
 
         let transactionItems = []
-        if(this.state.searchTerm === '') {
-            transactionItems = this.props.transactions.map( transaction => {
-                            return < TransactionItem key={transaction.id}
-                                transaction={transaction} 
-                                openModal={this.props.openModal}/>
-                            })
+        let loadingClass = this.state.loading ? 'loading': '';
+        if(this.state.loading) {
+            transactionItems = 
+            <tr className='results-loading'>
+                <td colSpan='5'>
+                    <div className='loader'></div>
+                </td>
+            </tr>
         } else {
-            transactionItems = this.props.filtered.map( transaction => {
-                            return < TransactionItem key={transaction.id}
-                                transaction={transaction} 
-                                openModal={this.props.openModal}/>
-                            })
+            if(this.state.searchTerm === '') {
+                transactionItems = this.props.transactions.map( transaction => {
+                                return < TransactionItem key={transaction.id}
+                                    transaction={transaction} 
+                                    openModal={this.props.openModal}/>
+                                })
+            } else {
+                transactionItems = this.props.filtered.map( transaction => {
+                                return < TransactionItem key={transaction.id}
+                                    transaction={transaction} 
+                                    openModal={this.props.openModal}/>
+                                })
+            }
         }
 
-        let loadingClass = this.state.loading ? 'loader': '';
-
-        let display = <div className={`${loadingClass}`}></div>
-
-        if(transactionItems.length === 0 && this.state.loading) {
-            transactionItems = <tr className='no-results'><td colSpan='5'>{display}</td></tr>
-        } else if (transactionItems.length === 0) {
+        if (transactionItems.length === 0) {
             transactionItems = <tr className='no-results'><td colSpan='5'>No Transactions To Display</td></tr>
         }
 
@@ -165,7 +169,7 @@ class Transactions extends React.Component {
                             <input type="text" onChange={this.editSearchTerm} placeholder='Enter Transaction Description'/>
                             </label>
                         </div>
-                        <table className='transaction-table'>
+                        <table className={`transaction-table ${loadingClass}`}>
                             <thead>
                                 <tr>
                                     <th className={`${this.state.date}`} >

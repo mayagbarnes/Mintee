@@ -57,19 +57,23 @@ class InvestmentItem extends React.Component {
 
     componentDidMount() {
         let marketOpen = this.testTime();
+        let today = this.buildDateString();
         let apikey = window.finnhubAPIKey;
         let ticker = this.props.investment.ticker;
+        let lastFetch = this.props.investment.last_fetch;
 
-        if (marketOpen) {
+
+        if(lastFetch !== today) {        
+            if (marketOpen) {
             fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
                 .then(response => (response.json()))
                 .then(quote => {this.addCurrentPrice(quote["pc"])});
-        } else {
-             fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
-                .then(response => (response.json()))
-                .then(quote => {this.addCurrentPrice(quote["c"])});
-        }
-
+            } else {
+                fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
+                    .then(response => (response.json()))
+                    .then(quote => {this.addCurrentPrice(quote["c"])});
+            }
+        } 
     }
 
     addCurrentPrice(price) {
