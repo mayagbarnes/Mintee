@@ -7,11 +7,11 @@ export const showInvestment = (investmentId) => (
 );
 
 export const indexInvestments = (signal) => (
-       fetch('/api/investments', {
+    fetch('/api/investments', {
         method: 'GET',
         signal: signal
-        })
-        .then((response) => response.json())
+    })
+    .then((response) => response.json())
 );
 
 export const newInvestment = (investment) => (

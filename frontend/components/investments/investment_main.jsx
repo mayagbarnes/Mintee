@@ -13,7 +13,9 @@ class Investments extends React.Component {
         this.controller = new AbortController();
         this.signal = this.controller.signal;
         this.state = {
-            loading: true,
+            mounted: true,
+            tableLoading: true,
+            stocksLoading: true,
             searchTerm: '',
             inv_name: 'default',
             ticker: 'default',
@@ -34,11 +36,26 @@ class Investments extends React.Component {
 
     componentDidMount() {
         this.props.fetchInvestments(this.signal)
+        .then( () =>  {
+            if(this.state.mounted) {
+                this.setState({tableLoading: false})
+            }
+        })
         this.props.fetchStocks(this.signal)
-        .then( () =>  this.setState({loading:false}))
+        .then( () =>  {
+            if(this.state.mounted) {this.setState({stocksLoading: false})}
+        })
+        // .catch(err => {
+        //     // You can catch the error
+        //     // thrown by the polyfill here.
+        //     if (err.name == "AbortError") {
+        //         console.log("Fetch Aborted");
+        //     } 
+        // });
     }
 
     componentWillUnmount() {
+        this.setState({mounted:false})
         this.controller.abort();
     }
 
@@ -175,8 +192,8 @@ class Investments extends React.Component {
 
 
         let investmentItems = []
-        let loadingClass = this.state.loading ? 'loading': '';
-        if(this.state.loading) {
+        let loadingClass = this.state.tableLoading ? 'loading': '';
+        if(this.state.tableLoading) {
              investmentItems = 
                 <tr className='results-loading'>
                     <td colSpan='7'>
@@ -213,7 +230,9 @@ class Investments extends React.Component {
                 </tr>
         }
 
-       
+        let addLoadingClass = this.state.stocksLoading ? 'wheel-loader': '';
+        let addButtonClass = this.state.stocksLoading ? 'hidden': '';
+
         return (
             <div>
                 <section className='main-nav'>
@@ -228,10 +247,11 @@ class Investments extends React.Component {
                     <div className='investments'>
                         <header className='inv-heading'>
                             <h2>INVESTMENTS</h2>
+                            { this.state.stocksLoading ? <div className={addLoadingClass}></div> : 
                             <button className='inv-right' onClick={ () => {this.props.openModal('AddInv')}}>
                                 <p> Add </p>
                                 <BsPlusCircle />
-                            </button>
+                            </button>}
                         </header>
                         <div className='transactions-search-bar'>
                             <label> <FaSearchDollar /> Search:

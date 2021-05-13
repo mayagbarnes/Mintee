@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Chart from 'chart.js/auto';
 
 // //--Chart Style Options--//
-// // Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif"
+// Chart.defaults.global.defaultFontFamily = "'Raleway', helvetica, serif;"
+// Chart.defaults.font.size = 100;
 // // Chart.defaults.global.legend.display = false;
 // //--Chart Style Options--//
 
@@ -46,6 +47,28 @@ export default class CurrenMonthChart extends Component {
                     ],
                     borderWidth: 3
                 }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 20
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            // Include a dollar sign in the ticks
+                            callback: function(value, index, values) {
+                                return '$' + value;
+                            }
+                        },
+                        pointLabels: { fontSize: 18 }
+                    }
+                }
             }
         });
     }
