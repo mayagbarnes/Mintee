@@ -6,11 +6,12 @@ export const showInvestment = (investmentId) => (
     })
 );
 
-export const indexInvestments = () => (
-    $.ajax({
+export const indexInvestments = (signal) => (
+    fetch('/api/investments', {
         method: 'GET',
-        url: '/api/investments'
+        signal: signal
     })
+    .then((response) => response.json())
 );
 
 export const newInvestment = (investment) => (

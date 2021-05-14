@@ -11,6 +11,7 @@ class Transactions extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             searchTerm: '',
             date: 'desc',
             description: 'default',
@@ -33,7 +34,8 @@ class Transactions extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchTransactions();
+        this.props.fetchTransactions()
+        .then( () =>  setTimeout(() => {this.setState({loading:false})}, 1000));
     }
 
     sortAmount() {
@@ -114,25 +116,34 @@ class Transactions extends React.Component {
         let descriptionSymbol = this.state.description === 'desc' ? <BiDownArrow/> : this.state.description === 'asc' ? <BiUpArrow/> : '';
 
         let transactionItems = []
-        if(this.state.searchTerm === '') {
-            transactionItems = this.props.transactions.map( transaction => {
-                            return < TransactionItem key={transaction.id}
-                                transaction={transaction} 
-                                openModal={this.props.openModal}/>
-                            })
-            if(transactionItems.length === 0) {
-                transactionItems = <tr className='no-results'><td colSpan='5'>No Transactions To Display</td></tr>
-            }
+        let loadingClass = this.state.loading ? 'loading': '';
+        if(this.state.loading) {
+            transactionItems = 
+            <tr className='results-loading'>
+                <td colSpan='5'>
+                    <div className='loader'></div>
+                </td>
+            </tr>
         } else {
-            transactionItems = this.props.filtered.map( transaction => {
-                            return < TransactionItem key={transaction.id}
-                                transaction={transaction} 
-                                openModal={this.props.openModal}/>
-                            })
-            if(transactionItems.length === 0) {
-                transactionItems = <tr className='no-results'><td colSpan='5'>No Results</td></tr>
+            if(this.state.searchTerm === '') {
+                transactionItems = this.props.transactions.map( transaction => {
+                                return < TransactionItem key={transaction.id}
+                                    transaction={transaction} 
+                                    openModal={this.props.openModal}/>
+                                })
+            } else {
+                transactionItems = this.props.filtered.map( transaction => {
+                                return < TransactionItem key={transaction.id}
+                                    transaction={transaction} 
+                                    openModal={this.props.openModal}/>
+                                })
             }
         }
+
+        if (transactionItems.length === 0) {
+            transactionItems = <tr className='no-results'><td colSpan='5'>No Transactions To Display</td></tr>
+        }
+
         
         return (
             <div>
@@ -158,7 +169,7 @@ class Transactions extends React.Component {
                             <input type="text" onChange={this.editSearchTerm} placeholder='Enter Transaction Description'/>
                             </label>
                         </div>
-                        <table className='transaction-table'>
+                        <table className={`transaction-table ${loadingClass}`}>
                             <thead>
                                 <tr>
                                     <th className={`${this.state.date}`} >

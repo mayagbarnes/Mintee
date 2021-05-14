@@ -6,11 +6,12 @@ export const showAccount = (accountId) => (
     })
 );
 
-export const indexAccounts = () => (
-    $.ajax({
+export const indexAccounts = (signal) => (
+     fetch('/api/accounts', {
         method: 'GET',
-        url: '/api/accounts'
+        signal: signal
     })
+    .then((response) => response.json())
 );
 
 export const newAccount = (account) => (

@@ -19,10 +19,12 @@ class AccountItem extends React.Component {
                     <h4 className='account-name' >{this.props.account.account_name}</h4>
                     <h4 className='account-balance'>{formatter.format(balance)}</h4>
                 </div>
-                <p className='account-institution'>{this.props.account.institution}</p>
-                <div className='account-change-buttons'>
-                    <button className='account-update' onClick={ () => {this.props.openModal('Update', this.props.account)}}>Update</button>
-                    <button className='account-delete' onClick={ () => {this.props.openModal('Delete', this.props.account)}}>Delete</button>
+                <div className='account-info-secondary'>
+                    <p className='account-institution'>{this.props.account.institution}</p>
+                    <div className='account-change-buttons'>
+                        <button className='account-update' onClick={ () => {this.props.openModal('Update', this.props.account)}}>Update</button>
+                        <button className='account-delete' onClick={ () => {this.props.openModal('Delete', this.props.account)}}>Delete</button>
+                    </div>
                 </div>
             </div>
         )

@@ -28,25 +28,63 @@ export default class SpendingTrendChart extends Component {
         let Month1Label = this.label(currDate-2);
         let Month1Spending = this.totalSpend(this.getMonth(currDate - 1));
 
+        Chart.defaults.font.size = 18;
+        
         new Chart(myChartRef, {
             type: 'bar',
             data: {
                 labels: [Month1Label, Month2Label, Month3Label],
                 datasets: [{
-                    label: 'Spending ($)',
+                    label: 'Spending',
                     data: [Month1Spending, Month2Spending, Month3Spending],
                     backgroundColor: [
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
                     ],
                     borderColor: [
-                       'rgba(54, 162, 235, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(255, 159, 64, 1)',
+                       'rgba(13, 119, 189, 1)',
+                        'rgba(44, 158, 133, 1)',
+                        'rgba(227, 123, 20, 1)',
                     ],
-                    borderWidth: 1
+                    borderWidth: 3
                 }]
+            },
+             options: {
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 20
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                             label: function(context) {
+                                var label = context.dataset.label || '';
+
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
+                    },
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            // Include a dollar sign in the ticks
+                            callback: function(value, index, values) {
+                                return '$' + value;
+                            },
+                        },
+                    }
+                }
             }
         });
     }
@@ -64,6 +102,7 @@ export default class SpendingTrendChart extends Component {
                 }
             }
         })
+        
         return -total;
     }
 
