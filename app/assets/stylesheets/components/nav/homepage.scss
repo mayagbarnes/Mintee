@@ -6,16 +6,23 @@
     .section-1 {
         position: relative;
 
-        video {
+        .main-video {
             display: block;
+        
+            video {
+                min-width: 100%; 
+                min-height: 100%;
+                width: 300px; 
+            }
         }
  
         .main-content {
             position: absolute;
+            background-color: transparent;
             z-index: 1;
-            margin-left: 8%;
             width: 30%;
-            margin-top: 4%;
+            margin-left: 6%;
+            margin-top: 3.5%;
 
             h2 {
                 margin-top: 35px;
