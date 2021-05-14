@@ -76,9 +76,7 @@
         border-color: $light-gray;
         border-style: solid;
         border-width: 1px;
-        font-family: $serif;
-        font-weight: 300;
-        font-size: 16px;
+        font: 300 16px $serif;
       }
 
       input {
@@ -97,6 +95,16 @@
       input:focus-within {
         border-color: $blue;
         box-shadow: 0 0 4px 4px $lightest-blue;
+      }
+
+      .button-holder {
+        text-align: center;
+        margin-top: 5px;
+        margin-bottom: 25px;
+
+        a:hover {
+            text-decoration: none;
+        }
       }
 
     }

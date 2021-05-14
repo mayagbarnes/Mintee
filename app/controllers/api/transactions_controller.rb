@@ -55,7 +55,8 @@ class Api::TransactionsController < ApplicationController
 
     def search 
         # query = params[:query] "%#{params[:search]}%"
-        @transactions = current_user.transactions.where("transactions.description ILIKE ?", "%#{params[:query]}%")
+        @transactions = current_user.transactions
+            .where("transactions.description ILIKE ? OR transactions.category ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
     end
 
     private

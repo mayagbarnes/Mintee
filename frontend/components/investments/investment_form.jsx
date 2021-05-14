@@ -14,6 +14,12 @@ class InvestmentForm extends React.Component {
             show: true,
             invalid: false,
             empty: false,
+            errors: {
+                name: '',
+                shares: false,
+                pricePaid: false,
+                account: false,
+            }
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
@@ -136,12 +142,22 @@ class InvestmentForm extends React.Component {
     }
 
     renderErrors() {
-        let errors = this.props.errors.map((error, i) => (
+        let errors = this.props.errors
+        errors = errors.map( message => {
+            if(message === "Inv name can't be blank") {
+                return "Name can't be blank"
+            } else if (message === "Account can't be blank") {
+                 return "Select Account from dropdown"
+            } else if (message !== 'Account must exist') {
+                return message
+            }
+        })
+        let errorMessages = errors.map((error, i) => (
                         <li key={`error-${i}`}>
                             {error}
                         </li>
                     ))
-        return errors;
+        return errorMessages;
     }
 
     filterStocks() {
@@ -239,8 +255,6 @@ class InvestmentForm extends React.Component {
                 <div className='investment-form-body'>
                     <ul>
                         {this.renderErrors()} 
-                        <li key='error-invalid' className={this.state.invalid ? '': 'hidden'}>Invalid Ticker</li> 
-                        <li key='error-empty' className={this.state.empty ? '': 'hidden'}>Ticker Symbol can't be blank</li> 
                     </ul>
                     <label>Account
                         <br/>
@@ -250,7 +264,7 @@ class InvestmentForm extends React.Component {
                         </select>
                     </label>
                     <br/>
-                    <label> Name/Description
+                    <label> Name/Description <div>{this.state.errors.name}</div>
                         <input id='investment-name' type="text" value={this.state.investment.inv_name}
                                 onChange={this.handleChange('inv_name')}/>
                     </label>
@@ -259,7 +273,7 @@ class InvestmentForm extends React.Component {
                          <input className='investment-ticker'
                                 type="text" 
                                 list='companies'
-                                placeholder='Search Stock, ETP, or REIT by Name or Ticker'
+                                placeholder='Search Company Name or Ticker'
                                 value={this.state.investment.ticker}
                                 onChange={this.handleChange('ticker')}
                                 onKeyUp={this.handleTicker}/> 
@@ -272,6 +286,10 @@ class InvestmentForm extends React.Component {
                                                 {rows}
                                             </tbody>
                                         </table> */}
+                            <ul>
+                                <li key='error-invalid' className={this.state.invalid ? '': 'hidden'}>Invalid Ticker - Select from dropdown</li> 
+                                <li key='error-empty' className={this.state.empty ? '': 'hidden'}>Ticker Symbol can't be blank</li> 
+                            </ul>
                             <div className={`no-results ${optionSelected} ${noResult}`}>No Matches Found</div>
                     </label>
                     <br/>

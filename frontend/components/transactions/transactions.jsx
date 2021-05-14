@@ -13,16 +13,19 @@ class Transactions extends React.Component {
         this.state = {
             loading: true,
             searchTerm: '',
+            page: '1',
             date: 'desc',
             description: 'default',
             category: 'default',
-            amount: 'default'
+            amount: 'default',
         };
         this.sortAmount = this.sortAmount.bind(this);
         this.sortCategory = this.sortCategory.bind(this);
         this.sortDescription = this.sortDescription.bind(this);
         this.sortDate = this.sortDate.bind(this);
         this.editSearchTerm = this.editSearchTerm.bind(this);
+        this.updatePage = this.updatePage.bind(this);
+
     }
 
     editSearchTerm(e) {
@@ -109,6 +112,19 @@ class Transactions extends React.Component {
         else {this.props.filtered.sort(func)}
     }
 
+    makePages() {
+        let total = Math.ceil(this.props.transactions.length / 12);
+        let pageButtons = [];
+        for( let i = total; i > 0; i--) {
+            pageButtons.unshift(<button key={i} onClick={this.updatePage} className={this.state.page === `${i}` ? 'selected' : ''} value={i}>{i}</button>) 
+        }
+        return pageButtons
+    }
+
+    updatePage(e) {
+        this.setState( {page: e.currentTarget.value});
+    }
+
     render() {
         let dateSymbol = this.state.date === 'desc' ? <BiDownArrow/> : this.state.date === 'asc' ? <BiUpArrow/> : '';
         let categorySymbol = this.state.category === 'desc' ? <BiDownArrow/> : this.state.category === 'asc' ? <BiUpArrow/> : '';
@@ -126,16 +142,24 @@ class Transactions extends React.Component {
             </tr>
         } else {
             if(this.state.searchTerm === '') {
-                transactionItems = this.props.transactions.map( transaction => {
-                                return < TransactionItem key={transaction.id}
-                                    transaction={transaction} 
-                                    openModal={this.props.openModal}/>
+                transactionItems = this.props.transactions.map( (transaction, idx) => {
+                                        let first = (this.state.page * 12) - 12
+                                        let last = (this.state.page * 12) - 1
+                                    if(idx >= first && idx <= last) {
+                                        return < TransactionItem key={transaction.id}
+                                            transaction={transaction} 
+                                            openModal={this.props.openModal}/>
+                                    }
                                 })
             } else {
-                transactionItems = this.props.filtered.map( transaction => {
-                                return < TransactionItem key={transaction.id}
-                                    transaction={transaction} 
-                                    openModal={this.props.openModal}/>
+                transactionItems = this.props.filtered.map( (transaction, idx) => {
+                                    let first = (this.state.page * 12) - 12
+                                    let last = (this.state.page * 12) - 1
+                                if(idx >= first && idx <= last) {
+                                    return < TransactionItem key={transaction.id}
+                                        transaction={transaction} 
+                                        openModal={this.props.openModal}/>
+                                }
                                 })
             }
         }
@@ -166,8 +190,12 @@ class Transactions extends React.Component {
                         </header>
                         <div className='transactions-search-bar'>
                             <label> <FaSearchDollar /> Search:
-                            <input type="text" onChange={this.editSearchTerm} placeholder='Enter Transaction Description'/>
+                            <input type="text" onChange={this.editSearchTerm} placeholder='Enter Transaction Description or Category'/>
                             </label>
+                        </div>
+                        <div className='page-button-holder'>
+                           <p>Pages: </p>
+                           {this.makePages(this.state.page)}
                         </div>
                         <table className={`transaction-table ${loadingClass}`}>
                             <thead>

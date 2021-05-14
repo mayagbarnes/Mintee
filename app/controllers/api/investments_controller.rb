@@ -53,7 +53,7 @@ class Api::InvestmentsController < ApplicationController
     end
 
     def search 
-        @investments = current_user.investments.where("investments.inv_name ILIKE ?", "%#{params[:query]}%")
+        @investments = current_user.investments.where("investments.inv_name ILIKE ? OR investments.ticker ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
     end
 
     private

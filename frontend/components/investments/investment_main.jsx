@@ -255,7 +255,7 @@ class Investments extends React.Component {
                         </header>
                         <div className='transactions-search-bar'>
                             <label> <FaSearchDollar /> Search:
-                            <input type="text" onChange={this.editSearchTerm} placeholder='Enter Investment Name'/>
+                            <input type="text" onChange={this.editSearchTerm} placeholder='Enter Investment Name or Ticker'/>
                             </label>
                         </div>
                         <table className={`investment-table ${loadingClass}`}>
