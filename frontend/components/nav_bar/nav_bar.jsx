@@ -17,7 +17,7 @@ class NavBar extends React.Component {
             <section className='nav-bar'>
                 <button className={`nav-button ${overviewClass}`}>
                     <Link to="/dashboard" className="nav-links">
-                        <div className='nav-link-text'> ACCOUNTS </div> 
+                        <div className='nav-link-text'> DASHBOARD </div> 
                     </Link>
                 </button>  
                 <button className={`nav-button ${transactionsClass}`}>

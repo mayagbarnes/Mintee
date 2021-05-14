@@ -3,7 +3,6 @@ import Chart from 'chart.js/auto';
 
 // //--Chart Style Options--//
 // Chart.defaults.global.defaultFontFamily = "'Raleway', helvetica, serif;"
-// Chart.defaults.font.size = 100;
 // // Chart.defaults.global.legend.display = false;
 // //--Chart Style Options--//
 
@@ -29,13 +28,14 @@ export default class CurrenMonthChart extends Component {
         let spending = this.totalSpend(this.getMonth(currDate));
         let income = this.totalIncome(this.getMonth(currDate))
 
+        Chart.defaults.font.size = 18;
 
-        new Chart(myChartRef, {
+        let monthChart = new Chart(myChartRef, {
             type: 'bar',
             data: {
                 labels: ["Income", "Spending"],
                 datasets: [{
-                    label: 'Total ($)',
+                    label: 'Total',
                     data: [income, spending],
                     backgroundColor: [ 
                         'rgba(7, 163, 98, 0.6)', 
@@ -56,7 +56,22 @@ export default class CurrenMonthChart extends Component {
                                 size: 20
                             }
                         }
-                    }
+                    },
+                    tooltip: {
+                        callbacks: {
+                             label: function(context) {
+                                var label = context.dataset.label || '';
+
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
+                    },
                 },
                 scales: {
                     y: {
@@ -64,9 +79,8 @@ export default class CurrenMonthChart extends Component {
                             // Include a dollar sign in the ticks
                             callback: function(value, index, values) {
                                 return '$' + value;
-                            }
+                            },
                         },
-                        pointLabels: { fontSize: 18 }
                     }
                 }
             }
