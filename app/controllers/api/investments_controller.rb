@@ -23,7 +23,6 @@ class Api::InvestmentsController < ApplicationController
     end
 
     def update
-        debugger
         @investment = current_user.investments.find_by(id: params[:id])
         old_amount = (@investment.shares * @investment.prev_close)
         new_amount =  (params[:investment][:shares].to_f * params[:investment][:prev_close].to_f)
