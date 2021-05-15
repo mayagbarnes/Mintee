@@ -2,13 +2,14 @@
 
 # Mintee
 
-[Mintee](https://mintee.herokuapp.com/#/) is a clone of [Mint](https://mint.intuit.com/), Intuit's personal financial management software. This version implements many of the same features, allowing users to manage their accounts, track spending, and monitor investments. 
+[Mintee](https://mintee.herokuapp.com/#/) is a clone of [Mint](https://mint.intuit.com/), Intuit's personal financial management platform. This version implements many of the same features, allowing users to manage their accounts, track spending, and monitor investments. 
 
 ## Features
 
 * **Sign Up / Login**
-* **Accounts View**
+* **Dashboard View**
   * Create, Update, and Delete accounts
+  * Chart.js visualizations: Current Month Income vs. Spending & Trailing 3 Month Spending Trend
 * **Transactions View, Sort, & Search**
   * View sidebar of accounts and all transactions
   * Create, Update, and Delete transactions
