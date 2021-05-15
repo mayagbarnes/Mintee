@@ -4,6 +4,16 @@
 
 [Mintee](https://mintee.herokuapp.com/#/) is a clone of [Mint](https://mint.intuit.com/), Intuit's personal financial management platform. This version implements many of the same features, allowing users to manage their accounts, track spending, and monitor investments. 
 
+## Technologies & Hosting
+
+Mintee is hosted on Heroku and incorporates the following technologies:
+* Ruby on Rails
+* React
+* Redux
+* PostgreSQL
+* Webpack
+* Babel
+
 ## Features
 
 * **Sign Up / Login**
@@ -21,12 +31,3 @@
   * Change the order of investments by any of the table categories - Ascending or Descending 
   * Search investments by their name
 
-## Technologies & Hosting
-
-Mintee is hosted on Heroku and incorporates the following technologies:
-* Ruby on Rails
-* React
-* Redux
-* PostgreSQL
-* Webpack
-* Babel
