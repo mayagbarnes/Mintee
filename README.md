@@ -2,23 +2,7 @@
 
 # Mintee
 
-[Mintee](https://mintee.herokuapp.com/#/) is a clone of [Mint](https://mint.intuit.com/), one of Intuit's financial software offerings geared toward personal use. This version implements many of the same features, allowing users to manage their accounts, track spending, and monitor investments. 
-
-## Features
-
-* **Sign Up / Login**
-* **Accounts View**
-  * Create, Update, and Delete accounts
-* **Transactions View, Sort, & Search**
-  * View sidebar of accounts and all transactions
-  * Create, Update, and Delete transactions
-  * Change the order of transactions by any of the table categories - Ascending or Descending 
-  * Search transactions by their description
-* **Investments View, Sort, & Search**
-  * View sidebar of accounts and all investments
-  * Create, Update, and Delete investments
-  * Change the order of investments by any of the table categories - Ascending or Descending 
-  * Search investments by their name
+[Mintee](https://mintee.herokuapp.com/#/) is a clone of [Mint](https://mint.intuit.com/), Intuit's personal financial management platform. This version implements many of the same features, allowing users to manage their accounts, track spending, and monitor investments. 
 
 ## Technologies & Hosting
 
@@ -29,3 +13,28 @@ Mintee is hosted on Heroku and incorporates the following technologies:
 * PostgreSQL
 * Webpack
 * Babel
+
+## Features
+
+* **Investments**
+  * Investment prices updated daily for each Investment - Finnhub API
+  * Dynamic ticker suggestions to assist with investment creation
+  * Create, Update, and Delete investments - updates associated account balance
+  * Search by name/ticker & Sort by table column (Ascending/Descending)
+  <!-- <p align="center">
+  <img width="500" alt="Spending Trend Chart" src="">
+  </p> -->
+* **Transactions View**
+  * Create, Update, and Delete Transactions - updates associated account balance
+  * Search by description/category & Sort by table column (Ascending/Descending)
+  * Pagination of transactions list
+  <p align="center">
+  <img width="600" alt="Transactions" src="https://user-images.githubusercontent.com/63436329/118378560-89160200-b589-11eb-8270-d8740f46a49d.gif">
+  </p>
+* **Dashboard View**
+  * View, Create, Update, and Delete Accounts
+  * Chart.js: Current Month Income vs. Spending & Trailing 3 Month Spending Trend
+  <p align="center">
+    <img width="600" alt="Current Month Chart" src="https://user-images.githubusercontent.com/63436329/118377787-561d3f80-b584-11eb-9266-a7a82e31a89f.gif">
+  </p>
+* **Sign Up / Login**

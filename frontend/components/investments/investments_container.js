@@ -5,7 +5,7 @@ import {openModal} from '../../actions/account_modal_actions';
 import {fetchStocks} from '../../actions/stock_actions';
 
  const starter = (a,b) => {
-        return a.market_value > b.market_value ? -1 : a.market_value < b.market_value ? 1 : 0 }
+        return (a.prev_close * a.shares) > (b.prev_close * b.shares) ? -1 : (a.prev_close * a.shares) < (b.prev_close * b.shares) ? 1 : 0 }
 
 const mapStateToProps = (state) => ({
     investments: Object.values(state.entities.investments).sort(starter),

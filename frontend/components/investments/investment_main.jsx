@@ -13,6 +13,7 @@ class Investments extends React.Component {
         this.controller = new AbortController();
         this.signal = this.controller.signal;
         this.state = {
+            investments: [],
             mounted: true,
             tableLoading: true,
             stocksLoading: true,
@@ -38,20 +39,13 @@ class Investments extends React.Component {
         this.props.fetchInvestments(this.signal)
         .then( () =>  {
             if(this.state.mounted) {
-                this.setState({tableLoading: false})
+                this.setState({investments: this.props.investments}, () => this.setState({tableLoading: false}))
             }
         })
         this.props.fetchStocks(this.signal)
         .then( () =>  {
             if(this.state.mounted) {this.setState({stocksLoading: false})}
         })
-        // .catch(err => {
-        //     // You can catch the error
-        //     // thrown by the polyfill here.
-        //     if (err.name == "AbortError") {
-        //         console.log("Fetch Aborted");
-        //     } 
-        // });
     }
 
     componentWillUnmount() {
@@ -84,8 +78,8 @@ class Investments extends React.Component {
         } else if (this.state.inv_name === 'desc') {
             this.setState( {inv_name: 'asc'});
         } 
-        if(this.state.searchTerm === '') {this.props.investments.sort(func)} 
-        else {this.props.filtered.sort(func)}
+        
+       this.setState( {investments: this.state.investments.sort(func)})
     }
 
     sortTicker() {
@@ -105,8 +99,8 @@ class Investments extends React.Component {
         } else if (this.state.ticker === 'desc') {
             this.setState( {ticker: 'asc'});
         } 
-        if(this.state.searchTerm === '') {this.props.investments.sort(func)} 
-        else {this.props.filtered.sort(func)}
+        
+       this.setState( {investments: this.state.investments.sort(func)})
     }
 
     sortPrice() {
@@ -116,15 +110,16 @@ class Investments extends React.Component {
         this.setState( {shares: 'default'});
         this.setState( {market_value: 'default'});
 
-        let func = (a,b) => a.price - b.price;
+
+        let func = (a,b) => a.prev_close - b.prev_close;
         if(this.state.price === 'default' || this.state.price === 'asc') {
-            func = (a,b) => b.price - a.price;
+            func = (a,b) => b.prev_close - a.prev_close;
             this.setState( {price: 'desc'});
         } else if(this.state.price === 'desc') {
             this.setState( {price: 'asc'});
         } 
-        if(this.state.searchTerm === '') {this.props.investments.sort(func)} 
-        else {this.props.filtered.sort(func)}
+
+       this.setState( {investments: this.state.investments.sort(func)})
     }
 
     sortPricePaid() {
@@ -141,8 +136,8 @@ class Investments extends React.Component {
         } else if(this.state.price_paid === 'desc') {
             this.setState( {price_paid: 'asc'});
         } 
-        if(this.state.searchTerm === '') {this.props.investments.sort(func)} 
-        else {this.props.filtered.sort(func)}
+
+        this.setState( {investments: this.state.investments.sort(func)})
     }
 
     sortShares() {
@@ -159,8 +154,8 @@ class Investments extends React.Component {
         } else if(this.state.shares === 'desc') {
             this.setState( {shares: 'asc'});
         } 
-        if(this.state.searchTerm === '') {this.props.investments.sort(func)} 
-        else {this.props.filtered.sort(func)}
+
+        this.setState( {investments: this.state.investments.sort(func)})
     }
 
     sortMarketValue() {
@@ -170,15 +165,15 @@ class Investments extends React.Component {
         this.setState( {price_paid: 'default'});
         this.setState( {shares: 'default'});
 
-        let func = (a,b) => a.market_value - b.market_value;
+        let func = (a,b) => (a.prev_close * a.shares) - (b.prev_close * b.shares);
         if(this.state.market_value === 'default' || this.state.market_value === 'asc') {
-            func = (a,b) => b.market_value - a.market_value;
+            func = (a,b) => (b.prev_close * b.shares) - (a.prev_close * a.shares);
             this.setState( {market_value: 'desc'});
         } else if(this.state.market_value === 'desc') {
             this.setState( {market_value: 'asc'});
         } 
-        if(this.state.searchTerm === '') {this.props.investments.sort(func)} 
-        else {this.props.filtered.sort(func)}
+
+        this.setState( {investments: this.state.investments.sort(func)})
     }
 
 
@@ -202,7 +197,7 @@ class Investments extends React.Component {
                 </tr>
         } else {
             if(this.state.searchTerm === '') {
-                investmentItems = this.props.investments.map( investment => {
+                investmentItems = this.state.investments.map( investment => {
                                 return < InvestmentItem key={investment.id}
                                     investment={investment} 
                                     updateInvestment={this.props.updateInvestment}
@@ -212,7 +207,7 @@ class Investments extends React.Component {
             } else {
                 let matches = this.props.filtered.map( investment => investment.id)
 
-                investmentItems = this.props.investments
+                investmentItems = this.state.investments
                     .filter(investment => matches.includes(investment.id))
                     .map( investment => {
                                 return < InvestmentItem key={investment.id}

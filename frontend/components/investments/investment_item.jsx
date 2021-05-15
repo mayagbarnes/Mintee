@@ -8,14 +8,12 @@ class InvestmentItem extends React.Component {
     }
 
     // componentDidUpdate() {
-    //     if(!this.props.investment.price) {
     //         let apikey = window.finnhubAPIKey;
     //         let ticker = this.props.investment.ticker
         
     //             fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
     //                 .then(response => (response.json()))
     //                 .then(quote => this.addCurrentPrice(quote["pc"]))
-    //     }
     // }
 
     buildDateString() {
@@ -61,7 +59,6 @@ class InvestmentItem extends React.Component {
         let apikey = window.finnhubAPIKey;
         let ticker = this.props.investment.ticker;
         let lastFetch = this.props.investment.last_fetch;
-
 
         if(lastFetch !== today) {        
             if (marketOpen) {

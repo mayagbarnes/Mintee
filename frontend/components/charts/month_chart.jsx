@@ -25,8 +25,8 @@ export default class CurrenMonthChart extends Component {
         const myChartRef = this.chartRef.current.getContext("2d");
 
         let currDate = new Date().getMonth();
-        let spending = this.totalSpend(this.getMonth(currDate));
-        let income = this.totalIncome(this.getMonth(currDate))
+        let spending = this.totalSpend(this.getMonth(currDate + 1));
+        let income = this.totalIncome(this.getMonth(currDate + 1))
 
         Chart.defaults.font.size = 18;
 
