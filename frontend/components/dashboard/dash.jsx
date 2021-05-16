@@ -8,6 +8,7 @@ import {GoCreditCard} from 'react-icons/go'
 import {BiLineChart} from 'react-icons/bi'
 import CurrentMonthChart from "../charts/month_chart";
 import SpendingTrendChart from "../charts/spending_chart";
+import InvestmentChart from "../charts/investments_chart";
 
 import { Link } from 'react-router-dom';
 
@@ -134,7 +135,6 @@ class Dash extends React.Component {
                     .then(quote => {this.addCurrentPrice(quote["c"], inv)});
             }
         })
-
     }
 
     addCurrentPrice(price, inv) {
@@ -282,14 +282,14 @@ class Dash extends React.Component {
                         </header>
                         <div className='chart-select-container'>
                             <button className={`chart-select-button-${monthClass}`} value="month" onClick={this.handleButtonClick}>
-                                Current Month
+                                Your Portfolio
                             </button>
-                            {/* <button className={`chart-select-button-${quarterClass} spending-tab`} value="quarter" onClick={this.handleButtonClick}>
+                             {/* <button className={`chart-select-button-${quarterClass} spending-tab`} value="quarter" onClick={this.handleButtonClick}>
                                 Spending Trend
-                            </button> */}
+                            </button>  */}
                         </div>
                         <div className={`current-chart-div-${monthClass}`}>
-                            <CurrentMonthChart fetchTransactions={this.props.fetchTransactions} transactions={this.props.transactions}/>
+                            <InvestmentChart fetchInvestments={this.props.fetchInvestments} investments={this.props.investments}/>
                         </div>
                         {/* <div className={`current-chart-div-${quarterClass}`}>
                             <SpendingTrendChart fetchTransactions={this.props.fetchTransactions} transactions={this.props.transactions}/>
