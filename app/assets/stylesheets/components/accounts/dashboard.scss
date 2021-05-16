@@ -102,15 +102,24 @@
 }
 
 .dash-rightside {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4%;
+    margin-right: 2%;
+    width: 60%;
+}
+
+.dashboard:last-of-type {
+    margin-top: 2%;
+}
+
+.dashboard {
     border-color: $light-gray;
     border-style: solid;
     border-width: 1px;
     border-radius: 5px;
     background-color: white;
     padding: 25px;
-    margin-top: 4%;
-    margin-right: 2%;
-    width: 57%;
 
     h2 {
         text-align: center;

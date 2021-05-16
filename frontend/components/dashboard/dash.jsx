@@ -6,7 +6,7 @@ import NavBar from '../nav_bar/nav_bar';
 import { IoCashOutline } from 'react-icons/io5';
 import {GoCreditCard} from 'react-icons/go'
 import {BiLineChart} from 'react-icons/bi'
-import CurrenMonthChart from "../charts/month_chart";
+import CurrentMonthChart from "../charts/month_chart";
 import SpendingTrendChart from "../charts/spending_chart";
 
 import { Link } from 'react-router-dom';
@@ -30,7 +30,6 @@ class Dash extends React.Component {
         this.setState({chart: e.target.value})
     }
     
-
     // calculate the total spent that month 
     totalSpend(month){
         let total = 0;
@@ -263,14 +262,41 @@ class Dash extends React.Component {
                             </button>
                         </div>
                         <div className={`current-chart-div-${monthClass}`}>
-                            <CurrenMonthChart fetchTransactions={this.props.fetchTransactions} transactions={this.props.transactions}/>
+                            <CurrentMonthChart fetchTransactions={this.props.fetchTransactions} transactions={this.props.transactions}/>
                         </div>
                         <div className={`current-chart-div-${quarterClass}`}>
                             <SpendingTrendChart fetchTransactions={this.props.fetchTransactions} transactions={this.props.transactions}/>
                         </div>
+                    </div>    
+                    <div className='dashboard'>
+                        <header className='dash-trans-heading'>
+                            <h2>INVESTMENT TRENDS</h2>
+                            <div className='view-button-container'>
+                                <button className='view-button'>
+                                <Link to="/investments">
+                                    <p className='icon'></p>
+                                    <div className='button-text'>View Investments</div>
+                                </Link>
+                                </button>
+                            </div>
+                        </header>
+                        <div className='chart-select-container'>
+                            <button className={`chart-select-button-${monthClass}`} value="month" onClick={this.handleButtonClick}>
+                                Current Month
+                            </button>
+                            {/* <button className={`chart-select-button-${quarterClass} spending-tab`} value="quarter" onClick={this.handleButtonClick}>
+                                Spending Trend
+                            </button> */}
+                        </div>
+                        <div className={`current-chart-div-${monthClass}`}>
+                            <CurrentMonthChart fetchTransactions={this.props.fetchTransactions} transactions={this.props.transactions}/>
+                        </div>
+                        {/* <div className={`current-chart-div-${quarterClass}`}>
+                            <SpendingTrendChart fetchTransactions={this.props.fetchTransactions} transactions={this.props.transactions}/>
+                        </div> */}
                     </div>
-                 </section>
                 </section>
+                </section> 
             </div>
             
         )

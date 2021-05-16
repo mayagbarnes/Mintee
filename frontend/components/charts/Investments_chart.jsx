@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import Chart from 'chart.js/auto';
 
-// //--Chart Style Options--//
-// Chart.defaults.global.defaultFontFamily = "'Raleway', helvetica, serif;"
-// // Chart.defaults.global.legend.display = false;
-// //--Chart Style Options--//
+    //    let current = (Date.now() / 1000);
+    //    let year = current - Number(31556926);
+    //    console.log(current.toFixed(0))
+    //    console.log(year.toFixed(0))
 
-export default class CurrentMonthChart extends Component {
+export default class InvestmentChart extends Component {
     constructor(props) {
         super(props);
         this.state = {
