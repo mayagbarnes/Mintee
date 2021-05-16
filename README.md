@@ -29,12 +29,13 @@ Mintee is hosted on Heroku and incorporates the following technologies:
   * Search by description/category & Sort by table column (Ascending/Descending)
   * Pagination of transactions list
   <p align="center">
-  <img width="600" alt="Transactions" src="https://user-images.githubusercontent.com/63436329/118378560-89160200-b589-11eb-8270-d8740f46a49d.gif">
+  <img width="650" alt="Transactions" src="https://user-images.githubusercontent.com/63436329/118378560-89160200-b589-11eb-8270-d8740f46a49d.gif">
   </p>
 * **Dashboard View**
   * View, Create, Update, and Delete Accounts
   * Chart.js: Current Month Income vs. Spending & Trailing 3 Month Spending Trend
   <p align="center">
-    <img width="600" alt="Current Month Chart" src="https://user-images.githubusercontent.com/63436329/118377787-561d3f80-b584-11eb-9266-a7a82e31a89f.gif">
+    <img width="650" alt="Current Month Chart" src="https://user-images.githubusercontent.com/63436329/118377787-561d3f80-b584-11eb-9266-a7a82e31a89f.gif">
   </p>
 * **Sign Up / Login**
+  * User authentication and authorization leveraging BCrypt to hash user passwords 

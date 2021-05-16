@@ -20,14 +20,22 @@ class TransactionForm extends React.Component {
     }
 
     renderErrors() {
-        let errors = <ul>
-                {this.props.errors.map((error, i) => (
+        let errors = this.props.errors
+        errors = errors.map( message => {
+            if (message === "Account can't be blank") {
+                 return "Select account from dropdown"
+            } else if (message !== 'Account must exist') {
+                return message
+            }
+        })
+        let errorMessages =  <ul>
+                {errors.map((error, i) => (
                 <li key={`error-${i}`}>
                     {error}
                 </li>
                 ))}
             </ul>
-        return errors;
+        return errorMessages;
     }
 
 
@@ -49,7 +57,7 @@ class TransactionForm extends React.Component {
                 </section>
                 <div className='transaction-form'>
                     <h2>{this.props.formHeading}</h2>
-                <div className='transaction-form-body'>
+                <form className='transaction-form-body'>
                     {this.renderErrors()} 
                     <label>Account
                         <br/>
@@ -95,7 +103,7 @@ class TransactionForm extends React.Component {
                     <div className='button-holder'>
                         <button onClick={this.handleSubmit}>{this.props.formType}</button>
                     </div>
-                </div>
+                </form>
                 </div>
             </section>
         )

@@ -52,16 +52,6 @@ class InvestmentForm extends React.Component {
         this.setState({ clicked: true, investment: { ticker: e.currentTarget.value}})
     }
 
-    // table implementation
-    //  handleClick(e) {
-    //     console.log('clicked')
-    //     let value = e.currentTarget.getAttribute("value");
-    //     console.log(value)
-    //     console.log(typeof value)
-    //     this.setState({ clicked: true}, () => console.log(this.state.clicked))
-    //     this.setState({investment: { ticker: value}})
-    // }
-
     handleSubmit() {
         let apikey = window.finnhubAPIKey;
         let ticker = this.state.investment.ticker
@@ -147,7 +137,7 @@ class InvestmentForm extends React.Component {
             if(message === "Inv name can't be blank") {
                 return "Name can't be blank"
             } else if (message === "Account can't be blank") {
-                 return "Select Account from dropdown"
+                 return "Select account from dropdown"
             } else if (message !== 'Account must exist') {
                 return message
             }
@@ -191,25 +181,6 @@ class InvestmentForm extends React.Component {
         return matches;
     }
 
-
-    // makeRows(allMatches) {
-    //     let matching = allMatches.slice(0,5)
-    //     let matches = matching.map((stock) => {
-    //         let company = stock.name.split(' ').map( (word) => {
-    //             return word[0].toUpperCase() + word.slice(1).toLowerCase()
-    //         }).join(' ');
-    //         return (
-    //             <tr onClick={this.handleClick} key={stock.ticker} value={stock.ticker}>
-    //                 <td>{company}</td>
-    //                 <td>{stock.ticker}</td>
-    //             </tr>
-    //         )
-    //     })
-    //     return matches;
-    // }
-
-
-
     render() {
         let defaultAccount = this.state.investment.account_id;
         let accountsDropdown = this.props.accounts.map( (account) => {
@@ -228,23 +199,15 @@ class InvestmentForm extends React.Component {
                 filteredStocks = this.filterStocks();
             } 
 
-        // for table implementation
-        // let rows;
-
         let matches;
         let noResult = 'hidden';
         if(filteredStocks.length === 0 && this.state.investment.ticker !== ''){
             noResult = ''
         } else {
             matches = this.makeMatches(filteredStocks)
-        // for table implementation
-            // rows = this.makeRows(allMatches)
         }
        
         // let tickerClass = this.state.invalid ? '': 'hidden';
-        // for table implementation
-        // let listClass = this.state.clicked ? 'hidden': '';
-
         return (
             <section className='investment-form-holder'>
                 <section className='investment-form-close'>
@@ -252,16 +215,18 @@ class InvestmentForm extends React.Component {
                 </section>
                 <div className='investment-form'>
                     <h2>{this.props.formHeading}</h2>
-                <div className='investment-form-body'>
+                <form className='investment-form-body'>
                     <ul>
                         {this.renderErrors()} 
                     </ul>
                     <label>Account
                         <br/>
+                        {/* <div className="select"> */}
                         <select defaultValue={defaultAccount} name="account_id" className="transaction-account" onChange={this.handleChange('account_id')} >
                             <option value='' disabled>---Please Select----</option>
                             {accountsDropdown}
                         </select>
+                        {/* </div> */}
                     </label>
                     <br/>
                     <label> Name/Description <div>{this.state.errors.name}</div>
@@ -310,7 +275,7 @@ class InvestmentForm extends React.Component {
                     <div className='button-holder'>
                         <button onClick={this.handleSubmit}>{this.props.formType}</button>
                     </div>
-                </div>
+                </form>
                 </div>
             </section>
         )
