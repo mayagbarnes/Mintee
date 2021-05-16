@@ -244,15 +244,17 @@ class Dash extends React.Component {
                 <section className='dash-rightside'>
                     <div className='dashboard'>
                         <header className='dash-trans-heading'>
-                            <h2>TRANSACTION TRENDS</h2>
-                            <div className='view-button-container'>
+                            <Link to="/transactions">
+                                <h2>TRANSACTIONS</h2>
+                            </Link>
+                            {/* <div className='view-button-container'>
                                 <button className='view-button'>
-                                <Link to="/transactions">
+                                 <Link to="/transactions">
                                     <p className='icon'></p>
                                     <div className='button-text'>View Transactions</div>
                                 </Link>
                                 </button>
-                            </div>
+                            </div> */}
                         </header>
                         <div className='chart-select-container'>
                             <button className={`chart-select-button-${monthClass}`} value="month" onClick={this.handleButtonClick}>

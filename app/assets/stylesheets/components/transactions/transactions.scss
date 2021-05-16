@@ -9,7 +9,7 @@
         margin: 0 auto;
         border-color: $light-gray;
         border-style: solid;
-        border-width: 2px;
+        border-width: 1.5px;
         border-radius: 5px;
         margin-bottom: 5%;
 
@@ -129,7 +129,7 @@
         padding-top: 25px;
         padding-left: 25px;
         padding-right: 25px;
-        margin-top: 4%;
+        margin-top: 3%;
         margin-right: 2%;
         width: 60%;
 
@@ -140,48 +140,70 @@
             font-size: 28px;
         }
 
-        .page-button-holder {
+        .transaction-table-info-container {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
-            margin-left: 2%;
-            margin-bottom: 5px;
+            width: 98%;
+            margin: 0 auto;
 
-            button {
-                margin-left: 2px;
-                padding-left: 8px;
-                padding-right: 8px;
-                padding-top: 5px;
-                padding-bottom: 7px;
-                font-size: 20px;
-                font-weight: 600;
-                color: $dark-blue;
-                border: 1px solid transparent;
+            .transaction-number-holder {
+                font-size: 18px;
+                color: $gray;
+                font-weight: 400;
+                margin-bottom: 7px;
+                p {
+                    padding: 2px
+                }
             }
 
-            button:hover {
-                background-color: $lightest-gray;
-                border: 1px solid $gray;
-            }
+            .page-button-holder {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                margin-left: 2%;
+                margin-bottom: 5px;
 
-            button.selected {
-                color: black;
-            }
+                .standard-button {
+                    font-size: 18px;
+                }
 
-            button.selected:hover{
-                background-color: none;
-                cursor: pointer;
-            }
+                .unavail {
+                    color: $gray;
+                }
 
-            p {
-                font-weight: 500;
-                font-size: 20px;
-                margin-right: 20px;
-                padding-top: 5px;
-                padding-bottom: 7px;
-            }
-           
-        }   
+                .unavail:hover {
+                    color: $gray;
+                    border: 1px solid transparent;
+                    cursor: default;
+                }
+
+                button {
+                    text-align: end;
+                    margin-left: 8px;
+                    padding: 1px;
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 20px;
+                    font-weight: 500;
+                    color: #6cd5eb;
+                    border: 1px solid transparent;
+                }
+
+                button:hover {
+                    border-bottom: 1px solid #6cd5eb;
+                }
+
+                button.selected {
+                    color: black;
+                }
+
+                button.selected:hover{
+                    background-color: none;
+                    cursor: pointer;
+                    border: 1px solid transparent;
+                }
+            } 
+        }  
 
     }
 
@@ -192,7 +214,7 @@
         margin-bottom: 5px;
         border-bottom: $light-gray;
         border-bottom-style: solid;
-        border-bottom-width: 3px;
+        border-bottom-width: 2px;
 
         h2 {
             font-size: 26px;

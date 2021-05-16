@@ -114,15 +114,29 @@ class Transactions extends React.Component {
 
     makePages() {
         let total = Math.ceil(this.props.transactions.length / 12);
-        let pageButtons = [];
+        let pageButtons = [<button key='next' onClick={this.updatePage} className={this.state.page === `${total}` ? 'standard-button unavail' : 'standard-button'} value='+'>NEXT</button>];
         for( let i = total; i > 0; i--) {
             pageButtons.unshift(<button key={i} onClick={this.updatePage} className={this.state.page === `${i}` ? 'selected' : ''} value={i}>{i}</button>) 
         }
-        return pageButtons
+        pageButtons.unshift(<button key='prev' onClick={this.updatePage} className={this.state.page === `1` ? 'standard-button unavail' : 'standard-button'} value='-'>PREV</button>);
+        return pageButtons;
     }
 
     updatePage(e) {
-        this.setState( {page: e.currentTarget.value});
+        let total = '' + Math.ceil(this.props.transactions.length / 12);
+        if(e.currentTarget.value === '-') {
+            if(this.state.page !== '1') {
+                let prev = '' + (Number(this.state.page) - 1)
+                this.setState( {page: prev});
+            }
+        } else if(e.currentTarget.value === '+') {
+            if(this.state.page !== total) {
+                let next = '' + (Number(this.state.page) + 1)
+                this.setState( {page: next});
+            }
+        } else {
+            this.setState( {page: e.currentTarget.value});
+        }
     }
 
     render() {
@@ -165,10 +179,14 @@ class Transactions extends React.Component {
         }
 
         if (transactionItems.length === 0) {
-            transactionItems = <tr className='no-results'><td colSpan='5'>No Transactions To Display</td></tr>
+            transactionItems = <tr className='no-results'>
+                    <td colSpan='5'>No Transactions To Display</td>
+                </tr>
         }
 
-        
+        let last = this.state.page * 12 > this.props.transactions.length ? 
+            this.props.transactions.length : this.state.page * 12
+
         return (
             <div>
                 <section className='main-nav'>
@@ -193,9 +211,13 @@ class Transactions extends React.Component {
                             <input type="text" onChange={this.editSearchTerm} placeholder='Enter Transaction Description or Category'/>
                             </label>
                         </div>
-                        <div className='page-button-holder'>
-                           <p>Pages: </p>
-                           {this.makePages(this.state.page)}
+                        <div className='transaction-table-info-container'>
+                            <div className='transaction-number-holder'>
+                                <p>Showing transactions {(this.state.page * 12) - 11}-{last} of {this.props.transactions.length} </p>
+                            </div>
+                            <div className='page-button-holder'>
+                                {this.makePages(this.state.page)}
+                            </div>
                         </div>
                         <table className={`transaction-table ${loadingClass}`}>
                             <thead>

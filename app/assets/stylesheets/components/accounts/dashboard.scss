@@ -15,7 +15,7 @@
     padding-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
-    margin-top: 4%;
+    margin-top: 3%;
     margin-left: 2%;
     width: 30%;
 
@@ -31,7 +31,7 @@
         justify-content: space-between;
         border-bottom: $light-gray;
         border-bottom-style: solid;
-        border-bottom-width: 3px;
+        border-bottom-width: 2px;
         margin: 20px;
         margin-bottom: 15px;
         padding: 10px;
@@ -108,7 +108,7 @@
     border-radius: 5px;
     background-color: white;
     padding: 25px;
-    margin-top: 4%;
+    margin-top: 3%;
     margin-right: 2%;
     width: 57%;
 
@@ -126,34 +126,39 @@
         margin-bottom: 5px;
         border-bottom: $light-gray;
         border-bottom-style: solid;
-        border-bottom-width: 3px;
+        border-bottom-width: 2px;
+
 
         h2 {
-            font-size: 28px;
+            font-size: 26px;
             margin-bottom: 0px;
             margin-top: 0px;
             margin-left: 0px;
         }
-    }
 
-    .view-button-container {
-        display: flex;
-        align-items: center;
-    
-
-        .view-button {
-            padding: 10px;
-            background-color: $dark-green;
-            border: 1px solid $darkest-green;
-            border-radius: 5px;
-
-            .button-text {
-                font-size: 16px;
-                font-weight: 500;
-                color: white;
-            }
+        a:hover {
+           color: #4fcee8;
         }
     }
+
+    // .view-button-container {
+    //     display: flex;
+    //     align-items: center;
+    
+
+    //     .view-button {
+    //         padding: 10px;
+    //         background-color: $dark-green;
+    //         border: 1px solid $darkest-green;
+    //         border-radius: 5px;
+
+    //         .button-text {
+    //             font-size: 16px;
+    //             font-weight: 500;
+    //             color: white;
+    //         }
+    //     }
+    // }
 
     canvas {
         margin-top: 3%;
@@ -168,14 +173,14 @@
             padding-bottom: 4px;
             margin-top: 20px;
             background-color: $lightest-gray;
-            border-top: 1px solid $darkest-green;
-            border-right: 1px solid $darkest-green;
-            border-left: 1px solid $darkest-green;
+            border-top: 1px solid $light-gray;
+            border-right: 1px solid $light-gray;
+            border-left: 1px solid $light-gray;
             border-top-left-radius: 4px;
             border-top-right-radius: 4px;
             font-size: 18px;
-            font-weight: 500;
-            color: $darkest-green;
+            font-weight: 400;
+            color: black;
         }
 
         .chart-select-button-selected {
@@ -186,14 +191,14 @@
             padding-bottom: 5px;
             margin-top: 20px;
             background-color: white;
-            border-top: 1px solid $darkest-green;
-            border-right: 1px solid $darkest-green;
-            border-left: 1px solid $darkest-green;
+            border-top: 1px solid $light-gray;
+            border-right: 1px solid $light-gray;
+            border-left: 1px solid $light-gray;
             border-top-left-radius: 4px;
             border-top-right-radius: 4px;
             font-size: 18px;
-            font-weight: 600;
-            color: $darkest-green;
+            font-weight: 500;
+            color: black;
         }
 
         .chart-select-button-unselected:hover {
@@ -210,10 +215,7 @@
 
         .current-chart-div-selected {
            background-color: white;
-           border-top: 1px solid $darkest-green;
-           border-bottom: 1px solid $darkest-green;
-           border-right: 1px solid $darkest-green;
-           border-left: 1px solid $darkest-green;
+           border: 1.5px solid $light-gray;
            border-radius: 4px;
            border-top-left-radius: 0px;
            padding: 15px;
