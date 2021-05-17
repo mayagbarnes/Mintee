@@ -2,6 +2,14 @@
 <html>
   <head>
     <title>Mintee</title>
+    <meta property="og:title" content="Mintee" />
+     <meta property='og:image' content="<%= image_url('snapshot.png') %>"/>
+     <meta property="og:description"
+       content="Single-page personal finance application inspired by Mint. Built with Ruby on Rails, React, Redux, JavaScript, & PostgreSQL. Integrates Finnhub API and Chart.js."
+     />
+     <meta property="og:url"
+       content="https://mintee.herokuapp.com/"
+     />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>

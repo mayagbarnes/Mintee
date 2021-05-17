@@ -6,22 +6,22 @@
     .section-1 {
         position: relative;
 
-        .main-video {
-            display: block;
+        // .main-video {
+        //     display: block;
         
             video {
                 min-width: 100%; 
                 min-height: 100%;
-                width: 300px; 
+                width: 600px; 
             }
-        }
+        // }
  
         .main-content {
             position: absolute;
             background-color: transparent;
             z-index: 1;
             width: 30%;
-            margin-left: 6%;
+            margin-left: 5%;
             margin-top: 3.5%;
 
             h2 {
