@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {updateInvestment, fetchInvestment, receiveInvestmentErrors} from '../../actions/investment_actions';
+import {updateInvestment, fetchInvestment, fetchInvestments, receiveInvestmentErrors} from '../../actions/investment_actions';
 import {fetchAccount} from '../../actions/account_actions';
 import InvestmentForm from './investment_form';
 import {fetchStocks} from '../../actions/stock_actions';
@@ -13,7 +13,7 @@ class UpdateInvestmentForm extends React.Component {
   }
 
   render () {
-    const { investment, stocks, accounts, formHeading, formType, errors, action, closeModal, receiveInvestmentErrors, fetchAccount, fetchStocks} = this.props;
+    const { investment, stocks, accounts, formHeading, formType, errors, action, closeModal, receiveInvestmentErrors, fetchAccount, fetchStocks, fetchInvestments} = this.props;
     return (
       <InvestmentForm
         investment={investment}
@@ -27,6 +27,7 @@ class UpdateInvestmentForm extends React.Component {
         receiveInvestmentErrors={receiveInvestmentErrors}
         fetchAccount={fetchAccount}
         fetchStocks={fetchStocks}
+        fetchInvestments={fetchInvestments}
          />
     );
   }
@@ -48,6 +49,7 @@ const mapDispatchToProps = (dispatch) => ({
     receiveInvestmentErrors: (error) => dispatch(receiveInvestmentErrors(error)),
     fetchAccount: (accountId) => dispatch(fetchAccount(accountId)),
     fetchStocks: () => dispatch(fetchStocks()),
+    fetchInvestments: () => dispatch(fetchInvestments()),
     fetchInvestment: (investmentId) => dispatch(fetchInvestment(investmentId))
 });
 

@@ -16,6 +16,7 @@ class InvestmentItem extends React.Component {
     //                 .then(quote => this.addCurrentPrice(quote["pc"]))
     // }
 
+
     buildDateString() {
         let current_date = new Date();
         let month = String(current_date.getMonth() + 1);
@@ -94,15 +95,27 @@ class InvestmentItem extends React.Component {
         let market_value = parseInt(this.props.investment.shares) * parseInt(this.props.investment.prev_close)
             market_value.toFixed(2);
             market_value = formatter.format(market_value)
+        let change = (parseInt(this.props.investment.prev_close) 
+                    - parseInt(this.props.investment.price_paid))
+                    * parseInt(this.props.investment.shares) 
+            change.toFixed(2);
+            change = formatter.format(change)
+        
+        let value = parseFloat(this.props.investment.prev_close);
+        let paid = parseFloat(this.props.investment.price_paid);
 
+        let changeClass = value > paid 
+            ? 'change-green' : value === paid ? 'change-black' : 'change-red';
+        
         return (
             <tr className='investment-info'>
                 <td className='investment-name'>{this.props.investment.inv_name}</td>
-                <td className='investment-ticker'>{this.props.investment.ticker}</td>
+                {/* <td className='investment-ticker'>{this.props.investment.ticker}</td> */}
                 <td className='investment-price'>{price}</td>
-                <td className='investment-cost'>{cost}</td>
                 <td className='investment-shares'>{this.props.investment.shares}</td>
+                <td className='investment-cost'>{cost}</td>
                 <td className='investment-mkt_value'>{market_value}</td>
+                <td className={changeClass}>{change}</td>
                 <td className='investment-change-buttons'>
                     <button className='investment-update' onClick={ () => {this.props.openModal('EditInv', this.props.investment)}}> < GrEdit /> </button>
                     <button className='investment-delete' onClick={ () => {this.props.openModal('RemoveInv', this.props.investment)}}><MdDeleteForever /></button>

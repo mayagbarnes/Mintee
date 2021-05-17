@@ -4,18 +4,19 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 class AccountForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            account: this.props.account,
-            dropdown: false,
-        }
+        this.state = this.props.account
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(type) {
-        return (e) => (this.setState( { account: {[type]: e.currentTarget.value}} ) )
+        return (e) => (
+            this.setState({[type]: e.currentTarget.value}) 
+        )
     }
 
-    handleSubmit() {
+    handleSubmit(e) {
+        e.preventDefault();
+        console.log(this.state)
         this.props.action(this.state)
             .then( () => this.props.closeModal());
     }
@@ -33,7 +34,7 @@ class AccountForm extends React.Component {
 
 
     render() {
-        let defaultVal = this.state.account.category;
+        let defaultVal = this.state.category;
         let menu = false;
 
         return (
@@ -43,16 +44,16 @@ class AccountForm extends React.Component {
                 </section>
                 <div className='account-form'>
                     <h2>{this.props.formHeading}</h2>
-                <form className='account-form-body'>
+                <div className='account-form-body'>
                     {this.renderErrors()}
                     <label> Account Name
-                        <input id='account-name' type="text" value={this.state.account.account_name}
+                        <input id='account-name' type="text" value={this.state.account_name}
                                 onChange={this.handleChange('account_name')}
                                 />
                     </label>
                     <br/>
                     <label> Institution (Bank)
-                        <input id='account-institution' type="text" value={this.state.account.institution}
+                        <input id='account-institution' type="text" value={this.state.institution}
                                 onChange={this.handleChange('institution')}
                                 />
                     </label>
@@ -68,7 +69,7 @@ class AccountForm extends React.Component {
                     </label>
                     <br/>
                     <label> Balance
-                        <input type="number" value={this.state.account.balance}
+                        <input type="number" value={this.state.balance}
                                 onChange={this.handleChange('balance')}
                                 />
                     </label>
@@ -76,7 +77,7 @@ class AccountForm extends React.Component {
                     <div className='button-holder'>
                         <button onClick={this.handleSubmit}>{this.props.formType}</button>
                     </div>
-                </form>
+                </div>
                 </div>
             </section>
         )

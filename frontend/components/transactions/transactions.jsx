@@ -38,7 +38,8 @@ class Transactions extends React.Component {
 
     componentDidMount() {
         this.props.fetchTransactions()
-        .then( () =>  setTimeout(() => {this.setState({loading:false})}, 1000));
+        .then( () =>  this.setState({loading:false}));
+        // .then( () =>  setTimeout(() => {this.setState({loading:false})}, 500));
     }
 
     sortAmount() {
@@ -223,9 +224,7 @@ class Transactions extends React.Component {
                             <thead>
                                 <tr>
                                     <th className={`${this.state.date}`} >
-                                        <button onClick={this.sortDate}> 
-                                        <div className='transaction-svg-holder'> Date {dateSymbol}</div>
-                                        </button>
+                                        <button onClick={this.sortDate}> Date {dateSymbol}</button>
                                     </th>
                                     <th className={`${this.state.description}`} > <button onClick={this.sortDescription}>Description {descriptionSymbol}</button></th>
                                     <th  className={`${this.state.category}`} > <button onClick={this.sortCategory}>Category {categorySymbol}</button></th>

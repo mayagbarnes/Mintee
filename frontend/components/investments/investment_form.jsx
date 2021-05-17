@@ -48,7 +48,6 @@ class InvestmentForm extends React.Component {
     // }
 
     handleClick(e) {
-        console.log(e.currentTarget.value)
         this.setState({ clicked: true, investment: { ticker: e.currentTarget.value}})
     }
 
@@ -115,6 +114,7 @@ class InvestmentForm extends React.Component {
     validateTicker(price) {
         let dateString = this.buildDateString();
         let accountId = this.state.investment.account_id
+
         if(price === 0) {
             this.setState({loading: false, invalid: true })
         } else {
@@ -122,7 +122,7 @@ class InvestmentForm extends React.Component {
                 () => this.props.action(this.state.investment)
                     .then(() => this.props.fetchAccount(accountId))
                     .then( () => this.setState({loading: false }))
-                    .then(this.props.closeModal))
+                    .then( () =>this.props.closeModal() ))
         }
     }
 
@@ -269,9 +269,8 @@ class InvestmentForm extends React.Component {
                                 onChange={this.handleChange('price_paid')}
                                 />
                     </label>
-                    <label className={this.state.loading ? 'loading-label': 'loading-label hidden'}> Fetching Current Price
-                        <div className={this.state.loading ? 'wheel-loader': ''}></div>
-                    </label> 
+                    <div className={this.state.loading ? 'loading-label': 'loading-label hidden'}> Fetching Current Price</div>
+                    <div className={this.state.loading ? 'wheel-loader': ''}></div>
                     <div className='button-holder'>
                         <button onClick={this.handleSubmit}>{this.props.formType}</button>
                     </div>

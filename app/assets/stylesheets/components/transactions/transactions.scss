@@ -30,14 +30,9 @@
             background-color: $green;
         }
 
-        .transaction-svg-holder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            svg {
-                margin-left: 5px;
-            }
+        svg {
+            height: 18px;
+            width: 18px;
         }
 
         td {
@@ -70,6 +65,12 @@
                 padding-right: 10px;
             }
 
+            .change-green {
+                text-align: right;
+                font-weight: 400;
+                color: #0ac775;
+            }
+
             .transaction-change-buttons {
                 display: flex;
                 align-items: center;
@@ -90,7 +91,7 @@
                 }
 
                 .transaction-update {
-                    background-color: $lightest-green;
+                    background-color: $lightest-blue;
                     border: 2px solid black;
                     border-radius: 5px;
 
@@ -107,7 +108,7 @@
                 }
 
                 .transaction-update:hover {
-                    background-color: $green;
+                    background-color: $light-blue;
                 }
 
                 .transaction-delete:hover {
@@ -186,6 +187,7 @@
                     font-size: 20px;
                     font-weight: 500;
                     color: #6cd5eb;
+                    // color: $light-blue;
                     border: 1px solid transparent;
                 }
 
