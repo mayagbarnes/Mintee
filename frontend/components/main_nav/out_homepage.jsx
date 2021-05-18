@@ -52,7 +52,7 @@ class LoggedOutHomePage extends React.Component {
                             </div>
                         </div>
                         {/* autoPlay muted loop  */}
-                        <video id="myVideo">
+                        <video autoPlay muted loop id="myVideo">
                             <source src="https://digitalasset.intuit.com/VIDEO/A5v9SBOck/mint-hero-xl.mp4" type="video/mp4"/>
                         </video>
                     </div>
