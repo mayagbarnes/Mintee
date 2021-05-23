@@ -127,8 +127,7 @@
         box-shadow: 0 0 4px 4px $lightest-blue;
       }
 
-
-.account-change-buttons {
+      .account-change-buttons {
         display: flex;
         align-items: center;
         justify-content: space-around;
@@ -154,7 +153,7 @@
             box-shadow: 0 0 1px 1px $lightest-gray;
             margin: 10px;
         }
-    }
+      }
 
   }
 }

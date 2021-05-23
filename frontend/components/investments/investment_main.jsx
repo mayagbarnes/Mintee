@@ -47,7 +47,6 @@ class Investments extends React.Component {
         })
     }
     
-
     componentWillUnmount() {
         this.setState({mounted:false})
         this.controller.abort();
@@ -257,7 +256,6 @@ class Investments extends React.Component {
         }
 
         let addLoadingClass = this.state.stocksLoading ? 'wheel-loader': '';
-        let addButtonClass = this.state.stocksLoading ? 'hidden': '';
 
         return (
             <div>

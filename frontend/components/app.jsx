@@ -9,13 +9,10 @@ import {
 import { AuthRoute, ProtectedRoute, AdjustedRoute } from '../util/route_utils'; 
 import SignUpContainer from './session/signup_container';
 import LoginContainer from './session/login_container';
-// import DemoContainer from './session/demo_container';
-// import MainNavContainer from './main_nav/main_nav_container';
 import DashContainer from './dashboard/dash_container';
 import TransactionsContainer from './transactions/transactions_container';
 import InvestmentsContainer from './investments/investments_container';
 import Modal from './modal/modal';
-// import HomepageContainer from './main_nav/homepage_container';
 import Homepage from './main_nav/out_homepage';
 
 const App = () => (
