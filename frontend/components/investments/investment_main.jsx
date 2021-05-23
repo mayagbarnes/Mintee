@@ -61,7 +61,6 @@ class Investments extends React.Component {
     }
 
     sortInvName() {
-        // this.setState( {ticker: 'default'});
         this.setState( {price: 'default'});
         this.setState( {price_paid: 'default'});
         this.setState( {shares: 'default'});
@@ -80,33 +79,10 @@ class Investments extends React.Component {
         } 
         
         this.props.investments.sort(func)
-    //    this.setState( {investments: this.state.investments.sort(func)})
     }
-
-    // sortTicker() {
-    //     this.setState( {inv_name: 'default'});
-    //     this.setState( {price: 'default'});
-    //     this.setState( {price_paid: 'default'});
-    //     this.setState( {shares: 'default'});
-    //     this.setState( {market_value: 'default'});
-
-    //     let func = (a,b) => { return a.ticker < b.ticker ? -1 
-    //         : a.ticker > b.ticker ? 1 : 0 }
-       
-    //     if(this.state.ticker === 'default'|| this.state.ticker === 'asc') {
-    //         func = (a,b) => { return a.ticker > b.ticker ? -1 
-    //             : a.ticker < b.ticker ? 1 : 0 }
-    //         this.setState( {ticker: 'desc'});
-    //     } else if (this.state.ticker === 'desc') {
-    //         this.setState( {ticker: 'asc'});
-    //     } 
-        
-    //    this.setState( {investments: this.state.investments.sort(func)})
-    // }
 
     sortPrice() {
         this.setState( {inv_name: 'default'});
-        // this.setState( {ticker: 'default'});
         this.setState( {price_paid: 'default'});
         this.setState( {shares: 'default'});
         this.setState( {market_value: 'default'});
@@ -122,12 +98,10 @@ class Investments extends React.Component {
         } 
 
         this.props.investments.sort(func)
-    //    this.setState( {investments: this.state.investments.sort(func)})
     }
 
     sortPricePaid() {
         this.setState( {inv_name: 'default'});
-        // this.setState( {ticker: 'default'});
         this.setState( {price: 'default'});
         this.setState( {shares: 'default'});
         this.setState( {market_value: 'default'});
@@ -142,12 +116,10 @@ class Investments extends React.Component {
         } 
 
         this.props.investments.sort(func)
-        // this.setState( {investments: this.state.investments.sort(func)})
     }
 
     sortShares() {
         this.setState( {inv_name: 'default'});
-        // this.setState( {ticker: 'default'});
         this.setState( {price: 'default'});
         this.setState( {price_paid: 'default'});
         this.setState( {market_value: 'default'});
@@ -162,12 +134,10 @@ class Investments extends React.Component {
         } 
 
         this.props.investments.sort(func)
-        // this.setState( {investments: this.state.investments.sort(func)})
     }
 
     sortMarketValue() {
         this.setState( {inv_name: 'default'});
-        // this.setState( {ticker: 'default'});
         this.setState( {price: 'default'});
         this.setState( {price_paid: 'default'});
         this.setState( {shares: 'default'});
@@ -182,12 +152,10 @@ class Investments extends React.Component {
         } 
 
         this.props.investments.sort(func)
-        // this.setState( {investments: this.state.investments.sort(func)})
     }
 
     sortChange() {
         this.setState( {inv_name: 'default'});
-        // this.setState( {ticker: 'default'});
         this.setState( {price: 'default'});
         this.setState( {price_paid: 'default'});
         this.setState( {shares: 'default'});
@@ -202,13 +170,11 @@ class Investments extends React.Component {
         } 
 
         this.props.investments.sort(func)
-        // this.setState( {investments: this.state.investments.sort(func)})
     }
 
 
     render() {
         let nameSymbol = this.state.inv_name === 'desc' ? <BiDownArrow/> : this.state.inv_name === 'asc' ? <BiUpArrow/> : '';
-        // let tickerSymbol = this.state.ticker === 'desc' ? <BiDownArrow/> : this.state.ticker === 'asc' ? <BiUpArrow/> : '';
         let priceSymbol = this.state.price === 'desc' ? <BiDownArrow/> : this.state.price === 'asc' ? <BiUpArrow/> : '';
         let costSymbol = this.state.price_paid === 'desc' ? <BiDownArrow/> : this.state.price_paid === 'asc' ? <BiUpArrow/> : '';
         let sharesSymbol = this.state.shares === 'desc' ? <BiDownArrow/> : this.state.shares === 'asc' ? <BiUpArrow/> : '';
@@ -290,7 +256,6 @@ class Investments extends React.Component {
                                         <div className='investment-svg-holder'> Name {nameSymbol}</div>
                                         </button>
                                     </th>
-                                    {/* <th className={`${this.state.ticker}`} > <button onClick={this.sortTicker}>Ticker {tickerSymbol}</button></th> */}
                                     <th className={`${this.state.price}`} > <button onClick={this.sortPrice}>Price {priceSymbol}</button></th>
                                     <th className={`${this.state.shares}`} > <button onClick={this.sortShares}>Shares {sharesSymbol}</button></th>
                                     <th className={`${this.state.price_paid}`} > <button onClick={this.sortPricePaid}>Price Paid {costSymbol}</button></th>

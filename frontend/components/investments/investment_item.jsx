@@ -100,7 +100,6 @@ class InvestmentItem extends React.Component {
         return (
             <tr className='investment-info'>
                 <td className='investment-name'>{this.props.investment.inv_name}</td>
-                {/* <td className='investment-ticker'>{this.props.investment.ticker}</td> */}
                 <td className='investment-price'>{price}</td>
                 <td className='investment-shares'>{this.props.investment.shares}</td>
                 <td className='investment-cost'>{cost}</td>

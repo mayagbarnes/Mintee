@@ -247,14 +247,6 @@ class Dash extends React.Component {
                             <Link to="/transactions">
                                 <h2>TRANSACTIONS</h2>
                             </Link>
-                            {/* <div className='view-button-container'>
-                                <button className='view-button'>
-                                 <Link to="/transactions">
-                                    <p className='icon'></p>
-                                    <div className='button-text'>View Transactions</div>
-                                </Link>
-                                </button>
-                            </div> */}
                         </header>
                         <div className='chart-select-container'>
                             <button className={`chart-select-button-${monthClass}`} value="month" onClick={this.handleButtonClick}>

@@ -232,12 +232,6 @@ class InvestmentForm extends React.Component {
                                     <datalist className={optionSelected} id="companies">
                                         {matches}
                                     </datalist> 
-                                {/* for table implementation
-                                <table className={`${listClass}`}>  
-                                            <tbody>
-                                                {rows}
-                                            </tbody>
-                                        </table> */}
                             <ul>
                                 <li key='error-invalid' className={this.state.invalid ? '': 'hidden'}>Invalid Ticker - Select from dropdown</li> 
                                 <li key='error-empty' className={this.state.empty ? '': 'hidden'}>Ticker Symbol can't be blank</li> 

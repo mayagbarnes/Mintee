@@ -39,7 +39,6 @@ class Transactions extends React.Component {
     componentDidMount() {
         this.props.fetchTransactions()
         .then( () =>  this.setState({loading:false}));
-        // .then( () =>  setTimeout(() => {this.setState({loading:false})}, 500));
     }
 
     sortAmount() {
