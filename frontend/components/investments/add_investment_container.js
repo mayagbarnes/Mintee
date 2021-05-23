@@ -1,7 +1,6 @@
 import {connect} from 'react-redux';
 import {createInvestment, fetchInvestments, receiveInvestmentErrors} from '../../actions/investment_actions';
 import {fetchAccount} from '../../actions/account_actions';
-// import NewInvestmentForm from './new_inv_form';
 import InvestmentForm from './investment_form';
 
 import {closeModal} from '../../actions/account_modal_actions'

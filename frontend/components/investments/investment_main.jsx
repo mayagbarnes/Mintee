@@ -18,7 +18,6 @@ class Investments extends React.Component {
             stocksLoading: true,
             searchTerm: '',
             inv_name: 'default',
-            // ticker: 'default',
             price: 'default',
             price_paid: 'default',
             shares: 'default',
@@ -27,7 +26,6 @@ class Investments extends React.Component {
         };
         
         this.sortInvName = this.sortInvName.bind(this);
-        // this.sortTicker = this.sortTicker.bind(this);
         this.sortPrice = this.sortPrice.bind(this);
         this.sortPricePaid = this.sortPricePaid.bind(this);
         this.sortShares = this.sortShares.bind(this);
@@ -38,7 +36,6 @@ class Investments extends React.Component {
 
     componentDidMount() {
         this.props.fetchInvestments(this.signal)
-        // .then( () => this.setState({tableLoading: false}) )
         .then( () =>  {
             if(this.state.mounted) {
                 this.setState({tableLoading: false})

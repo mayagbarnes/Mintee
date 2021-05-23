@@ -6,11 +6,6 @@ import {FcGoogle} from 'react-icons/fc';
 
 class LoggedOutHomePage extends React.Component {
 
-    // handleDemo() {
-    //     this.props.demo({username: 'DemoLogin', password: '123456'})
-    //     .then( () => this.props.history.push('/transactions'));
-    // }
-
     render() {
         return (
             <section className='logged-out-homepage'>
@@ -66,10 +61,6 @@ class LoggedOutHomePage extends React.Component {
                         <p className='section-2-secondary'>Budget-friendly, totally free</p>
                         </div>
                     </div>
-                    {/* <div className='section-3'>
-                        <div className='rotation-controls'>
-                        </div>
-                    </div> */}
                 </div>
             </section>
         )

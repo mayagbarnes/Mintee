@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
 import Chart from 'chart.js/auto';
 
-// //--Chart Style Options--//
-// // Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif"
-// // Chart.defaults.global.legend.display = false;
-// //--Chart Style Options--//
-
 export default class SpendingTrendChart extends Component {
     constructor(props) {
         super(props);

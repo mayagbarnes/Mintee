@@ -1,6 +1,6 @@
 import React from 'react';
 import { AiOutlineCloseCircle, AiOutlineLoading } from 'react-icons/ai';
-import SearchMatches from './ticker_search';
+// import SearchMatches from './ticker_search';
 
 class NewInvestmentForm extends React.Component {
     constructor(props) {

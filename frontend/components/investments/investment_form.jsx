@@ -1,6 +1,6 @@
 import React from 'react';
 import { AiOutlineCloseCircle, AiOutlineLoading } from 'react-icons/ai';
-import SearchMatches from './ticker_search';
+// import SearchMatches from './ticker_search';
 
 class InvestmentForm extends React.Component {
     constructor(props) {
@@ -25,7 +25,6 @@ class InvestmentForm extends React.Component {
         this.handleSearch = this.handleSearch.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleTicker = this.handleTicker.bind(this);
-        // this.handleCloseOptions = this.handleCloseOptions.bind(this);
     }
 
     handleSearch(e) {
@@ -42,10 +41,6 @@ class InvestmentForm extends React.Component {
     handleTicker(e) {
         if(e.code) { this.setState({ show: true, invalid: false, empty: false, keyPress: e.currentTarget.value})}
     }
-
-    // handleCloseOptions() {
-    //     this.setState({ show: false })
-    // }
 
     handleClick(e) {
         this.setState({ clicked: true, investment: { ticker: e.currentTarget.value}})

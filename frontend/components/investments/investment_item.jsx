@@ -7,16 +7,6 @@ class InvestmentItem extends React.Component {
         super(props);
     }
 
-    // componentDidUpdate() {
-    //         let apikey = window.finnhubAPIKey;
-    //         let ticker = this.props.investment.ticker
-        
-    //             fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
-    //                 .then(response => (response.json()))
-    //                 .then(quote => this.addCurrentPrice(quote["pc"]))
-    // }
-
-
     buildDateString() {
         let current_date = new Date();
         let month = String(current_date.getMonth() + 1);

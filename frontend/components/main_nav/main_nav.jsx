@@ -13,7 +13,6 @@ class MainNav extends React.Component {
           super(props);
           this.handleDemo = this.handleDemo.bind(this);
           this.handleLogout = this.handleLogout.bind(this);
-
     }
 
     handleDemo() {
