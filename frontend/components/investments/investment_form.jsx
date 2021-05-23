@@ -8,18 +8,12 @@ class InvestmentForm extends React.Component {
         this.state = {
             investment: this.props.investment,
             keyPress: '',
-            stocks: this.props.stocks,
+            // stocks: this.props.stocks,
             loading: false,
             clicked: false,
             show: true,
             invalid: false,
             empty: false,
-            errors: {
-                name: '',
-                shares: false,
-                pricePaid: false,
-                account: false,
-            }
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
@@ -202,7 +196,6 @@ class InvestmentForm extends React.Component {
             matches = this.makeMatches(filteredStocks)
         }
        
-        // let tickerClass = this.state.invalid ? '': 'hidden';
         return (
             <section className='investment-form-holder'>
                 <section className='investment-form-close'>
@@ -224,7 +217,7 @@ class InvestmentForm extends React.Component {
                         {/* </div> */}
                     </label>
                     <br/>
-                    <label> Name/Description <div>{this.state.errors.name}</div>
+                    <label> Name/Description
                         <input id='investment-name' type="text" value={this.state.investment.inv_name}
                                 onChange={this.handleChange('inv_name')}/>
                     </label>
