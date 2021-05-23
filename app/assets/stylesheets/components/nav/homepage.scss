@@ -5,16 +5,12 @@
 
     .section-1 {
         position: relative;
-
-        // .main-video {
-        //     display: block;
         
             video {
                 min-width: 100%; 
                 min-height: 100%;
                 width: 600px; 
             }
-        // }
  
         .main-content {
             position: absolute;

@@ -1,11 +1,9 @@
 import {connect} from 'react-redux';
 import {createInvestment, fetchInvestments, receiveInvestmentErrors} from '../../actions/investment_actions';
 import {fetchAccount} from '../../actions/account_actions';
-import InvestmentForm from './investment_form';
-
 import {closeModal} from '../../actions/account_modal_actions'
 import {fetchStocks} from '../../actions/stock_actions';
-
+import InvestmentForm from './investment_form';
 
 const mapStateToProps = (state) => ({
     investment: {
