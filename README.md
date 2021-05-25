@@ -22,8 +22,8 @@ Mintee is hosted on Heroku and incorporates the following technologies:
   * Create, Update, and Delete investments - updates associated account balance
   * Search by name/ticker & Sort by table column (Ascending/Descending)
   <p align="center">
-  <img width="650" alt="Investments" src="https://user-images.githubusercontent.com/63436329/119448089-b4b18e80-bce5-11eb-8e5d-8bb2f7c32c45.gif">
-  </p> -->
+  <img width="650" alt="Investments" src="https://user-images.githubusercontent.com/63436329/119448812-b16ad280-bce6-11eb-9e35-5904ee6a63eb.gif">
+  </p>
 * **Transactions View**
   * Create, Update, and Delete Transactions - updates associated account balance
   * Search by description/category & Sort by table column (Ascending/Descending)
