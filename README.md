@@ -21,11 +21,8 @@ Mintee is hosted on Heroku and incorporates the following technologies:
   * Dynamic ticker suggestions to assist with investment creation
   * Create, Update, and Delete investments - updates associated account balance
   * Search by name/ticker & Sort by table column (Ascending/Descending)
-  <p align="left">
-  <img width="500" alt="Investment Table" src="https://user-images.githubusercontent.com/63436329/119446565-80d56980-bce3-11eb-9be7-d28890a1d893.png">
-  </p>
-    <!-- <p align="right">
-  <img width="250" alt="Investment Addition" src="https://user-images.githubusercontent.com/63436329/119446562-7f0ba600-bce3-11eb-869f-317a14ee01bb.png">
+  <p align="center">
+  <img width="650" alt="Investments" src="https://user-images.githubusercontent.com/63436329/119448089-b4b18e80-bce5-11eb-8e5d-8bb2f7c32c45.gif">
   </p> -->
 * **Transactions View**
   * Create, Update, and Delete Transactions - updates associated account balance
