@@ -1,5 +1,5 @@
 class Transaction < ApplicationRecord
-    validates :description, :category, :amount, :date, :account_id, presence: true
+    validates :account_id, :date, :description, :category, :amount, presence: true
 
     belongs_to :account,
         foreign_key: :account_id,
