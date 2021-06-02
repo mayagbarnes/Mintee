@@ -40,7 +40,6 @@ export const fetchInvestment = (investmentId) => dispatch => (
 );
 
 export const createInvestment = investment => dispatch => {
-    // if(investment.price === 0) return;
     return InvestmentAPIUtil.newInvestment(investment)
     .then(investment => (
         dispatch(receiveInvestment(investment))

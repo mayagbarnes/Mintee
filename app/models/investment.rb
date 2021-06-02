@@ -1,5 +1,6 @@
 class Investment < ApplicationRecord
-    validates :inv_name, :ticker, :shares, :price_paid, :account_id, presence: true
+    validates :account_id, :inv_name, :shares, :price_paid, presence: true
+    validates :prev_close, numericality: {other_than: 0, message: 'Invalid Ticker'}
 
     belongs_to :account,
         foreign_key: :account_id,

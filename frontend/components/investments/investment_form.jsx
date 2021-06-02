@@ -21,7 +21,6 @@ class InvestmentForm extends React.Component {
     }
 
     handleSearch(e) {
-        e.preventDefault();
         this.setState({investment: { ticker: e.currentTarget.value}})
     }
 
@@ -39,14 +38,22 @@ class InvestmentForm extends React.Component {
         this.setState({ clicked: true, investment: { ticker: e.currentTarget.value}})
     }
 
-    handleSubmit() {
+    handleSubmit(e) {
+        e.preventDefault();
+
+        let form = document.getElementById('investment-form-body');
+        let tags = form.getElementsByTagName('strong');
+            for(let i = 0; i < tags.length; i++) {
+                tags[i].textContent = ''
+            }
+
         let apikey = window.finnhubAPIKey;
         let ticker = this.state.investment.ticker
         let marketOpen = this.testTime();
 
-        if(ticker === '') {
-           this.setState({ empty: true})
-        } else {
+        // if(ticker === '') {
+        //    this.setState({ empty: true})
+        // } else {
             if(!marketOpen) {
                 this.setState( {loading: true }, () => { 
                     fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
@@ -60,7 +67,7 @@ class InvestmentForm extends React.Component {
                         .then(quote => this.validateTicker(quote["pc"]))
                     });
             }
-        }
+        // }
     }
 
     testTime() {
@@ -103,15 +110,15 @@ class InvestmentForm extends React.Component {
         let dateString = this.buildDateString();
         let accountId = this.state.investment.account_id
 
-        if(price === 0) {
-            this.setState({loading: false, invalid: true })
-        } else {
+        // if(price === 0) {
+        //     this.setState({loading: false, invalid: true })
+        // } else {
             this.setState({ loading: false, investment: { ...this.state.investment, prev_close: price, last_fetch: dateString} },
                 () => this.props.action(this.state.investment)
                     .then(() => this.props.fetchAccount(accountId))
-                    .then( () => this.setState({loading: false }))
-                    .then( () =>this.props.closeModal() ))
-        }
+                    .then(() =>this.props.closeModal())
+                )
+        // }
     }
 
     submitInvestment() {
@@ -126,6 +133,8 @@ class InvestmentForm extends React.Component {
                 return "Name can't be blank"
             } else if (message === "Account can't be blank") {
                  return "Select account from dropdown"
+            } else if (message === "Prev close Invalid Ticker") {
+                 return "Invalid Ticker - select from search options"
             } else if (message !== 'Account must exist') {
                 return message
             }
@@ -137,6 +146,29 @@ class InvestmentForm extends React.Component {
                     ))
         return errorMessages;
     }
+
+    // Can add new errors, but does not remove old errors
+    // renderErrors(field) {
+    //     let errors = this.props.errors.filter(error => error.includes(field));
+    //     if(errors.length > 0) {
+    //         errors = errors.map( message => {
+    //             if (message === "Account can't be blank") {
+    //                 return "select from dropdown"
+    //             } else if (message !== 'Account must exist') {
+    //                 let num = field.length
+    //                 return message.slice(num)
+    //             }
+    //         })
+
+    //         let errorMessages = 
+    //             <strong className='error-red' key={`error-${field}`}>
+    //                 - {errors[0]}
+    //             </strong>
+    //         return errorMessages;
+    //     } else {
+    //         return '';
+    //     }
+    // }
 
     filterStocks() {
         let betterMatches = [];
@@ -194,34 +226,34 @@ class InvestmentForm extends React.Component {
         } else {
             matches = this.makeMatches(filteredStocks)
         }
-       
+
         return (
             <section className='investment-form-holder'>
                 <section className='investment-form-close'>
-                        <button onClick={this.props.closeModal}> < AiOutlineCloseCircle /> </button>
+                        <button onClick={this.props.closeModal}> <AiOutlineCloseCircle/> </button>
                 </section>
                 <div className='investment-form'>
                     <h2>{this.props.formHeading}</h2>
-                <form className='investment-form-body'>
+                <form className='investment-form-body' id='investment-form-body'>
                     <ul>
                         {this.renderErrors()} 
                     </ul>
-                    <label>Account
-                        <br/>
-                        {/* <div className="select"> */}
+                    <label>Account 
+                        {/* {this.renderErrors('Account')}  */}
                         <select defaultValue={defaultAccount} name="account_id" className="transaction-account" onChange={this.handleChange('account_id')} >
                             <option value='' disabled>---Please Select----</option>
                             {accountsDropdown}
                         </select>
-                        {/* </div> */}
                     </label>
                     <br/>
-                    <label> Name/Description
+                    <label>Name/Description 
+                        {/* {this.renderErrors('Inv name')}  */}
                         <input id='investment-name' type="text" value={this.state.investment.inv_name}
                                 onChange={this.handleChange('inv_name')}/>
                     </label>
                     <br/>
-                    <label> Select Ticker Symbol 
+                    <label>Ticker Symbol 
+                        {/* {this.renderErrors('Prev close')}  */}
                          <input className='investment-ticker'
                                 type="text" 
                                 list='companies'
@@ -232,20 +264,22 @@ class InvestmentForm extends React.Component {
                                     <datalist className={optionSelected} id="companies">
                                         {matches}
                                     </datalist> 
-                            <ul>
+                            {/* <ul>
                                 <li key='error-invalid' className={this.state.invalid ? '': 'hidden'}>Invalid Ticker - Select from dropdown</li> 
                                 <li key='error-empty' className={this.state.empty ? '': 'hidden'}>Ticker Symbol can't be blank</li> 
-                            </ul>
+                            </ul> */}
                             <div className={`no-results ${optionSelected} ${noResult}`}>No Matches Found</div>
                     </label>
                     <br/>
-                    <label id='investment-shares'> Shares
+                    <label id='investment-shares'> Shares 
+                    {/* {this.renderErrors('Shares')}  */}
                         <input placeholder='ex: 20.0' id='investment-shares' type="number" value={this.state.investment.shares}
                                 onChange={this.handleChange('shares')}
                                 />
                     </label>
                     <br/>
-                    <label id='price-paid'> Price Paid
+                    <label id='price-paid'> Price Paid 
+                    {/* {this.renderErrors('Price paid')}  */}
                         <input placeholder='ex: 150.25' id='price-paid' type="number" value={this.state.investment.price_paid}
                                 onChange={this.handleChange('price_paid')}
                                 />

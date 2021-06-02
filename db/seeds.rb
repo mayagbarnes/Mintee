@@ -16,7 +16,7 @@ account_4 = Account.create( { account_name: 'Credit Card', institution: 'Chase',
 account_5 = Account.create( { account_name: 'Individual', institution: 'Charles Schwab', category: 'Investment', balance: 1500.50, user_id: demo_login.id } )
 account_6 = Account.create( { account_name: 'Roth IRA', institution: 'Charles Schwab', category: 'Investment', balance: 7000.30, user_id: demo_login.id } )
 
-# checking account transactions - March, April, May
+# checking account transactions - April, May, June
 
 transaction_21 = Transaction.create( { description: 'Paycheck', category: 'Income', date: "2021-05-15", amount: 2000.50, account_id: account_1.id } )
 transaction_22= Transaction.create( { description: 'Paycheck', category: 'Income', date: "2021-05-30", amount: 2000.50, account_id: account_1.id } )
@@ -64,25 +64,25 @@ transaction_18 = Transaction.create( { description: 'Wendys', category: 'Food an
 transaction_19 = Transaction.create( { description: 'Chipotle', category: 'Food and Dining', date: "2021-04-12", amount: -19.29, account_id: account_1.id } )
 transaction_20 = Transaction.create( { description: 'Philz Coffee', category: 'Food and Dining', date: "2021-04-29", amount: -7.82, account_id: account_1.id } )
 
-transaction_45 = Transaction.create( { description: 'Paycheck', category: 'Income', date: "2021-03-15", amount: 2000.50, account_id: account_1.id } )
-transaction_46 = Transaction.create( { description: 'Paycheck', category: 'Income', date: "2021-03-30", amount: 2000.50, account_id: account_1.id } )
-transaction_47 = Transaction.create( { description: 'Mortgage Payment', category: 'Home', date: "2021-03-02", amount:  -1750.25, account_id: account_1.id } )
-transaction_48 = Transaction.create( { description: 'Cox Internet', category: 'Bills and Utilities', date: "2021-03-05", amount: -70.00 , account_id: account_1.id} )
-transaction_49 = Transaction.create( { description: 'Water Bill', category: 'Bills and Utilities', date: "2021-03-17", amount: -65.39 , account_id: account_1.id} )
-transaction_50 = Transaction.create( { description: 'Energy Bill', category: 'Bills and Utilities', date: "2021-03-09", amount: -95.76 , account_id: account_1.id} )
-transaction_51 = Transaction.create( { description: 'Trash Bill', category: 'Bills and Utilities', date: "2021-03-04", amount: -20.24 , account_id: account_1.id} )
-transaction_52 = Transaction.create( { description: 'Sewer', category: 'Bills and Utilities', date: "2021-03-04", amount: -21.99 , account_id: account_1.id} )
-transaction_53 = Transaction.create( { description: 'Gym Membership', category: 'Health and Fitness', date: "2021-03-20", amount: -85.99, account_id: account_1.id } )
-transaction_54 = Transaction.create( { description: 'Philz Coffee', category: 'Food and Dining', date: "2021-03-06", amount:  -7.50, account_id: account_1.id } )
-transaction_55 = Transaction.create( { description: 'Spotify', category: 'Entertainment', date: "2021-03-01", amount: -9.99, account_id: account_1.id } )
-transaction_56 = Transaction.create( { description: 'Netflix', category: 'Entertainment', date: "2021-03-01", amount: -14, account_id: account_1.id } )
-transaction_57 = Transaction.create( { description: 'Hair Cut', category: 'Personal Care', date: "2021-03-26", amount: -80.47, account_id: account_1.id } )
-transaction_58 = Transaction.create( { description: 'Amazon', category: 'Shopping', date: "2021-03-23", amount: -20.56, account_id: account_1.id } )
-transaction_60 = Transaction.create( { description: 'Capriottis', category: 'Food and Dining', date: "2021-03-06", amount: -40.12, account_id: account_1.id } )
-transaction_61 = Transaction.create( { description: 'North Italia', category: 'Food and Dining', date: "2021-03-24", amount: -65.42, account_id: account_1.id } )
-transaction_62 = Transaction.create( { description: 'Wendys', category: 'Food and Dining', date: "2021-03-18", amount: -16.84, account_id: account_1.id } )
-transaction_63 = Transaction.create( { description: 'Chipotle', category: 'Food and Dining', date: "2021-03-12", amount: -19.29, account_id: account_1.id } )
-transaction_64 = Transaction.create( { description: 'Philz Coffee', category: 'Food and Dining', date: "2021-03-29", amount: -7.82, account_id: account_1.id } )
+transaction_45 = Transaction.create( { description: 'Paycheck', category: 'Income', date: "2021-06-15", amount: 2000.50, account_id: account_1.id } )
+transaction_46 = Transaction.create( { description: 'Paycheck', category: 'Income', date: "2021-06-30", amount: 2000.50, account_id: account_1.id } )
+transaction_47 = Transaction.create( { description: 'Mortgage Payment', category: 'Home', date: "2021-06-02", amount:  -1750.25, account_id: account_1.id } )
+transaction_48 = Transaction.create( { description: 'Cox Internet', category: 'Bills and Utilities', date: "2021-06-05", amount: -70.00 , account_id: account_1.id} )
+transaction_49 = Transaction.create( { description: 'Water Bill', category: 'Bills and Utilities', date: "2021-06-17", amount: -65.39 , account_id: account_1.id} )
+transaction_50 = Transaction.create( { description: 'Energy Bill', category: 'Bills and Utilities', date: "2021-06-09", amount: -95.76 , account_id: account_1.id} )
+transaction_51 = Transaction.create( { description: 'Trash Bill', category: 'Bills and Utilities', date: "2021-06-04", amount: -20.24 , account_id: account_1.id} )
+transaction_52 = Transaction.create( { description: 'Sewer', category: 'Bills and Utilities', date: "2021-06-04", amount: -21.99 , account_id: account_1.id} )
+transaction_53 = Transaction.create( { description: 'Gym Membership', category: 'Health and Fitness', date: "2021-06-20", amount: -85.99, account_id: account_1.id } )
+transaction_54 = Transaction.create( { description: 'Philz Coffee', category: 'Food and Dining', date: "2021-06-06", amount:  -7.50, account_id: account_1.id } )
+transaction_55 = Transaction.create( { description: 'Spotify', category: 'Entertainment', date: "2021-06-01", amount: -9.99, account_id: account_1.id } )
+transaction_56 = Transaction.create( { description: 'Netflix', category: 'Entertainment', date: "2021-06-01", amount: -14, account_id: account_1.id } )
+transaction_57 = Transaction.create( { description: 'Hair Cut', category: 'Personal Care', date: "2021-06-26", amount: -80.47, account_id: account_1.id } )
+transaction_58 = Transaction.create( { description: 'Amazon', category: 'Shopping', date: "2021-06-23", amount: -20.56, account_id: account_1.id } )
+transaction_60 = Transaction.create( { description: 'Capriottis', category: 'Food and Dining', date: "2021-06-06", amount: -40.12, account_id: account_1.id } )
+transaction_61 = Transaction.create( { description: 'North Italia', category: 'Food and Dining', date: "2021-06-24", amount: -65.42, account_id: account_1.id } )
+transaction_62 = Transaction.create( { description: 'Wendys', category: 'Food and Dining', date: "2021-06-18", amount: -16.84, account_id: account_1.id } )
+transaction_63 = Transaction.create( { description: 'Chipotle', category: 'Food and Dining', date: "2021-06-12", amount: -19.29, account_id: account_1.id } )
+transaction_64 = Transaction.create( { description: 'Philz Coffee', category: 'Food and Dining', date: "2021-06-29", amount: -7.82, account_id: account_1.id } )
 
 # individual brokerage investments
 

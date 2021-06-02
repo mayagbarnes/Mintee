@@ -12,7 +12,8 @@ class TransactionForm extends React.Component {
         return (e) => (this.setState( {[type]: e.currentTarget.value} ) )
     }
 
-    handleSubmit() {
+    handleSubmit(e) {
+        e.preventDefault();
         let accountId = this.state.account_id
         this.props.action(this.state)
             .then(() => this.props.fetchAccount(accountId))

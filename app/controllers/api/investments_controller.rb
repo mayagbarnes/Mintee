@@ -19,6 +19,7 @@ class Api::InvestmentsController < ApplicationController
             render "api/investments/show"
         else
             render json: @investment.errors.full_messages, status: 422
+            # render json: @investment.errors.messages, status: 422
         end
     end
 

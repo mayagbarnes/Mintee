@@ -147,6 +147,7 @@
             align-items: center;
             width: 98%;
             margin: 0 auto;
+            margin-top: 2%;
 
             .transaction-number-holder {
                 font-size: 18px;
@@ -166,7 +167,7 @@
                 margin-bottom: 5px;
 
                 .standard-button {
-                    font-size: 18px;
+                    font-size: 16px;
                 }
 
                 .unavail {
@@ -184,10 +185,9 @@
                     margin-left: 8px;
                     padding: 1px;
                     font-family: Arial, Helvetica, sans-serif;
-                    font-size: 20px;
+                    font-size: 18px;
                     font-weight: 500;
                     color: #6cd5eb;
-                    // color: $light-blue;
                     border: 1px solid transparent;
                 }
 
