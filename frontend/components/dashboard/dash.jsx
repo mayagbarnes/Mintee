@@ -199,6 +199,13 @@ class Dash extends React.Component {
             quarterClass = 'selected';
         }
 
+        let investmentCharts;
+        if(this.props.investments) {
+            investmentCharts = this.props.investments.map( inv => {
+                 <InvestmentChart ticker={inv.ticker}/>
+            })
+        }
+
         return (
             <div>
                 <section className='main-nav'>
@@ -289,7 +296,7 @@ class Dash extends React.Component {
                             </button>  */}
                         </div>
                         <div className={`current-chart-div-${monthClass}`}>
-                            <InvestmentChart fetchInvestments={this.props.fetchInvestments} investments={this.props.investments}/>
+                           {investmentCharts}
                         </div>
                         {/* <div className={`current-chart-div-${quarterClass}`}>
                             <SpendingTrendChart fetchTransactions={this.props.fetchTransactions} transactions={this.props.transactions}/>
