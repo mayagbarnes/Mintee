@@ -17,11 +17,10 @@ class Dash extends React.Component {
         super(props);
         this.state = {
             chart: 'month',
-            invChart: '',
+            invChart: ''
         }
-        this.handleButtonClick = this.handleButtonClick.bind(this)
+        this.handleTransactionClick = this.handleTransactionClick.bind(this)
         this.handleInvestmentClick = this.handleInvestmentClick.bind(this)
-
     }
 
     componentDidMount() {
@@ -31,18 +30,18 @@ class Dash extends React.Component {
             .then( () => this.props.fetchAccounts())
     }
 
-    // Method to handle which transaction chart to render
-    handleButtonClick(e) {
+    // handle which transaction chart to render
+    handleTransactionClick(e) {
         e.preventDefault();
         this.setState({chart: e.currentTarget.value})
     }
 
-     // Method to handle which investment chart to render
+     // handle which investment chart to render
     handleInvestmentClick(e) {
         e.preventDefault();
         this.setState({invChart: e.currentTarget.value})
     }
-    
+
     // calculate the total spent that month 
     totalSpend(month){
         let total = 0;
@@ -187,13 +186,13 @@ class Dash extends React.Component {
                 if(this.state.invChart === inv.ticker) {
                     return (
                         <div key={inv.id} className='current-chart-div-selected'>
-                            <InvestmentChart key={inv.id} investment={inv}/>
+                            <InvestmentChart key={inv.id} investment={inv} timePeriod={this.state.timePeriod}/>
                         </div>
                     )
                 } else {
                     return (
                         <div key={inv.id} className='current-chart-div-unselected'>
-                            <InvestmentChart key={inv.id} investment={inv}/>
+                            <InvestmentChart key={inv.id} investment={inv} timePeriod={this.state.timePeriod}/>
                         </div>
                     )
                 }
@@ -316,10 +315,10 @@ class Dash extends React.Component {
                             </div>
                         </header>
                         <div className='chart-select-container'>
-                            <button className={`chart-select-button-${monthClass}`} value="month" onClick={this.handleButtonClick}>
+                            <button className={`chart-select-button-${monthClass}`} value="month" onClick={this.handleTransactionClick}>
                                 Current Month
                             </button>
-                            <button className={`chart-select-button-${quarterClass} spending-tab`} value="quarter" onClick={this.handleButtonClick}>
+                            <button className={`chart-select-button-${quarterClass} spending-tab`} value="quarter" onClick={this.handleTransactionClick}>
                                 Spending Trend
                             </button>
                         </div>

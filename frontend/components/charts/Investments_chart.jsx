@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Chart from 'chart.js/auto';
 
-// Buttons - add single chart display mechanism
 // buttons - add time period chart display mechanism
 
 export default class InvestmentChart extends Component {
@@ -9,9 +8,11 @@ export default class InvestmentChart extends Component {
         super(props);
         this.state = {
             loading: true,
-            investment: this.props.investment
+            investment: this.props.investment,
+            timePeriod: 'year'
         }
         this.chartRef = React.createRef();
+        this.handleTimePeriodClick = this.handleTimePeriodClick.bind(this)
     }
 
    componentDidMount() {
@@ -22,21 +23,36 @@ export default class InvestmentChart extends Component {
         this.setState({loading:false})
    }
 
+   // handle which investment chart to render
+    handleTimePeriodClick(e) {
+        e.preventDefault();
+        this.setState({timePeriod: e.currentTarget.value})
+    }
+
     getData() {
         let ticker = this.state.investment.ticker;
         let apikey = window.finnhubAPIKey;
         let current = (Date.now() / 1000);
-        let yearAgo = current - Number(31556926);
+        let startTime;
+        switch(this.state.timePeriod) {
+            case 'year':
+                startTime = current - Number(31556926);
+                break;
+            case '6 month':
+                startTime = current - Number(15778463);
+                break;
+            case 'quarter':
+                startTime = current - Number(7889231);
+                break;
+        }
         current = current.toFixed(0)
-        yearAgo = yearAgo.toFixed(0)
+        startTime = startTime.toFixed(0)
 
-        fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${ticker}&resolution=D&from=${yearAgo}&to=${current}&token=${apikey}`)
+        fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${ticker}&resolution=D&from=${startTime}&to=${current}&token=${apikey}`)
             .then(response => response.json())
             .then(data => {
                 this.buildChart(data["c"], data["t"])
             });
-       
-        // labels variable is the date at each point between two times
     }
 
     convertTimestamps(timestamps){
@@ -57,22 +73,16 @@ export default class InvestmentChart extends Component {
         const myChartRef = this.chartRef.current.getContext("2d");
         Chart.defaults.font.size = 18;
 
-        new Chart(myChartRef, {
+        let myLineChart = new Chart(myChartRef, {
             type: 'line',
             data: {
                 labels: labels,
                 datasets: [{
                     label: `${this.state.investment.inv_name} (${this.state.investment.ticker})`,
                     data: datapoints,
-                    // backgroundColor: [ 
-                    //     'rgba(7, 163, 98, 0.6)', 
-                    //     'rgba(232, 9, 20, 0.6)'
-                    // ],
                     borderColor: [
                         'rgb(6, 122, 74)', 
-                        // 'rgb(179, 5, 14)'
                     ],
-                    // borderWidth: 3
                 }]
             },
             options: {
@@ -124,6 +134,18 @@ export default class InvestmentChart extends Component {
 
         return (
             <div className='spending-trend-container'>
+                <h3>Time Periods:</h3>
+                    <div className='view-button-container'>
+                        <button className='view-button' value="quarter" onClick={this.handleTimePeriodClick}>
+                        3 Months
+                        </button>
+                        <button className='view-button' value="6 month" onClick={this.handleTimePeriodClick}>
+                        6 Months
+                        </button>
+                        <button className='view-button' value="year" onClick={this.handleTimePeriodClick}>
+                        12 Months
+                        </button>
+                    </div>
                 <h2>Trailing Year Stock Price</h2>
                 <canvas id="myChart" ref={this.chartRef}> 
                 </canvas>
@@ -165,3 +187,10 @@ export default class InvestmentChart extends Component {
         // console.log(values)
         // console.log(labels)
         
+        // let yearAgo = current - Number(31556926);
+        // let sixMonthsAgo = current - Number(15778463);
+        // let threeMonthsAgo = current - Number(7889231);
+        // current = current.toFixed(0)
+        // yearAgo = yearAgo.toFixed(0)
+        // sixMonthsAgo = sixMonthsAgo.toFixed(0)
+        // threeMonthsAgo = threeMonthsAgo.toFixed(0)
