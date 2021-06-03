@@ -102,6 +102,19 @@
 }
 
 .dash-rightside {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4%;
+    margin-right: 2%;
+    width: 60%;
+}
+
+.dashboard:last-of-type {
+    margin-top: 2%;
+    margin-bottom: 6%;
+}
+
+.dashboard {
     border-color: $light-gray;
     border-style: solid;
     border-width: 1px;
@@ -135,9 +148,60 @@
             margin-top: 0px;
             margin-left: 0px;
         }
+    }
 
-        a:hover {
-           color: #4fcee8;
+    .time-period-button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h3 {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .time-period-button-selected {
+            padding: 6px 10px 6px 10px;
+            font-size: 14px;
+            font-weight: 500;
+            background-color: white;
+            border: 1px solid $darkest-green;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+
+        .time-period-button-unselected {
+            padding: 6px 10px 6px 10px;
+            font-size: 14px;
+            font-weight: 400;
+            background-color: $lightest-gray;
+            border: 1px solid $darkest-green;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+
+        .time-period-button-unselected:hover {
+            box-shadow: 0 0 2px 2px $light-gray;
+        }
+    }
+
+    .view-button-container {
+        display: flex;
+        align-items: center;
+    
+
+        .view-button {
+            padding: 10px;
+            background-color: $dark-green;
+            border: 1px solid $darkest-green;
+            border-radius: 5px;
+
+            .button-text {
+                font-size: 16px;
+                font-weight: 500;
+                color: white;
+            }
         }
     }
 
@@ -149,9 +213,7 @@
         .chart-select-button-unselected {
             position: relative;
             top: 1px;
-            padding: 15px;
-            padding-top: 6px;
-            padding-bottom: 4px;
+            padding: 6px 15px 4px 15px;
             margin-top: 20px;
             background-color: $lightest-gray;
             border-top: 1px solid $light-gray;
@@ -211,6 +273,7 @@
 
     .loader-container {
         position: relative;
+        min-height: 200px;
     }
 
     .hidden {
@@ -253,6 +316,7 @@
     .loader:after {
         left: 1.5em;
     }
+
     @-webkit-keyframes load1 {
         0%,
         80%,
@@ -265,6 +329,7 @@
             height: 2em;
         }
     }
+
     @keyframes load1 {
         0%,
         80%,
@@ -277,6 +342,4 @@
             height: 2em;
         }
     }
-
-
 }
