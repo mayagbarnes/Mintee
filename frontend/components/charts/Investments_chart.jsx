@@ -148,7 +148,7 @@ export default class InvestmentChart extends Component {
                         12 Months
                         </button>
                     </div> */}
-                <h2>Trailing Year Stock Price</h2>
+                <h2>Stock Price - Last 12 Months</h2>
                 <canvas id="myChart" ref={this.chartRef}> 
                 </canvas>
                 {display}
