@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import Chart from 'chart.js/auto';
 
-// //--Chart Style Options--//
-// Chart.defaults.global.defaultFontFamily = "'Raleway', helvetica, serif;"
-// // Chart.defaults.global.legend.display = false;
-// //--Chart Style Options--//
 
 export default class CurrentMonthChart extends Component {
     constructor(props) {

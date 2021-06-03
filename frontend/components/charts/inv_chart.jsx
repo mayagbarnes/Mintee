@@ -1,34 +1,20 @@
 import React, { Component } from 'react'
 import Chart from 'chart.js/auto';
 
-// stop jarring page display with chart change?
-// buttons - add ability to adjust time period chart displays
-
 export default class InvestmentChart extends Component {
     constructor(props) {
         super(props);
         this.state = {
             loading: true,
             investment: this.props.investment,
-            timePeriod: 'year'
+            timePeriod: this.props.timePeriod
         }
         this.chartRef = React.createRef();
-        this.handleTimePeriodClick = this.handleTimePeriodClick.bind(this)
     }
 
    componentDidMount() {
-        this.getData()
+    this.getData();
    }
-
-//    componentDidUpdate() {
-//         this.getData()
-//    }
-
-   // handle which investment chart to render
-    handleTimePeriodClick(e) {
-        e.preventDefault();
-        this.setState({timePeriod: e.currentTarget.value})
-    }
 
     getData() {
         let ticker = this.state.investment.ticker;
@@ -52,7 +38,7 @@ export default class InvestmentChart extends Component {
         fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${ticker}&resolution=D&from=${startTime}&to=${current}&token=${apikey}`)
             .then(response => response.json())
             .then(data => { this.buildChart(data["c"], data["t"]) })
-            .then( () => this.setState({loading:false}));
+            .then( () => this.setState({loading: false}));
     }
 
     convertTimestamps(timestamps){
@@ -73,6 +59,7 @@ export default class InvestmentChart extends Component {
         const myChartRef = this.chartRef.current.getContext("2d");
         Chart.defaults.font.size = 17;
 
+        
         let myLineChart = new Chart(myChartRef, {
             type: 'line',
             data: {
@@ -118,7 +105,7 @@ export default class InvestmentChart extends Component {
                                 return '$' + value;
                             },
                         },
-                    }
+                    },
                 }
             }
         });
@@ -133,21 +120,18 @@ export default class InvestmentChart extends Component {
             display = <div className='hidden'></div>
         }
 
+        let chartTitle;
+        if(this.state.timePeriod === 'year'){
+            chartTitle = 'Stock Price - Last 12 Months'
+        } else if (this.state.timePeriod === '6 month') {
+            chartTitle = 'Stock Price - Last 6 Months'
+        } else {
+            chartTitle = 'Stock Price - Last 3 Months'
+        }
+
         return (
             <div className='spending-trend-container'>
-                {/* <h3>Time Periods:</h3>
-                    <div className='view-button-container'>
-                        <button className='view-button' value="quarter" onClick={this.handleTimePeriodClick}>
-                        3 Months
-                        </button>
-                        <button className='view-button' value="6 month" onClick={this.handleTimePeriodClick}>
-                        6 Months
-                        </button>
-                        <button className='view-button' value="year" onClick={this.handleTimePeriodClick}>
-                        12 Months
-                        </button>
-                    </div> */}
-                <h2>Stock Price - Last 12 Months</h2>
+                <h2>{chartTitle}</h2>
                 <canvas id="myChart" ref={this.chartRef}> 
                 </canvas>
                 {display}
@@ -155,43 +139,3 @@ export default class InvestmentChart extends Component {
         )
     }
 }
-
-
- // let promiseArray = this.props.investments.map((inv) => {
-        //     return new Promise((resolve) => {
-        //         resolve(fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${inv.ticker}&resolution=D&from=${yearAgo}&to=${current}&token=${apikey}`)
-        //         .then(response => response.json())
-        //         .then(quote => quote["c"]));
-        //     })
-        // });
-        
-        // const fetching = async() => { 
-        //     const values = [];
-        //     const labels = [];
-            
-        //     this.props.investments.forEach( async(inv) => {
-        //         const data = await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${inv.ticker}&resolution=D&from=${yearAgo}&to=${current}&token=${apikey}`)
-        //         const response = await data.json();
-
-        //         const quotes = response["c"];
-        //         const labelVals = response["t"];
-
-        //         console.log(quotes)
-
-        //         values.push(quotes)
-        //         labels.push(labelVals)
-        //     });
-        //     return true;
-        // }
-
-        // await fetching();
-        // console.log(values)
-        // console.log(labels)
-        
-        // let yearAgo = current - Number(31556926);
-        // let sixMonthsAgo = current - Number(15778463);
-        // let threeMonthsAgo = current - Number(7889231);
-        // current = current.toFixed(0)
-        // yearAgo = yearAgo.toFixed(0)
-        // sixMonthsAgo = sixMonthsAgo.toFixed(0)
-        // threeMonthsAgo = threeMonthsAgo.toFixed(0)

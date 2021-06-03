@@ -8,7 +8,7 @@ import {GoCreditCard} from 'react-icons/go'
 import {BiLineChart} from 'react-icons/bi'
 import CurrentMonthChart from "../charts/month_chart";
 import SpendingTrendChart from "../charts/spending_chart";
-import InvestmentChart from "../charts/Investments_chart";
+import InvestmentChart from "../charts/inv_chart";
 
 import { Link } from 'react-router-dom';
 
@@ -17,10 +17,12 @@ class Dash extends React.Component {
         super(props);
         this.state = {
             chart: 'month',
-            invChart: ''
+            invChart: '',
+            timePeriod: 'year',
         }
         this.handleTransactionClick = this.handleTransactionClick.bind(this)
         this.handleInvestmentClick = this.handleInvestmentClick.bind(this)
+        this.handleTimePeriodClick = this.handleTimePeriodClick.bind(this)
     }
 
     componentDidMount() {
@@ -40,6 +42,12 @@ class Dash extends React.Component {
     handleInvestmentClick(e) {
         e.preventDefault();
         this.setState({invChart: e.currentTarget.value})
+    }
+
+    // handle which time period to render
+    handleTimePeriodClick(e) {
+        e.preventDefault();
+        this.setState({timePeriod: e.currentTarget.value})
     }
 
     // calculate the total spent that month 
@@ -156,6 +164,8 @@ class Dash extends React.Component {
         .then(() => this.props.fetchAccount(accountId));
     }
 
+    //for Investment Chart
+
     makeButtons() {
         return this.props.investments.map( inv => {
                 if(this.state.invChart === inv.ticker) {
@@ -181,22 +191,43 @@ class Dash extends React.Component {
         
     }
 
-    makeInvCharts() {
-        return this.props.investments.map( inv => {
-                if(this.state.invChart === inv.ticker) {
-                    return (
-                        <div key={inv.id} className='current-chart-div-selected'>
-                            <InvestmentChart key={inv.id} investment={inv} timePeriod={this.state.timePeriod}/>
+    makeInvChart() {
+        let yearClass = this.state.timePeriod === 'year' ? 'selected' : 'unselected';
+        let halfYearClass = this.state.timePeriod === '6 month' ? 'selected' : 'unselected';
+        let quarterClass = this.state.timePeriod === 'quarter' ? 'selected' : 'unselected';
+
+        let charts = []; 
+        let timePeriods = <div className='time-period-button-container'>
+                                <h3 className='time-period-header'>Change Time Period:</h3>
+                                <button className={`time-period-button-${quarterClass}`} value="quarter" onClick={this.handleTimePeriodClick}>
+                                3 Months
+                                </button>
+                                <button className={`time-period-button-${halfYearClass}`} value="6 month" onClick={this.handleTimePeriodClick}>
+                                6 Months
+                                </button>
+                                <button className={`time-period-button-${yearClass}`} value="year" onClick={this.handleTimePeriodClick}>
+                                12 Months
+                                </button>
+                            </div>
+        this.props.investments.forEach( inv => {
+            if(this.state.invChart === inv.ticker) {
+                    charts.push(
+                        <div key={`${inv.id}-1`} className={`current-chart-div-${yearClass}`}>
+                            <InvestmentChart key={`${inv.id}-1`} investment={inv} timePeriod='year'/>
+                            {timePeriods}
+                        </div>,
+                        <div key={`${inv.id}-2`} className={`current-chart-div-${halfYearClass}`}>
+                            <InvestmentChart key={`${inv.id}-2`} investment={inv} timePeriod='6 month'/>
+                            {timePeriods}
+                        </div>,
+                         <div key={`${inv.id}-3`} className={`current-chart-div-${quarterClass}`}>
+                            <InvestmentChart key={`${inv.id}-3`} investment={inv} timePeriod='quarter'/>
+                            {timePeriods}
                         </div>
                     )
-                } else {
-                    return (
-                        <div key={inv.id} className='current-chart-div-unselected'>
-                            <InvestmentChart key={inv.id} investment={inv} timePeriod={this.state.timePeriod}/>
-                        </div>
-                    )
-                }
+            } 
         })
+        return charts;
     }
 
     render() {
@@ -253,13 +284,13 @@ class Dash extends React.Component {
             quarterClass = 'selected';
         }
 
-        let investmentCharts;
         let investmentButtons;
+        let investmentCharts;
         if(this.props.investments.length > 0) {
-            investmentCharts = this.makeInvCharts();
             investmentButtons = this.makeButtons();
+            investmentCharts = this.makeInvChart();
         }
-
+        
         return (
             <div>
                 <section className='main-nav'>
@@ -344,7 +375,7 @@ class Dash extends React.Component {
                         <div className='chart-select-container'>
                             {investmentButtons}
                         </div>
-                        {investmentCharts}
+                            {investmentCharts}
                     </div>
                 </section>
                 </section> 
