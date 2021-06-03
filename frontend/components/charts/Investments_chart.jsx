@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Chart from 'chart.js/auto';
 
-// buttons - add time period chart display mechanism
+// stop jarring page display with chart change?
+// buttons - add ability to adjust time period chart displays
 
 export default class InvestmentChart extends Component {
     constructor(props) {
@@ -17,7 +18,6 @@ export default class InvestmentChart extends Component {
 
    componentDidMount() {
         this.getData()
-        this.setState({loading:false})
    }
 
 //    componentDidUpdate() {
@@ -51,9 +51,8 @@ export default class InvestmentChart extends Component {
 
         fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${ticker}&resolution=D&from=${startTime}&to=${current}&token=${apikey}`)
             .then(response => response.json())
-            .then(data => {
-                this.buildChart(data["c"], data["t"])
-            });
+            .then(data => { this.buildChart(data["c"], data["t"]) })
+            .then( () => this.setState({loading:false}));
     }
 
     convertTimestamps(timestamps){
