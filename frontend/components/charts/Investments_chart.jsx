@@ -16,12 +16,13 @@ export default class InvestmentChart extends Component {
     }
 
    componentDidMount() {
-        // this.props.fetchInvestments()
-        // .then( () =>  this.buildChart())
-        // .then( () => this.setState({loading:false}))
         this.getData()
         this.setState({loading:false})
    }
+
+//    componentDidUpdate() {
+//         this.getData()
+//    }
 
    // handle which investment chart to render
     handleTimePeriodClick(e) {
@@ -71,7 +72,7 @@ export default class InvestmentChart extends Component {
         let labels = this.convertTimestamps(timestamps)
 
         const myChartRef = this.chartRef.current.getContext("2d");
-        Chart.defaults.font.size = 18;
+        Chart.defaults.font.size = 17;
 
         let myLineChart = new Chart(myChartRef, {
             type: 'line',
@@ -122,6 +123,7 @@ export default class InvestmentChart extends Component {
                 }
             }
         });
+
     }
 
     render() {
@@ -134,7 +136,7 @@ export default class InvestmentChart extends Component {
 
         return (
             <div className='spending-trend-container'>
-                <h3>Time Periods:</h3>
+                {/* <h3>Time Periods:</h3>
                     <div className='view-button-container'>
                         <button className='view-button' value="quarter" onClick={this.handleTimePeriodClick}>
                         3 Months
@@ -145,7 +147,7 @@ export default class InvestmentChart extends Component {
                         <button className='view-button' value="year" onClick={this.handleTimePeriodClick}>
                         12 Months
                         </button>
-                    </div>
+                    </div> */}
                 <h2>Trailing Year Stock Price</h2>
                 <canvas id="myChart" ref={this.chartRef}> 
                 </canvas>
