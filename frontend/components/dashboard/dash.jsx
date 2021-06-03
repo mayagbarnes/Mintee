@@ -15,20 +15,32 @@ import { Link } from 'react-router-dom';
 class Dash extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {chart: 'month'}
+        this.state = {
+            chart: 'month',
+            invChart: '',
+        }
         this.handleButtonClick = this.handleButtonClick.bind(this)
+        this.handleInvestmentClick = this.handleInvestmentClick.bind(this)
+
     }
 
     componentDidMount() {
         this.props.fetchInvestments()
+            .then( () => this.setState( {invChart: this.props.investments[0].ticker}))
             .then( () => this.updateInvestments())
             .then( () => this.props.fetchAccounts())
     }
 
-    // Method to handle which chart to render
+    // Method to handle which transaction chart to render
     handleButtonClick(e) {
         e.preventDefault();
-        this.setState({chart: e.target.value})
+        this.setState({chart: e.currentTarget.value})
+    }
+
+     // Method to handle which investment chart to render
+    handleInvestmentClick(e) {
+        e.preventDefault();
+        this.setState({invChart: e.currentTarget.value})
     }
     
     // calculate the total spent that month 
@@ -145,6 +157,49 @@ class Dash extends React.Component {
         .then(() => this.props.fetchAccount(accountId));
     }
 
+    makeButtons() {
+        return this.props.investments.map( inv => {
+                if(this.state.invChart === inv.ticker) {
+                    return (
+                        <button className='chart-select-button-selected' 
+                                value={`${inv.ticker}`} 
+                                key={inv.id}
+                                onClick={this.handleInvestmentClick}>
+                            {inv.ticker}
+                        </button>
+                    )
+                } else {
+                    return (
+                         <button className='chart-select-button-unselected' 
+                                value={`${inv.ticker}`} 
+                                key={inv.id}
+                                onClick={this.handleInvestmentClick}>
+                            {inv.ticker}
+                        </button>
+                    )
+                }
+        })
+        
+    }
+
+    makeInvCharts() {
+        return this.props.investments.map( inv => {
+                if(this.state.invChart === inv.ticker) {
+                    return (
+                        <div key={inv.id} className='current-chart-div-selected'>
+                            <InvestmentChart key={inv.id} investment={inv}/>
+                        </div>
+                    )
+                } else {
+                    return (
+                        <div key={inv.id} className='current-chart-div-unselected'>
+                            <InvestmentChart key={inv.id} investment={inv}/>
+                        </div>
+                    )
+                }
+        })
+    }
+
     render() {
         let none = <li className='account-item'  key='account-none'>
                         <div>
@@ -185,7 +240,7 @@ class Dash extends React.Component {
             }
         })
 
-        if(cashAccounts.length === 0) { cashAccounts = none}
+        if(cashAccounts.length === 0) {cashAccounts = none}
         if(loanAccounts.length === 0) {loanAccounts = none}
         if(investmentAccounts.length === 0) {investmentAccounts = none}
 
@@ -200,10 +255,10 @@ class Dash extends React.Component {
         }
 
         let investmentCharts;
+        let investmentButtons;
         if(this.props.investments.length > 0) {
-            investmentCharts = this.props.investments.map( inv => {
-                return <InvestmentChart key={inv.id} investment={inv}/>
-            })
+            investmentCharts = this.makeInvCharts();
+            investmentButtons = this.makeButtons();
         }
 
         return (
@@ -288,19 +343,9 @@ class Dash extends React.Component {
                             </div>
                         </header>
                         <div className='chart-select-container'>
-                            <button className={`chart-select-button-${monthClass}`} value="month" onClick={this.handleButtonClick}>
-                                Your Portfolio
-                            </button>
-                             {/* <button className={`chart-select-button-${quarterClass} spending-tab`} value="quarter" onClick={this.handleButtonClick}>
-                                Spending Trend
-                            </button>  */}
+                            {investmentButtons}
                         </div>
-                         <div className={`current-chart-div-${monthClass}`}>
                         {investmentCharts}
-                        </div>
-                        {/* <div className={`current-chart-div-${quarterClass}`}>
-                            <SpendingTrendChart fetchTransactions={this.props.fetchTransactions} transactions={this.props.transactions}/>
-                        </div> */}
                     </div>
                 </section>
                 </section> 

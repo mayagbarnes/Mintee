@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import Chart from 'chart.js/auto';
 
-
-// Option 1: Pass each ticker to build ind chart
-// Option 2: Promise.all to resolve each of the data fetches in one chart
+// Buttons - add single chart display mechanism
+// buttons - add time period chart display mechanism
 
 export default class InvestmentChart extends Component {
     constructor(props) {
         super(props);
         this.state = {
             loading: true,
-            // data: [],
             investment: this.props.investment
         }
         this.chartRef = React.createRef();
@@ -64,7 +62,7 @@ export default class InvestmentChart extends Component {
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Price',
+                    label: `${this.state.investment.inv_name} (${this.state.investment.ticker})`,
                     data: datapoints,
                     // backgroundColor: [ 
                     //     'rgba(7, 163, 98, 0.6)', 
@@ -127,7 +125,6 @@ export default class InvestmentChart extends Component {
         return (
             <div className='spending-trend-container'>
                 <h2>Trailing Year Stock Price</h2>
-                <h3>{this.state.investment.inv_name} ({this.state.investment.ticker})</h3>
                 <canvas id="myChart" ref={this.chartRef}> 
                 </canvas>
                 {display}
