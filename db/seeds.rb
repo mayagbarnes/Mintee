@@ -13,8 +13,8 @@ account_1 = Account.create( { account_name: 'Checking', institution: 'Citi', cat
 account_2 = Account.create( { account_name: 'Savings', institution: 'Bank of America', category: 'Cash', balance: 4000.50, user_id: demo_login.id } )
 account_3 = Account.create( { account_name: 'Mortgage', institution: 'Wells Fargo', category: 'Loan', balance: -100000.25, user_id: demo_login.id } )
 account_4 = Account.create( { account_name: 'Credit Card', institution: 'Chase', category: 'Loan', balance: -100.50, user_id: demo_login.id } )
-account_5 = Account.create( { account_name: 'Individual', institution: 'Charles Schwab', category: 'Investment', balance: 1500.50, user_id: demo_login.id } )
-account_6 = Account.create( { account_name: 'Roth IRA', institution: 'Charles Schwab', category: 'Investment', balance: 7000.30, user_id: demo_login.id } )
+account_5 = Account.create( { account_name: 'Individual', institution: 'Charles Schwab', category: 'Investment', balance: 0, user_id: demo_login.id } )
+account_6 = Account.create( { account_name: 'Roth IRA', institution: 'Charles Schwab', category: 'Investment', balance: 0, user_id: demo_login.id } )
 
 # checking account transactions - April, May, June
 
