@@ -8,7 +8,7 @@ import {GoCreditCard} from 'react-icons/go'
 import {BiLineChart} from 'react-icons/bi'
 import CurrentMonthChart from "../charts/month_chart";
 import SpendingTrendChart from "../charts/spending_chart";
-import InvestmentChart from "../charts/investments_chart";
+import InvestmentChart from "../charts/Investments_chart";
 
 import { Link } from 'react-router-dom';
 
@@ -200,9 +200,9 @@ class Dash extends React.Component {
         }
 
         let investmentCharts;
-        if(this.props.investments) {
+        if(this.props.investments.length > 0) {
             investmentCharts = this.props.investments.map( inv => {
-                 <InvestmentChart ticker={inv.ticker}/>
+                return <InvestmentChart key={inv.id} investment={inv}/>
             })
         }
 
@@ -295,8 +295,8 @@ class Dash extends React.Component {
                                 Spending Trend
                             </button>  */}
                         </div>
-                        <div className={`current-chart-div-${monthClass}`}>
-                           {investmentCharts}
+                         <div className={`current-chart-div-${monthClass}`}>
+                        {investmentCharts}
                         </div>
                         {/* <div className={`current-chart-div-${quarterClass}`}>
                             <SpendingTrendChart fetchTransactions={this.props.fetchTransactions} transactions={this.props.transactions}/>

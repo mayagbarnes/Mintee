@@ -11,7 +11,7 @@ export default class InvestmentChart extends Component {
         this.state = {
             loading: true,
             // data: [],
-            ticker: this.props.ticker
+            investment: this.props.investment
         }
         this.chartRef = React.createRef();
     }
@@ -20,12 +20,12 @@ export default class InvestmentChart extends Component {
         // this.props.fetchInvestments()
         // .then( () =>  this.buildChart())
         // .then( () => this.setState({loading:false}))
-        this.buildChart()
+        this.getData()
         this.setState({loading:false})
    }
 
     getData() {
-        let ticker = this.state.ticker;
+        let ticker = this.state.investment.ticker;
         let apikey = window.finnhubAPIKey;
         let current = (Date.now() / 1000);
         let yearAgo = current - Number(31556926);
@@ -41,7 +41,20 @@ export default class InvestmentChart extends Component {
         // labels variable is the date at each point between two times
     }
 
-    buildChart(datapoints, labels) {
+    convertTimestamps(timestamps){
+        let labelsArray = timestamps.map( UNIX => {
+            let newDate = new Date(UNIX * 1000);
+            let year = newDate.getFullYear().toString().slice(2);
+            let month = newDate.getMonth() + 1;
+            let date = newDate.getDate();
+            let label = month + '/' + date + '/' + year
+            return label
+        })
+        return labelsArray;
+    }
+
+    buildChart(datapoints, timestamps) {
+        let labels = this.convertTimestamps(timestamps)
 
         const myChartRef = this.chartRef.current.getContext("2d");
         Chart.defaults.font.size = 18;
@@ -114,6 +127,7 @@ export default class InvestmentChart extends Component {
         return (
             <div className='spending-trend-container'>
                 <h2>Trailing Year Stock Price</h2>
+                <h3>{this.state.investment.inv_name} ({this.state.investment.ticker})</h3>
                 <canvas id="myChart" ref={this.chartRef}> 
                 </canvas>
                 {display}
