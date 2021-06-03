@@ -77,8 +77,8 @@ export default class InvestmentChart extends Component {
                     legend: {
                         labels: {
                             font: {
-                                size: 20
-                            }
+                                size: 20,
+                            },
                         }
                     },
                     tooltip: {

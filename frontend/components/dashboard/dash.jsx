@@ -198,7 +198,7 @@ class Dash extends React.Component {
 
         let charts = []; 
         let timePeriods = <div className='time-period-button-container'>
-                                <h3 className='time-period-header'>Change Time Period:</h3>
+                                <h3 className='time-period-header'>Time Period:</h3>
                                 <button className={`time-period-button-${quarterClass}`} value="quarter" onClick={this.handleTimePeriodClick}>
                                 3 Months
                                 </button>
