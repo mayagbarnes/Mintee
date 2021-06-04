@@ -10,13 +10,10 @@ class InvestmentForm extends React.Component {
             // stocks: this.props.stocks,
             loading: false,
             clicked: false,
-            show: true,
-            invalid: false,
-            empty: false,
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        // this.handleClick = this.handleClick.bind(this);
         this.handleTicker = this.handleTicker.bind(this);
     }
 
@@ -31,12 +28,12 @@ class InvestmentForm extends React.Component {
     }
 
     handleTicker(e) {
-        if(e.code) { this.setState({ show: true, invalid: false, empty: false, keyPress: e.currentTarget.value})}
+        if(e.code) { this.setState({ show: true, keyPress: e.currentTarget.value})}
     }
 
-    handleClick(e) {
-        this.setState({ clicked: true, investment: { ticker: e.currentTarget.value}})
-    }
+    // handleClick(e) {
+    //     this.setState({ clicked: true, investment: { ticker: e.currentTarget.value}})
+    // }
 
     handleSubmit(e) {
         e.preventDefault();
@@ -51,9 +48,6 @@ class InvestmentForm extends React.Component {
         let ticker = this.state.investment.ticker
         let marketOpen = this.testTime();
 
-        // if(ticker === '') {
-        //    this.setState({ empty: true})
-        // } else {
             if(!marketOpen) {
                 this.setState( {loading: true }, () => { 
                     fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${apikey}`)
@@ -67,7 +61,6 @@ class InvestmentForm extends React.Component {
                         .then(quote => this.validateTicker(quote["pc"]))
                     });
             }
-        // }
     }
 
     testTime() {
@@ -108,17 +101,12 @@ class InvestmentForm extends React.Component {
 
     validateTicker(price) {
         let dateString = this.buildDateString();
-        let accountId = this.state.investment.account_id
 
-        // if(price === 0) {
-        //     this.setState({loading: false, invalid: true })
-        // } else {
             this.setState({ loading: false, investment: { ...this.state.investment, prev_close: price, last_fetch: dateString} },
                 () => this.props.action(this.state.investment)
-                    .then(() => this.props.fetchAccount(accountId))
+                    .then(() => this.props.fetchAccounts())
                     .then(() =>this.props.closeModal())
                 )
-        // }
     }
 
     submitInvestment() {
@@ -195,7 +183,8 @@ class InvestmentForm extends React.Component {
                 return word[0].toUpperCase() + word.slice(1).toLowerCase()
             }).join(' ');
             return (
-                    <option onClick={this.handleClick} className='option' key={`${stock.ticker}`} value={`${stock.ticker}`}>{company}</option>
+                    <option className='option' key={`${stock.ticker}`} value={`${stock.ticker}`}>{company}</option>
+                    // <option onClick={this.handleClick} className='option' key={`${stock.ticker}`} value={`${stock.ticker}`}>{company}</option>
             )
         })
         return matches;
@@ -264,10 +253,6 @@ class InvestmentForm extends React.Component {
                                     <datalist className={optionSelected} id="companies">
                                         {matches}
                                     </datalist> 
-                            {/* <ul>
-                                <li key='error-invalid' className={this.state.invalid ? '': 'hidden'}>Invalid Ticker - Select from dropdown</li> 
-                                <li key='error-empty' className={this.state.empty ? '': 'hidden'}>Ticker Symbol can't be blank</li> 
-                            </ul> */}
                             <div className={`no-results ${optionSelected} ${noResult}`}>No Matches Found</div>
                     </label>
                     <br/>

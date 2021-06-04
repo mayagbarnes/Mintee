@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {createInvestment, fetchInvestments, receiveInvestmentErrors} from '../../actions/investment_actions';
-import {fetchAccount} from '../../actions/account_actions';
+import {fetchAccounts} from '../../actions/account_actions';
 import {closeModal} from '../../actions/account_modal_actions'
 import {fetchStocks} from '../../actions/stock_actions';
 import InvestmentForm from './investment_form';
@@ -25,7 +25,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     action: (investment) => dispatch(createInvestment(investment)),
     receiveInvestmentErrors: (error) => dispatch(receiveInvestmentErrors(error)),
-    fetchAccount: (accountId) => dispatch(fetchAccount(accountId)),
+    fetchAccounts: () => dispatch(fetchAccounts()),
     fetchStocks: () => dispatch(fetchStocks()),
     fetchInvestments: () => dispatch(fetchInvestments()),
     closeModal: () => dispatch(closeModal())

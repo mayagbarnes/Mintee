@@ -25,14 +25,20 @@ class Api::InvestmentsController < ApplicationController
 
     def update
         @investment = current_user.investments.find_by(id: params[:id])
+        old_account = current_user.accounts.find_by(id: @investment.account)
+        new_account = current_user.accounts.find_by(id: params[:investment][:account_id])
         old_amount = (@investment.shares * @investment.prev_close)
-        new_amount =  (params[:investment][:shares].to_f * params[:investment][:prev_close].to_f)
+        new_amount = (params[:investment][:shares].to_f * params[:investment][:prev_close].to_f)
         if @investment.update(investment_params)
-            if old_amount != new_amount
-                 # Adjusting Account Balance:
-                @account = current_user.accounts.find_by(id: @investment.account)
-                @account.balance = @account.balance - old_amount + new_amount
-                @account.save
+            #  Adjust account balances:
+            if new_account != old_account 
+                old_account.balance = old_account.balance - old_amount
+                old_account.save
+                new_account.balance = new_account.balance + new_amount
+                new_account.save
+            else 
+                old_account.balance = old_account.balance - old_amount + new_amount
+                old_account.save
             end
             render "api/investments/show"
         else

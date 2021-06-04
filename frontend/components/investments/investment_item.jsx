@@ -66,8 +66,7 @@ class InvestmentItem extends React.Component {
 
     addCurrentPrice(price) {
         let today = this.buildDateString();
-        let total = parseInt(this.props.investment.shares) * price;
-        let investment = {...this.props.investment, prev_close: price, last_fetch: today, market_value: total};
+        let investment = {...this.props.investment, prev_close: price, last_fetch: today};
         this.props.updateInvestment(investment);
     }
 
@@ -82,12 +81,12 @@ class InvestmentItem extends React.Component {
         let price = parseFloat(this.props.investment.prev_close);
             price.toFixed(2);
             price = formatter.format(price)
-        let market_value = parseInt(this.props.investment.shares) * parseInt(this.props.investment.prev_close)
+        let market_value = parseFloat(this.props.investment.shares) * parseFloat(this.props.investment.prev_close)
             market_value.toFixed(2);
             market_value = formatter.format(market_value)
-        let change = (parseInt(this.props.investment.prev_close) 
-                    - parseInt(this.props.investment.price_paid))
-                    * parseInt(this.props.investment.shares) 
+        let change = (parseFloat(this.props.investment.prev_close) 
+                    - parseFloat(this.props.investment.price_paid))
+                    * parseFloat(this.props.investment.shares) 
             change.toFixed(2);
             change = formatter.format(change)
         
