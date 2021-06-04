@@ -9,8 +9,8 @@ Stock.delete_all
 
 
 demo_login = User.create( {username: 'DemoLogin', password: '123456'})
-account_1 = Account.create( { account_name: 'Checking', institution: 'Citi', category: 'Cash', balance: 1000.77, user_id: demo_login.id} )
-account_2 = Account.create( { account_name: 'Savings', institution: 'Bank of America', category: 'Cash', balance: 4000.50, user_id: demo_login.id } )
+account_1 = Account.create( { account_name: 'Checking', institution: 'Citi', category: 'Cash', balance: 5500.77, user_id: demo_login.id} )
+account_2 = Account.create( { account_name: 'Savings', institution: 'Bank of America', category: 'Cash', balance: 27250.50, user_id: demo_login.id } )
 account_3 = Account.create( { account_name: 'Mortgage', institution: 'Wells Fargo', category: 'Loan', balance: -100000.25, user_id: demo_login.id } )
 account_4 = Account.create( { account_name: 'Credit Card', institution: 'Chase', category: 'Loan', balance: -100.50, user_id: demo_login.id } )
 account_5 = Account.create( { account_name: 'Individual', institution: 'Charles Schwab', category: 'Investment', balance: 0, user_id: demo_login.id } )
@@ -86,16 +86,16 @@ transaction_64 = Transaction.create( { description: 'Philz Coffee', category: 'F
 
 # individual brokerage investments
 
-investment_1 = Investment.create( { inv_name: 'Apple', ticker: 'AAPL', shares: 20.00, prev_close: 0.01, price_paid: 100.00, account_id: account_5.id, last_fetch: "2021-05-01" } )
-investment_2 = Investment.create( { inv_name: 'Microsoft', ticker: 'MSFT', shares: 10.00, prev_close: 0.01, price_paid: 200.00, account_id: account_5.id, last_fetch: "2021-05-01"} )
-investment_3 = Investment.create( { inv_name: 'Google', ticker: 'GOOGL', shares: 1.00, prev_close: 0.01, price_paid: 2000.00, account_id: account_5.id, last_fetch: "2021-05-01"} )
-investment_4 = Investment.create( { inv_name: 'Zendesk', ticker: 'ZEN', shares: 25.00, prev_close: 0.01, price_paid: 95.00, account_id: account_5.id, last_fetch: "2021-05-01"} )
+investment_1 = Investment.create( { inv_name: 'Apple', ticker: 'AAPL', shares: 40.5, prev_close: 0.01, price_paid: 100.00, account_id: account_5.id, last_fetch: "2021-05-01" } )
+investment_2 = Investment.create( { inv_name: 'Microsoft', ticker: 'MSFT', shares: 20.35, prev_close: 0.01, price_paid: 200.00, account_id: account_5.id, last_fetch: "2021-05-01"} )
+investment_3 = Investment.create( { inv_name: 'Google', ticker: 'GOOGL', shares: 2.15, prev_close: 0.01, price_paid: 2000.00, account_id: account_5.id, last_fetch: "2021-05-01"} )
+investment_4 = Investment.create( { inv_name: 'Zendesk', ticker: 'ZEN', shares: 38.00, prev_close: 0.01, price_paid: 95.00, account_id: account_5.id, last_fetch: "2021-05-01"} )
 
 # Roth investments
 
-investment_5 = Investment.create( { inv_name: 'Russell 3000 ETF', ticker: 'VTHR', shares: 47.00, prev_close: 0.01, price_paid: 225.00, account_id: account_6.id, last_fetch: "2021-05-01" } )
-investment_6 = Investment.create( { inv_name: 'MSCI ACWI ETF', ticker: 'ACWI', shares: 40.00, prev_close: 0.01, price_paid: 88.00, account_id: account_6.id, last_fetch: "2021-05-01"} )
-investment_7 = Investment.create( { inv_name: 'Total Bond ETF', ticker: 'BND', shares: 75.00, prev_close: 0.01, price_paid: 80.00, account_id: account_6.id, last_fetch: "2021-05-01"} )
+investment_5 = Investment.create( { inv_name: 'Russell 3000 ETF', ticker: 'VTHR', shares: 144.00, prev_close: 0.01, price_paid: 225.00, account_id: account_6.id, last_fetch: "2021-05-01" } )
+investment_6 = Investment.create( { inv_name: 'MSCI ACWI ETF', ticker: 'ACWI', shares: 70.00, prev_close: 0.01, price_paid: 88.00, account_id: account_6.id, last_fetch: "2021-05-01"} )
+investment_7 = Investment.create( { inv_name: 'Total Bond ETF', ticker: 'BND', shares: 176.50, prev_close: 0.01, price_paid: 80.00, account_id: account_6.id, last_fetch: "2021-05-01"} )
 
 
 # Fetch U.S. traded stocks, ETPS, and REITS
