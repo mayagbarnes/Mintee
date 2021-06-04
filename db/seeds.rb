@@ -93,7 +93,7 @@ investment_4 = Investment.create( { inv_name: 'Zendesk', ticker: 'ZEN', shares: 
 
 # Roth investments
 
-investment_5 = Investment.create( { inv_name: 'Russell 3000 ETF', ticker: 'VTHR', shares: 144.00, prev_close: 0.01, price_paid: 225.00, account_id: account_6.id, last_fetch: "2021-05-01" } )
+investment_5 = Investment.create( { inv_name: 'Russell 3000 ETF', ticker: 'VTHR', shares: 144.00, prev_close: 0.01, price_paid: 135.00, account_id: account_6.id, last_fetch: "2021-05-01" } )
 investment_6 = Investment.create( { inv_name: 'MSCI ACWI ETF', ticker: 'ACWI', shares: 70.00, prev_close: 0.01, price_paid: 88.00, account_id: account_6.id, last_fetch: "2021-05-01"} )
 investment_7 = Investment.create( { inv_name: 'Total Bond ETF', ticker: 'BND', shares: 176.50, prev_close: 0.01, price_paid: 80.00, account_id: account_6.id, last_fetch: "2021-05-01"} )
 

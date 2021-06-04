@@ -115,21 +115,17 @@ class Transactions extends React.Component {
     makePages() {
         let total = this.state.searchTerm === '' ? Math.ceil(this.props.transactions.length / 12) : Math.ceil(this.props.filtered.length / 12);
         let pageButtons = [];
-        if(total <= 1) {
-            pageButtons.push(<button key='next' className='standard-button unavail' value='+'>NEXT</button>);
-            pageButtons.unshift(<button key='prev' className='standard-button unavail' value='-'>PREV</button>);
-        } else {
-            pageButtons.push(<button key='next' onClick={this.updatePage} className={this.state.page === `${total}` ? 'standard-button unavail' : 'standard-button'} value='+'>NEXT</button>);
-            for( let i = total; i > 0; i--) {
-                pageButtons.unshift(<button key={i} onClick={this.updatePage} className={this.state.page === `${i}` ? 'selected' : ''} value={i}>{i}</button>) 
-            }
-            pageButtons.unshift(<button key='prev' onClick={this.updatePage} className={this.state.page === `1` ? 'standard-button unavail' : 'standard-button'} value='-'>PREV</button>);
+        pageButtons.push(<button key='next' onClick={this.updatePage} className={this.state.page === `${total}` ? 'standard-button unavail' : 'standard-button'} value='+'>NEXT</button>);
+        for( let i = total; i > 0; i--) {
+            pageButtons.unshift(<button key={i} onClick={this.updatePage} className={this.state.page === `${i}` ? 'selected' : ''} value={i}>{i}</button>) 
         }
+        pageButtons.unshift(<button key='prev' onClick={this.updatePage} className={this.state.page === `1` ? 'standard-button unavail' : 'standard-button'} value='-'>PREV</button>);
+        
         return pageButtons;
     }
 
     updatePage(e) {
-        let total = '' + Math.ceil(this.props.transactions.length / 12);
+        let total = this.state.searchTerm === '' ? '' + Math.ceil(this.props.transactions.length / 12) : '' + Math.ceil(this.props.filtered.length / 12);
         if(e.currentTarget.value === '-') {
             if(this.state.page !== '1') {
                 let prev = '' + (Number(this.state.page) - 1)
