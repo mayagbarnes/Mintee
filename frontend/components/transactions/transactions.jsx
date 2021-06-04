@@ -25,7 +25,6 @@ class Transactions extends React.Component {
         this.sortDate = this.sortDate.bind(this);
         this.editSearchTerm = this.editSearchTerm.bind(this);
         this.updatePage = this.updatePage.bind(this);
-
     }
 
     editSearchTerm(e) {
@@ -33,7 +32,8 @@ class Transactions extends React.Component {
     }
 
     dynamicSearch() {
-        this.props.fetchFilteredTransactions(this.state.searchTerm)
+        this.setState( {page: '1'}, 
+        () => this.props.fetchFilteredTransactions(this.state.searchTerm));
     }
 
     componentDidMount() {
@@ -113,12 +113,18 @@ class Transactions extends React.Component {
     }
 
     makePages() {
-        let total = Math.ceil(this.props.transactions.length / 12);
-        let pageButtons = [<button key='next' onClick={this.updatePage} className={this.state.page === `${total}` ? 'standard-button unavail' : 'standard-button'} value='+'>NEXT</button>];
-        for( let i = total; i > 0; i--) {
-            pageButtons.unshift(<button key={i} onClick={this.updatePage} className={this.state.page === `${i}` ? 'selected' : ''} value={i}>{i}</button>) 
+        let total = this.state.searchTerm === '' ? Math.ceil(this.props.transactions.length / 12) : Math.ceil(this.props.filtered.length / 12);
+        let pageButtons = [];
+        if(total <= 1) {
+            pageButtons.push(<button key='next' className='standard-button unavail' value='+'>NEXT</button>);
+            pageButtons.unshift(<button key='prev' className='standard-button unavail' value='-'>PREV</button>);
+        } else {
+            pageButtons.push(<button key='next' onClick={this.updatePage} className={this.state.page === `${total}` ? 'standard-button unavail' : 'standard-button'} value='+'>NEXT</button>);
+            for( let i = total; i > 0; i--) {
+                pageButtons.unshift(<button key={i} onClick={this.updatePage} className={this.state.page === `${i}` ? 'selected' : ''} value={i}>{i}</button>) 
+            }
+            pageButtons.unshift(<button key='prev' onClick={this.updatePage} className={this.state.page === `1` ? 'standard-button unavail' : 'standard-button'} value='-'>PREV</button>);
         }
-        pageButtons.unshift(<button key='prev' onClick={this.updatePage} className={this.state.page === `1` ? 'standard-button unavail' : 'standard-button'} value='-'>PREV</button>);
         return pageButtons;
     }
 
@@ -146,6 +152,7 @@ class Transactions extends React.Component {
         let descriptionSymbol = this.state.description === 'desc' ? <BiDownArrow/> : this.state.description === 'asc' ? <BiUpArrow/> : '';
 
         let transactionItems = []
+        let totalTransactions;
         let loadingClass = this.state.loading ? 'loading': '';
         if(this.state.loading) {
             transactionItems = 
@@ -165,6 +172,7 @@ class Transactions extends React.Component {
                                             openModal={this.props.openModal}/>
                                     }
                                 })
+                totalTransactions = this.props.transactions.length
             } else {
                 transactionItems = this.props.filtered.map( (transaction, idx) => {
                                     let first = (this.state.page * 12) - 12
@@ -175,17 +183,19 @@ class Transactions extends React.Component {
                                         openModal={this.props.openModal}/>
                                 }
                                 })
+                totalTransactions = this.props.filtered.length
             }
         }
+
+        let last = this.state.page * 12 > totalTransactions ? 
+                        totalTransactions : this.state.page * 12
+        let first = totalTransactions === 0 ? 0 : (this.state.page * 12) - 11;
 
         if (transactionItems.length === 0) {
             transactionItems = <tr className='no-results'>
                     <td colSpan='5'>No Transactions To Display</td>
                 </tr>
         }
-
-        let last = this.state.page * 12 > this.props.transactions.length ? 
-            this.props.transactions.length : this.state.page * 12
 
         return (
             <div>
@@ -213,10 +223,10 @@ class Transactions extends React.Component {
                         </div>
                         <div className='transaction-table-info-container'>
                             <div className='transaction-number-holder'>
-                                <p>Showing transactions {(this.state.page * 12) - 11}-{last} of {this.props.transactions.length} </p>
+                                <p>Showing transactions {first}-{last} of {totalTransactions} </p>
                             </div>
                             <div className='page-button-holder'>
-                                {this.makePages(this.state.page)}
+                                {this.makePages()}
                             </div>
                         </div>
                         <table className={`transaction-table ${loadingClass}`}>

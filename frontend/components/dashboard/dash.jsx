@@ -99,7 +99,7 @@ class Dash extends React.Component {
                 <section className='dashboard-leftside'>
                     <header className='dashboard-heading'>
                         <h2>ACCOUNTS</h2>
-                        <button className='dashboard-right' onClick={ () => {props.openModal('Create')}}>
+                        <button className='dashboard-right' onClick={ () => {this.props.openModal('Create')}}>
                             <p>Add</p>
                             <BsPlusCircle />
                         </button>
