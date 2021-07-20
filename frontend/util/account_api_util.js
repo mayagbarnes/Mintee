@@ -7,7 +7,7 @@ export const showAccount = (accountId) => (
 );
 
 export const indexAccounts = (signal) => (
-     fetch('/api/accounts', {
+    fetch('/api/accounts', {
         method: 'GET',
         signal: signal
     })

@@ -12,14 +12,13 @@ class Api::InvestmentsController < ApplicationController
     def create
         @investment = Investment.new(investment_params)
         if @investment.save
-             # Update to Account Balance:
+             # Update Account Balance:
             @account = current_user.accounts.find_by(id: @investment.account)
             @account.balance = @account.balance + (@investment.shares * @investment.prev_close)
             @account.save
             render "api/investments/show"
         else
             render json: @investment.errors.full_messages, status: 422
-            # render json: @investment.errors.messages, status: 422
         end
     end
 
@@ -30,7 +29,7 @@ class Api::InvestmentsController < ApplicationController
         old_amount = (@investment.shares * @investment.prev_close)
         new_amount = (params[:investment][:shares].to_f * params[:investment][:prev_close].to_f)
         if @investment.update(investment_params)
-            #  Adjust account balances:
+            #  Adjust account balance(s):
             if new_account != old_account 
                 old_account.balance = old_account.balance - old_amount
                 old_account.save
