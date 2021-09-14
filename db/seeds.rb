@@ -100,39 +100,39 @@ investment_7 = Investment.create( { inv_name: 'Total Bond ETF', ticker: 'BND', s
 
 # Fetch U.S. traded stocks, ETPS, and REITS
 
-fetch_stocks = URI("https://finnhub.io/api/v1/stock/symbol?exchange=US&securityType=Common%20Stock&token=#{Rails.application.credentials.finnhub[:api_key]}")
-all_stocks = Net::HTTP.get_response(fetch_stocks).body
-all_stocks = JSON.parse(all_stocks)
+# fetch_stocks = URI("https://finnhub.io/api/v1/stock/symbol?exchange=US&securityType=Common%20Stock&token=#{Rails.application.credentials.finnhub[:api_key]}")
+# all_stocks = Net::HTTP.get_response(fetch_stocks).body
+# all_stocks = JSON.parse(all_stocks)
 
-all_stocks.each do |stock|
-  Stock.create(
-    { name: stock["description"],
-      ticker: stock["symbol"]
-    }
-  )
-end
+# all_stocks.each do |stock|
+#   Stock.create(
+#     { name: stock["description"],
+#       ticker: stock["symbol"]
+#     }
+#   )
+# end
 
-fetch_etps = URI("https://finnhub.io/api/v1/stock/symbol?exchange=US&securityType=ETP&token=#{Rails.application.credentials.finnhub[:api_key]}")
-all_etps = Net::HTTP.get_response(fetch_etps).body
-all_etps = JSON.parse(all_etps) 
+# fetch_etps = URI("https://finnhub.io/api/v1/stock/symbol?exchange=US&securityType=ETP&token=#{Rails.application.credentials.finnhub[:api_key]}")
+# all_etps = Net::HTTP.get_response(fetch_etps).body
+# all_etps = JSON.parse(all_etps) 
 
-all_etps.each do |stock|
-  Stock.create(
-    name: stock["description"],
-    ticker: stock["symbol"],
-  )
-end
+# all_etps.each do |stock|
+#   Stock.create(
+#     name: stock["description"],
+#     ticker: stock["symbol"],
+#   )
+# end
 
-fetch_reits = URI("https://finnhub.io/api/v1/stock/symbol?exchange=US&securityType=REIT&token=#{Rails.application.credentials.finnhub[:api_key]}")
-all_reits = Net::HTTP.get_response(fetch_reits).body
-all_reits = JSON.parse(all_reits) 
+# fetch_reits = URI("https://finnhub.io/api/v1/stock/symbol?exchange=US&securityType=REIT&token=#{Rails.application.credentials.finnhub[:api_key]}")
+# all_reits = Net::HTTP.get_response(fetch_reits).body
+# all_reits = JSON.parse(all_reits) 
 
-all_reits.each do |stock|
-  Stock.create(
-    name: stock["description"],
-    ticker: stock["symbol"],
-)
-end
+# all_reits.each do |stock|
+#   Stock.create(
+#     name: stock["description"],
+#     ticker: stock["symbol"],
+# )
+# end
 
 # Fetch U.S. traded ADRs & MLPS
 
